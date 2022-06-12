@@ -17,4 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 
 Commands usages :
 
-dart run build_runner build
+flutter pub run build_runner build --delete-conflicting-outputs
