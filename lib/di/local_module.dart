@@ -9,9 +9,10 @@ abstract class LocalModule {
   @preResolve
   Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();
 
-  /// Get UUID generator id.
+  /// Generate uuid to string.
+  @Named('uuid')
   @Singleton()
-  String get idGenerated {
+  String get uuid {
     const uuid = Uuid();
     return uuid.v4();
   }

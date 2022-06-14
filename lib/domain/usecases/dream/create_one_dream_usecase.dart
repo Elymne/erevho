@@ -7,25 +7,26 @@ import 'package:erevho/domain/entities/dream/tag_entity.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
 import 'package:injectable/injectable.dart';
 
-/// Usecase when user update his own dream.
+/// Usecase to create a dream.
+/// ex: User has completed his form and validate it.
 @Injectable()
-class UpdateOneDreamUsecase extends Usecase<void, UpdateOneDreamParams> {
+class CreateOneDreamUsecase extends Usecase<int, CreateOneDreamParams> {
   final DreamLocalRepository dreamLocalRepository;
 
-  UpdateOneDreamUsecase(this.dreamLocalRepository);
+  CreateOneDreamUsecase(this.dreamLocalRepository);
 
   @override
-  Future perform(UpdateOneDreamParams params) async {
+  Future<int> perform(CreateOneDreamParams params) async {
     try {
-      dreamLocalRepository.updateOne(params.createDreamEntity());
+      return await dreamLocalRepository.createOne(params.createDreamEntity());
     } catch (e) {
-      throw ('Error: $e');
+      throw ("ERROR DreamLocalRepository: $e");
     }
   }
 }
 
 /// TODO Boilerplate here.
-class UpdateOneDreamParams extends Params {
+class CreateOneDreamParams extends Params {
   final String uuid;
   final String title;
   final String content;
@@ -33,7 +34,7 @@ class UpdateOneDreamParams extends Params {
   final DreamType dreamType;
   final List<String> tags;
 
-  UpdateOneDreamParams({required this.uuid, required this.title, required this.content, required this.pseudonym, required this.dreamType, required this.tags});
+  CreateOneDreamParams(@Named('uuid') this.uuid, {required this.title, required this.content, required this.pseudonym, required this.dreamType, required this.tags});
 
   /// That's what we'll use in our usecase.
   DreamModel createDreamEntity() {

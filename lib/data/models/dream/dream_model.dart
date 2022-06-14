@@ -14,10 +14,11 @@ class DreamModel extends DreamEntity with _$DreamModel {
     @JsonKey(name: 'id', required: true, disallowNullValue: true) @HiveField(0) required String id,
     @HiveField(1) required String pseudonym,
     @HiveField(2) required String title,
-    @HiveField(3) required List<TagModel> tags,
-    @HiveField(4) required List<String> images,
-    @HiveField(5) required DateTime created,
-    @HiveField(6) required DateTime updated,
+    @HiveField(3) required String content,
+    @HiveField(4) required DreamType dreamType,
+    @HiveField(5) required List<TagModel> tags,
+    @HiveField(6) required DateTime created,
+    @HiveField(7) DateTime? updated,
   }) = _DreamModel;
 
   factory DreamModel.fromJson(Map<String, Object?> json) => _$DreamModelFromJson(json);

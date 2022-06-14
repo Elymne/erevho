@@ -6,18 +6,23 @@ import 'package:erevho/domain/entities/dream/tag_entity.dart';
 abstract class DreamEntity extends Entity {
   final String pseudonym;
   final String title;
+  final String content;
+  final DreamType dreamType;
   final List<TagEntity> tags;
-  final List<String> images;
   final DateTime created;
-  final DateTime updated;
+  final DateTime? updated;
 
   DreamEntity({
     required String id,
+    required this.dreamType,
     required this.pseudonym,
     required this.title,
+    required this.content,
     required this.tags,
-    required this.images,
     required this.created,
-    required this.updated,
+    this.updated,
   }) : super(id: id);
 }
+
+/// Just use that to define a style for type of dream.
+enum DreamType { todo }
