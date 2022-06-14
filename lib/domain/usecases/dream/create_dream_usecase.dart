@@ -4,7 +4,8 @@ import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
 import 'package:injectable/injectable.dart';
 
-/// Create a dream.
+/// Usecase to create a dream.
+/// ex: User has completed his form and validate it.
 @Injectable()
 class CreateDreamUsecase extends Usecase<int, CreateDreamParams> {
   final DreamLocalRepository dreamLocalRepository;

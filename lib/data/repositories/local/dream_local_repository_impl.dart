@@ -1,5 +1,4 @@
 import 'package:erevho/data/datasources/local/dream_local_data_source.dart';
-import 'package:erevho/data/models/dream/dream_model.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -12,36 +11,31 @@ class DreamLocalRepositoryImpl implements DreamLocalRepository {
 
   @override
   Future<int> createOne(DreamEntity dreamEntity) async {
-    return await dreamLocalDataSource.saveOne(dreamEntity as DreamModel);
-  }
-
-  @override
-  Future deleteAll(List<String> ids) {
-    // TODO: implement deleteAll
-    throw UnimplementedError();
-  }
-
-  @override
-  Future deleteOne(String id) {
-    // TODO: implement deleteOne
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<DreamEntity> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+    return await dreamLocalDataSource.createOne(dreamEntity);
   }
 
   @override
   Future<DreamEntity> getOne(String id) {
-    // TODO: implement getOne
-    throw UnimplementedError();
+    return dreamLocalDataSource.readOne(id);
   }
 
   @override
-  Future<int> updateOne(DreamEntity dreamEntity) {
-    // TODO: implement updateOne
-    throw UnimplementedError();
+  Future<List<DreamEntity>> getAll() async {
+    return dreamLocalDataSource.readAll();
+  }
+
+  @override
+  Future updateOne(DreamEntity dreamEntity) async {
+    return dreamLocalDataSource.updateOne(dreamEntity);
+  }
+
+  @override
+  Future deleteOne(String id) async {
+    dreamLocalDataSource.deleteOne(id);
+  }
+
+  @override
+  Future deleteAll(List<String> ids) async {
+    dreamLocalDataSource.deleteAll(ids);
   }
 }

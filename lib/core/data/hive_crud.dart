@@ -15,28 +15,28 @@ abstract class HiveCrud<T extends Entity, R> {
     return box.clear();
   }
 
-  /// Get all data from table.
-  Future<List<T>> getAll() async {
+  /// Save one data.
+  Future<int> createOne(T element) async {
     final box = await open();
-    return box.values.toList();
-  }
-
-  /// Get one value by it's ID.
-  Future<T> getOne(R id) async {
-    final box = await open();
-    return box.values.firstWhere((element) => element.id == id);
+    return box.add(element);
   }
 
   /// Save all data in table.
-  Future<Iterable<int>> saveAll(List<T> elements) async {
+  Future<Iterable<int>> createAll(List<T> elements) async {
     final box = await open();
     return box.addAll(elements);
   }
 
-  /// Save one data.
-  Future<int> saveOne(T element) async {
+  /// Get one value by it's ID.
+  Future<T> readOne(R id) async {
     final box = await open();
-    return box.add(element);
+    return box.values.firstWhere((element) => element.id == id);
+  }
+
+  /// Get all data from table.
+  Future<List<T>> readAll() async {
+    final box = await open();
+    return box.values.toList();
   }
 
   /// Update one.
