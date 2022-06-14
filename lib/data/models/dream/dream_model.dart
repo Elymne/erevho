@@ -1,6 +1,6 @@
 import 'package:erevho/core/data/hive_id.dart';
-import 'package:erevho/data/models/tag_model.dart';
-import 'package:erevho/domain/entities/dream_entity.dart';
+import 'package:erevho/data/models/dream/tag_model.dart';
+import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 

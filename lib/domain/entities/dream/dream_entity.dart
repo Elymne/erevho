@@ -1,5 +1,5 @@
 import 'package:erevho/core/data/entity.dart';
-import 'package:erevho/domain/entities/tag_entity.dart';
+import 'package:erevho/domain/entities/dream/tag_entity.dart';
 
 /// Entity class that represente Dream post.
 /// Abstraction to respect Clean Architecture.

@@ -1,5 +1,5 @@
 import 'package:erevho/core/data/hive_id.dart';
-import 'package:erevho/domain/entities/tag_entity.dart';
+import 'package:erevho/domain/entities/dream/tag_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
