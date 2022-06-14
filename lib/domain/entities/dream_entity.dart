@@ -1,8 +1,9 @@
+import 'package:erevho/core/data/entity.dart';
 import 'package:erevho/domain/entities/tag_entity.dart';
 
-///
-abstract class DreamEntity {
-  final String id;
+/// Entity class that represente Dream post.
+/// Abstraction to respect Clean Architecture.
+abstract class DreamEntity extends Entity {
   final String pseudonym;
   final String title;
   final List<TagEntity> tags;
@@ -10,5 +11,13 @@ abstract class DreamEntity {
   final DateTime created;
   final DateTime updated;
 
-  DreamEntity(this.id, this.pseudonym, this.title, this.tags, this.images, this.created, this.updated);
+  DreamEntity({
+    required String id,
+    required this.pseudonym,
+    required this.title,
+    required this.tags,
+    required this.images,
+    required this.created,
+    required this.updated,
+  }) : super(id: id);
 }
