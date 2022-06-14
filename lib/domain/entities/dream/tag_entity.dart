@@ -10,4 +10,4 @@ abstract class TagEntity extends Entity {
 }
 
 /// Enum that will allow us to define colors to our custom tags.
-enum TagColor { black, white, blue, red }
+enum TagColor { blue, green, orange, red }
