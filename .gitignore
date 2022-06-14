@@ -46,3 +46,7 @@ app.*.map.json
 /android/app/release
 
 .vscode
+
+# Generated Dart files  
+**/*.g.dart
+**/*.freezed.dart
