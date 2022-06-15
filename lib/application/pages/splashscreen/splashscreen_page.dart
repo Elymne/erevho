@@ -2,10 +2,15 @@ import 'package:erevho/application/pages/splashscreen/splashscreen_controller.da
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-class SplashscreenPage extends StatelessWidget {
-  final SplashscreenController controller = GetIt.instance();
+class SplashscreenPage extends StatefulWidget {
+  const SplashscreenPage({Key? key}) : super(key: key);
 
-  SplashscreenPage({Key? key}) : super(key: key);
+  @override
+  State<StatefulWidget> createState() => SplashscreenState();
+}
+
+class SplashscreenState extends State<SplashscreenPage> {
+  final SplashscreenController controller = GetIt.instance();
 
   @override
   Widget build(BuildContext context) {
