@@ -13,6 +13,12 @@ class SplashscreenState extends State<SplashscreenPage> {
   final SplashscreenController controller = GetIt.instance();
 
   @override
+  void initState() {
+    super.initState();
+    controller.init(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return const Center(
       child: Text('Splashscreen'),

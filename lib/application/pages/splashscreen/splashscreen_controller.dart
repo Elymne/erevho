@@ -10,6 +10,9 @@ class SplashscreenController extends Controller {
   void init(BuildContext context) async {
     super.init(context);
 
+    print('AAA');
     await Future.delayed(const Duration(seconds: 2));
+    print('OOOOOH');
+    appRouter.navigate(context, '/home');
   }
 }
