@@ -5,16 +5,12 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-    sdk: '>=2.17.0-10.0.dev <3.0.0'
+    sdk: '>=2.17.0 <3.0.0'
 
 dependencies:
     flutter:
         sdk: flutter
 
-    # FIREBASE packages.
-    firebase_core: ^1.17.1
-    firebase_crashlytics: ^2.8.1
-    firebase_performance: ^0.8.0+13
     # Hive : NoSQL package.
     hive: ^2.2.2
     hive_flutter: ^1.1.0

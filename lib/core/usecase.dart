@@ -1,4 +1,4 @@
-import 'package:erevho/core/usecase/params.dart';
+import 'package:erevho/core/params.dart';
 
 abstract class Usecase<T, P extends Params> {
   Future<T> perform(P params);

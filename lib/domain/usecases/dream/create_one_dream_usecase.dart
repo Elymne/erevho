@@ -1,11 +1,12 @@
-import 'package:erevho/core/usecase/params.dart';
-import 'package:erevho/core/usecase/usecase.dart';
+import 'package:erevho/core/params.dart';
+import 'package:erevho/core/usecase.dart';
 import 'package:erevho/data/models/dream/dream_model.dart';
 import 'package:erevho/data/models/dream/tag_model.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:erevho/domain/entities/dream/tag_entity.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
 
 /// Usecase to create a dream.
 /// ex: User has completed his form and validate it.
@@ -27,19 +28,18 @@ class CreateOneDreamUsecase extends Usecase<int, CreateOneDreamParams> {
 
 /// TODO Boilerplate here.
 class CreateOneDreamParams extends Params {
-  final String uuid;
   final String title;
   final String content;
   final String pseudonym;
   final DreamType dreamType;
   final List<String> tags;
 
-  CreateOneDreamParams(@Named('uuid') this.uuid, {required this.title, required this.content, required this.pseudonym, required this.dreamType, required this.tags});
+  CreateOneDreamParams({required this.title, required this.content, required this.pseudonym, required this.dreamType, required this.tags});
 
   /// That's what we'll use in our usecase.
   DreamModel createDreamEntity() {
     final result = DreamModel(
-      id: uuid,
+      id: const Uuid().v4(),
       title: title,
       content: content,
       pseudonym: pseudonym,

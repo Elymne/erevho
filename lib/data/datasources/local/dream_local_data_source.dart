@@ -3,7 +3,7 @@ import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:injectable/injectable.dart';
 
 /// Dream nosql DB CRUD.
-@Singleton()
+@singleton
 class DreamLocalDataSource extends HiveCrud<DreamEntity, String> {
-  DreamLocalDataSource({required super.boxName});
+  DreamLocalDataSource() : super(boxName: 'BOX_DREAM');
 }

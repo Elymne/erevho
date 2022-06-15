@@ -1,5 +1,5 @@
-import 'package:erevho/core/usecase/params.dart';
-import 'package:erevho/core/usecase/usecase.dart';
+import 'package:erevho/core/params.dart';
+import 'package:erevho/core/usecase.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
 import 'package:injectable/injectable.dart';
 
