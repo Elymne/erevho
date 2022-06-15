@@ -1,6 +1,6 @@
 import 'package:erevho/application/navigation/app_router.dart';
-import 'package:erevho/application/pages/splashscreen/splashscreen_page.dart';
-import 'package:erevho/core/theme.dart';
+import 'package:erevho/application/pages/splashscreen/splash_page.dart';
+import 'package:erevho/core/themes/default.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -17,8 +17,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'EREVHO',
-      theme: AppTheme.defaultTheme,
-      home: const SplashscreenPage(),
+      debugShowCheckedModeBanner: false,
+      home: const SplashPage(),
+      theme: defaultTheme,
+      darkTheme: defaultTheme,
+      themeMode: ThemeMode.system,
     );
   }
 }

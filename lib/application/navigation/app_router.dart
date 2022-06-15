@@ -1,5 +1,5 @@
 import 'package:erevho/application/pages/home/home_page.dart';
-import 'package:erevho/application/pages/splashscreen/splashscreen_page.dart';
+import 'package:erevho/application/pages/splashscreen/splash_page.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +16,8 @@ class AppRouter {
 
   void _defineRoutes() {
     _router.define(
-      '/splashscreen',
-      handler: Handler(handlerFunc: (context, params) => const SplashscreenPage()),
+      '/splash',
+      handler: Handler(handlerFunc: (context, params) => const SplashPage()),
     );
     _router.define(
       '/home',
