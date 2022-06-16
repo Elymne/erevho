@@ -1,3 +1,4 @@
+import 'package:erevho/application/widgets/dream_tag.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/data/models/dream/dream_model.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class DreamCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: nightGreyLight,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: nightGreyShadow,
               spreadRadius: 5,
@@ -49,7 +50,7 @@ class DreamCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10, top: 8),
-              //TODO La suite, si pas la flemme.
+              child: dream.tags.isNotEmpty ? DreamTag(tag: dream.tags[0]) : null,
             ),
           ],
         ),
