@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 
 /// Splash
 @Injectable()
-class SplashController extends Controller {
+class SplashController extends StatelessController {
   final AppRouter appRouter;
 
   SplashController(this.appRouter);

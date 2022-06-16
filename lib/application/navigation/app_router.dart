@@ -23,7 +23,7 @@ class AppRouter {
     );
     _router.define(
       personnal,
-      handler: Handler(handlerFunc: (context, params) => const PersonnalPage()),
+      handler: Handler(handlerFunc: (context, params) => PersonnalPage()),
       transitionType: TransitionType.none,
     );
   }

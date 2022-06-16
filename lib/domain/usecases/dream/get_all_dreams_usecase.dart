@@ -23,10 +23,11 @@ class GetAllDreamsUsecase extends Usecase<List<DreamEntity>, GetAllDreamsParams>
   }
 }
 
+/// Penser à faire un filtrage plus tard, enfin plutôt à l'appliquer sur le usecase ne haut là.
 class GetAllDreamsParams extends Params {
-  final String title;
-  final String pseudonym;
-  final List<String> tagTitles;
-  final DateTime created;
-  GetAllDreamsParams(this.title, this.pseudonym, this.tagTitles, this.created);
+  final String? title;
+  final String? pseudonym;
+  final List<String>? tagTitles;
+  final DateTime? created;
+  GetAllDreamsParams({this.title, this.pseudonym, this.tagTitles, this.created});
 }

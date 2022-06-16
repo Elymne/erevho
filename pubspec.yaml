@@ -38,6 +38,8 @@ dependencies:
     analyzer: ^3.4.1
     # Routing package management.
     fluro: ^2.0.3
+    # State management.
+    flutter_riverpod: ^1.0.4
 
 dev_dependencies:
     flutter_test:
