@@ -1,4 +1,5 @@
 import 'package:erevho/application/pages/splashscreen/splash_controller.dart';
+import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -27,6 +28,7 @@ class SplashState extends State<SplashPage> {
       body: Center(
         child: Text('Splashscreen'),
       ),
+      backgroundColor: nightGreyDarker,
     );
   }
 }

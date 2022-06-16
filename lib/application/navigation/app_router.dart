@@ -1,10 +1,12 @@
 import 'package:erevho/application/navigation/routes.dart';
 import 'package:erevho/application/pages/home/home_page.dart';
+import 'package:erevho/application/pages/personnal/personnal_page.dart';
 import 'package:erevho/application/pages/splashscreen/splash_page.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
-/// TODO Implémenter le reste (params etc, là j'ai la flemme).
+/// AppRouter class.
+/// Injected from app class as singleton.
 class AppRouter {
   final _router = FluroRouter();
 
@@ -12,10 +14,17 @@ class AppRouter {
     _router.define(
       splash,
       handler: Handler(handlerFunc: (context, params) => const SplashPage()),
+      transitionType: TransitionType.none,
     );
     _router.define(
       home,
       handler: Handler(handlerFunc: (context, params) => const HomePage()),
+      transitionType: TransitionType.none,
+    );
+    _router.define(
+      personnal,
+      handler: Handler(handlerFunc: (context, params) => const PersonnalPage()),
+      transitionType: TransitionType.none,
     );
   }
 

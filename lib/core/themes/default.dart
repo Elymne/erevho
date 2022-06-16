@@ -1,3 +1,4 @@
+import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 ThemeData get defaultTheme {
@@ -5,6 +6,7 @@ ThemeData get defaultTheme {
     brightness: Brightness.dark,
     primaryColor: Colors.blue.shade300,
     secondaryHeaderColor: Colors.blueAccent.shade400,
+    backgroundColor: nightGrey,
     fontFamily: 'Georgia',
     textTheme: const TextTheme(
       headline1: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),

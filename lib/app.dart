@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:erevho/application/navigation/app_router.dart';
 import 'package:erevho/application/pages/splashscreen/splash_page.dart';
+import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/core/themes/default.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 
 class MyApp extends StatelessWidget {
@@ -15,6 +19,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (Platform.isAndroid) {
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        systemNavigationBarColor: nightGreyDarker,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ));
+    }
+
     return MaterialApp(
       title: 'EREVHO',
       debugShowCheckedModeBanner: false,

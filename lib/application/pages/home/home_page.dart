@@ -1,5 +1,6 @@
 import 'package:erevho/application/pages/home/home_controller.dart';
 import 'package:erevho/application/widgets/layouts/bottom_bar.dart';
+import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -18,11 +19,12 @@ class HomeState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      bottomNavigationBar: BottomBar(),
-      body: Center(
+    return Scaffold(
+      bottomNavigationBar: BottomBar(pageSelected: PageSelected.none),
+      body: const Center(
         child: Text('HOME PAGE'),
       ),
+      backgroundColor: nightGrey,
     );
   }
 }
