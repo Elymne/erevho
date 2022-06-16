@@ -41,7 +41,7 @@ class _CustomPageViewState extends State<CustomPageView> {
   List<Widget> buildHeader(int index) {
     return widget.pagesNames.asMap().entries.map((entry) {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
         child: Text(
           entry.value,
           style: TextStyle(
