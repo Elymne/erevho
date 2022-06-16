@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
       theme: defaultTheme,
       darkTheme: defaultTheme,
       themeMode: ThemeMode.system,
+      checkerboardOffscreenLayers: true,
     );
   }
 }

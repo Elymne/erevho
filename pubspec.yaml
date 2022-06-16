@@ -40,6 +40,8 @@ dependencies:
     fluro: ^2.0.3
     # State management.
     flutter_riverpod: ^1.0.4
+    # List of Google font.
+    google_fonts: ^3.0.1
 
 dev_dependencies:
     flutter_test:
