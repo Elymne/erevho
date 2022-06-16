@@ -1,3 +1,4 @@
+import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 /// The custom pager that I use on various page of my app.
@@ -13,7 +14,7 @@ class CustomPageView extends StatefulWidget {
 
 class _CustomPageViewState extends State<CustomPageView> {
   final PageController pageController = PageController(initialPage: 0, viewportFraction: 1);
-  late final int currentPage = pageController.initialPage;
+  late int currentPage = pageController.initialPage;
 
   @override
   Widget build(BuildContext context) {
@@ -36,23 +37,31 @@ class _CustomPageViewState extends State<CustomPageView> {
     );
   }
 
+  /// Build each header.
   List<Widget> buildHeader(int index) {
-    return widget.pagesNames.map((pageName) {
+    return widget.pagesNames.asMap().entries.map((entry) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          pageName,
+          entry.value,
           style: TextStyle(
-            fontSize: 22,
+            fontSize: entry.key == currentPage ? 24 : 22,
+            color: entry.key == currentPage ? pureWhite : fadeWhite,
           ),
         ),
       );
     }).toList();
   }
 
+  /// Build each page.
   Widget onItemBuilder(BuildContext context, int index) {
     return widget.pages[index];
   }
 
-  onPageChange(int index) {}
+  /// Manage page change.
+  onPageChange(int index) {
+    setState(() {
+      currentPage = index;
+    });
+  }
 }

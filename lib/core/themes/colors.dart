@@ -7,3 +7,6 @@ const nightOrange = Color.fromARGB(255, 194, 113, 93);
 const nightOrangeDarker = Color.fromARGB(255, 170, 80, 58);
 
 const neonBlue = Color.fromARGB(255, 100, 102, 199);
+
+const pureWhite = Color.fromARGB(255, 255, 255, 255);
+const fadeWhite = Color.fromARGB(99, 255, 255, 255);
