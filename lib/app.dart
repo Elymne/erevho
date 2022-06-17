@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:erevho/application/navigation/app_router.dart';
 import 'package:erevho/application/pages/splashscreen/splash_page.dart';
 import 'package:erevho/core/themes/colors.dart';
@@ -7,9 +6,10 @@ import 'package:erevho/core/themes/default.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'dart:io';
 
 class MyApp extends StatelessWidget {
-  // Create object that ùanage routing throught our app.
+  // Create object that manage routing throught our app.
   final AppRouter appRouter = AppRouter();
 
   MyApp({Key? key}) : super(key: key) {
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Update bottom bar navigation.
     if (Platform.isAndroid) {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         systemNavigationBarColor: nightGreyDarker,
@@ -34,6 +35,8 @@ class MyApp extends StatelessWidget {
       darkTheme: defaultTheme,
       themeMode: ThemeMode.system,
       checkerboardOffscreenLayers: true,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

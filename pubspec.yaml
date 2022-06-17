@@ -11,6 +11,9 @@ dependencies:
     flutter:
         sdk: flutter
 
+    flutter_localizations:
+        sdk: flutter
+
     # Hive : NoSQL package.
     hive: ^2.2.2
     hive_flutter: ^1.1.0
@@ -42,6 +45,8 @@ dependencies:
     flutter_riverpod: ^1.0.4
     # List of Google font.
     google_fonts: ^3.0.1
+    # Translation provider.
+    intl: ^0.17.0
 
 dev_dependencies:
     flutter_test:
@@ -57,5 +62,6 @@ dev_dependencies:
 
 flutter:
     uses-material-design: true
+    generate: true
     assets:
         - assets/images/
