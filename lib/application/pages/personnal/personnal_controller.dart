@@ -8,20 +8,21 @@ import 'package:injectable/injectable.dart';
 class PersonnalController extends StatefulController {
   final GetAllDreamsUsecase getAllDreamsUsecase;
 
+  // Private state TextField.
+  String _textfieldValue = '';
+
   // State watchers.
   late final _dreamsProvider = FutureProvider<List<DreamEntity>>((ref) async {
-    print(textfieldValue);
-    return await getAllDreamsUsecase.perform(GetAllDreamsParams());
+    return await getAllDreamsUsecase.perform(GetAllDreamsParams(
+      title: _textfieldValue,
+    ));
   });
   AsyncValue<List<DreamEntity>> get dreams => ref.watch(_dreamsProvider);
-
-  // Private state TextField.
-  String textfieldValue = '';
 
   PersonnalController(this.getAllDreamsUsecase);
 
   void onSubmitted(String text) {
-    textfieldValue = text;
+    _textfieldValue = text;
     ref.refresh(_dreamsProvider);
   }
 }
