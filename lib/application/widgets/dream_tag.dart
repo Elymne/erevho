@@ -1,5 +1,4 @@
 import 'package:erevho/core/extensions/tag_color_extension.dart';
-import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/domain/entities/dream/tag_entity.dart';
 import 'package:flutter/material.dart';
 
