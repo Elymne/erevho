@@ -28,7 +28,12 @@ class PersonnalController extends StatefulController {
           title: "Rêve de merde enfait",
           content: "content",
           dreamType: DreamType.todo,
-          tags: [const TagModel(id: "22", title: "fuuuu", tagColor: TagColor.blue)],
+          tags: [
+            const TagModel(id: "22", title: "Bizarre", tagColor: TagColor.blue),
+            const TagModel(id: "22", title: "NSFW", tagColor: TagColor.red),
+            const TagModel(id: "22", title: "Jambon", tagColor: TagColor.green),
+            const TagModel(id: "22", title: "Green", tagColor: TagColor.orange),
+          ],
           created: DateTime.now(),
         ),
         DreamModel(

@@ -15,4 +15,30 @@ extension TagColorExtension on TagColor {
         return nightRed;
     }
   }
+
+  Color get darkColor {
+    switch (this) {
+      case TagColor.blue:
+        return nightBlueDarker;
+      case TagColor.green:
+        return nightGreenDarker;
+      case TagColor.orange:
+        return nightOrangeDarker;
+      case TagColor.red:
+        return nightRedDarker;
+    }
+  }
+
+  Color get shadowColor {
+    switch (this) {
+      case TagColor.blue:
+        return nightBlueShadow;
+      case TagColor.green:
+        return nightGreenShadow;
+      case TagColor.orange:
+        return nightOrangeShadow;
+      case TagColor.red:
+        return nightRedShadow;
+    }
+  }
 }

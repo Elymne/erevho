@@ -45,12 +45,20 @@ class DreamCard extends StatelessWidget {
               child: Text(dream.title, style: GoogleFonts.robotoFlex(fontSize: 18)),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10, top: 8),
+              padding: const EdgeInsets.only(left: 10, top: 4),
               child: Text(dream.created.toString(), style: GoogleFonts.robotoFlex(fontSize: 14, fontStyle: FontStyle.italic)),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10, top: 8),
-              child: dream.tags.isNotEmpty ? DreamTag(tag: dream.tags[0]) : null,
+              padding: const EdgeInsets.only(left: 10, top: 12, bottom: 10),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: dream.tags
+                    .map((tag) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: DreamTag(tag: tag),
+                        ))
+                    .toList(),
+              ),
             ),
           ],
         ),
