@@ -3,18 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 
-class DreamFormPage extends ConsumerWidget {
-  final DreamFormController controller = GetIt.instance();
+class DreamFormPage extends ConsumerStatefulWidget {
   final String? dreamId;
 
-  DreamFormPage({Key? key, this.dreamId}) : super(key: key);
+  const DreamFormPage({Key? key, this.dreamId}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Center(
-      child: OutlinedButton(
-        onPressed: () {},
-        child: const Text('FORMULAIRE LEL'),
+  ConsumerState<ConsumerStatefulWidget> createState() => DreamFormState();
+}
+
+class DreamFormState extends ConsumerState<DreamFormPage> {
+  final DreamFormController controller = GetIt.instance();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.init(context, ref, DreamFormParam(id: widget.dreamId));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            OutlinedButton(
+              onPressed: () {},
+              child: const Text('FORMULAIRE LEL'),
+            ),
+          ],
+        ),
       ),
     );
   }
