@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 /// Usecase to get all dreams created by user. Allow possibility to filter theses dreams.
 /// ex: User accessing to his global list of created dreams.
 /// ex: User filtering his dreams by tag.
+/// TODO Meilleur gestion de filtrage à faire de toute évidence.
 @Injectable()
 class GetAllDreamsUsecase extends Usecase<List<DreamEntity>, GetAllDreamsParams> {
   final DreamLocalRepository dreamLocalRepository;
@@ -16,7 +17,15 @@ class GetAllDreamsUsecase extends Usecase<List<DreamEntity>, GetAllDreamsParams>
   @override
   Future<List<DreamEntity>> perform(GetAllDreamsParams params) async {
     try {
-      return dreamLocalRepository.getAll();
+      final dreams = await dreamLocalRepository.getAll();
+      return dreams.where((dream) {
+        if (dream.title == params.title) return true;
+        if (dream.pseudonym == params.pseudonym) return true;
+        if (params.tagTitles != null) {
+          if (dream.tags.map((tag) => tag.title).toSet().intersection(params.tagTitles!.toSet()).isNotEmpty) return true;
+        }
+        return false;
+      }).toList();
     } catch (e) {
       throw ('Error: $e');
     }
@@ -28,6 +37,8 @@ class GetAllDreamsParams extends Params {
   final String? title;
   final String? pseudonym;
   final List<String>? tagTitles;
+
+  // TODO Mouai bof, à voir.
   final DateTime? created;
   GetAllDreamsParams({this.title, this.pseudonym, this.tagTitles, this.created});
 }

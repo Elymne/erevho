@@ -1,4 +1,5 @@
 import 'package:erevho/application/navigation/routes.dart';
+import 'package:erevho/application/pages/dream_form/dream_form_page.dart';
 import 'package:erevho/application/pages/home/home_page.dart';
 import 'package:erevho/application/pages/personnal/personnal_page.dart';
 import 'package:erevho/application/pages/splashscreen/splash_page.dart';
@@ -25,6 +26,11 @@ class AppRouter {
       personnal,
       handler: Handler(handlerFunc: (context, params) => const PersonnalPage()),
       transitionType: TransitionType.none,
+    );
+    _router.define(
+      dreamForm,
+      handler: Handler(handlerFunc: (context, params) => DreamFormPage(dreamId: params['id']?[0])),
+      transitionType: TransitionType.inFromBottom,
     );
   }
 
