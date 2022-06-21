@@ -1,3 +1,8 @@
 {
-  "research": "Research"
+  "content_form": "Content",
+  "content_form_error": "Content is incorrect",
+  "research": "Research",
+  "submit": "Submit",
+  "title_form": "Title",
+  "title_form_error": "Title is incorrect"
 }

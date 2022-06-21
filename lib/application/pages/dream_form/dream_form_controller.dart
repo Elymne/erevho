@@ -19,11 +19,15 @@ class DreamFormController extends StatefulControllerWithParams<DreamFormParam> {
   late final FutureProvider<DreamForm> _dreamFormProvider;
   AsyncValue<DreamForm> get dreams => ref.watch(_dreamFormProvider);
 
+  /// Form key
+  late final GlobalKey<FormState> formKey;
+
   DreamFormController(this.getOneDreamUsecase, this.createOneDreamUsecase);
 
   @override
   void init(BuildContext context, WidgetRef ref, DreamFormParam params) async {
     super.init(context, ref, params);
+    formKey = GlobalKey<FormState>();
     _dreamFormProvider = FutureProvider<DreamForm>((ref) async {
       // Update Mode.
       if (params.id != null) {
@@ -35,7 +39,15 @@ class DreamFormController extends StatefulControllerWithParams<DreamFormParam> {
     });
   }
 
-  void backAction() {}
+  /// Trigger this when user submit his data.
+  /// TODO Save current dream.
+  void onSubmit() {
+    if (formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+      );
+    }
+  }
 }
 
 class DreamFormParam extends Params {

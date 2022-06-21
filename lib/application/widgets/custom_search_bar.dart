@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  final Function(String text) onSubmitted;
+  final void Function(String text) onSubmitted;
 
   const CustomSearchBar({Key? key, required this.onSubmitted}) : super(key: key);
 

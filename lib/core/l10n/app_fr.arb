@@ -1,3 +1,8 @@
 {
-  "research": "Rechercher"
+  "content_form": "Contenu",
+  "content_form_error": "Le contenu est incorrect",
+  "research": "Rechercher",
+  "submit": "Valider",
+  "title_form": "Titre",
+  "title_form_error": "Le titre est incorrect"
 }
