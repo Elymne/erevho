@@ -24,3 +24,27 @@ Run theses commands when you have cloned the project.
 > flutter pub get
 
 > flutter pub run build_runner build --delete-conflicting-outputs
+
+## Vscode settings that can help
+
+>
+
+    {
+
+        "search.exclude": {
+            "**/*.g.dart": true,
+            "**/*.freezed.dart": true,
+            "**/*.gr.dart": true,
+            "**/*.config.dart": true
+        },
+
+        "explorer.experimental.fileNesting.enabled": true,
+        "explorer.experimental.fileNesting.expand": false,
+        "explorer.experimental.fileNesting.patterns": {
+            "pubspec.yaml": ".flutter-plugins, .packages, .dart_tool, .flutter-plugins-dependencies, .metadata, .packages, pubspec.lock, build.yaml, analysis_options.yaml, all_lint_rules.yaml",
+            ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
+            "readme.*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
+            "*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture).gr.dart, $(capture).config.dart",
+        },
+
+    }
