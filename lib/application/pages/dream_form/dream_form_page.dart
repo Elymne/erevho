@@ -1,11 +1,11 @@
 import 'package:erevho/application/widgets/custom_form_field.dart';
+import 'package:erevho/di/tools/app_localisation_tools.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:erevho/application/pages/dream_form/dream_form_controller.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DreamFormPage extends ConsumerStatefulWidget {
   final String? dreamId;
@@ -18,6 +18,7 @@ class DreamFormPage extends ConsumerStatefulWidget {
 
 class DreamFormState extends ConsumerState<DreamFormPage> {
   final DreamFormController controller = GetIt.instance();
+  final AppLocalisationTools appLocals = GetIt.instance();
 
   @override
   void initState() {
@@ -51,28 +52,28 @@ class DreamFormState extends ConsumerState<DreamFormPage> {
                 child: Column(
                   children: [
                     CustomFormField(
-                      hintText: AppLocalizations.of(context)!.title_form,
+                      hintText: appLocals.current.title_form,
                       isContent: false,
                       validator: (text) {
-                        if (text == null) return AppLocalizations.of(context)!.title_form_error;
-                        if (text == '') return AppLocalizations.of(context)!.title_form_error;
+                        if (text == null) return appLocals.current.title_form_error;
+                        if (text == '') return appLocals.current.title_form_error;
                         return null;
                       },
                     ),
                     const SizedBox(height: 10),
                     CustomFormField(
-                      hintText: AppLocalizations.of(context)!.content_form,
+                      hintText: appLocals.current.content_form,
                       isContent: true,
                       validator: (text) {
-                        if (text == null) return AppLocalizations.of(context)!.content_form_error;
-                        if (text == '') return AppLocalizations.of(context)!.content_form_error;
+                        if (text == null) return appLocals.current.content_form_error;
+                        if (text == '') return appLocals.current.content_form_error;
                         return null;
                       },
                     ),
                     const SizedBox(height: 10),
                     OutlinedButton(
                       onPressed: () => controller.onSubmit(),
-                      child: Text(AppLocalizations.of(context)!.submit),
+                      child: Text(appLocals.current.submit),
                     ),
                   ],
                 ),
