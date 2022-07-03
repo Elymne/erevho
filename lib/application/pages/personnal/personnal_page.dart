@@ -59,28 +59,9 @@ class PersonnalPageState extends ConsumerState<PersonnalPage> {
               ],
             ),
             // Page 2 : create one dream \\
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: () => controller.accessToCreateDreamFormPage(),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: pureWhite,
-                        style: BorderStyle.solid,
-                        width: 3,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Icon(Icons.add, size: 100),
-                  ),
-                ),
-              ],
-            ),
+            const Center(child: Text('FILTRAGE ETC (in prog'))
           ],
-          pagesNames: const ['Mes rêves', 'Ajouter'],
+          pagesNames: const ['Mes rêves', 'Filtres'],
         ),
       ),
       bottomNavigationBar: BottomBar(pageSelected: PageSelected.personnal),
