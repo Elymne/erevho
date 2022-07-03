@@ -1,3 +1,4 @@
+import 'package:erevho/di/tools/app_localisation_tools.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:erevho/application/navigation/app_router.dart';
 import 'package:erevho/application/pages/splashscreen/splash_page.dart';
@@ -11,10 +12,12 @@ import 'dart:io';
 class MyApp extends StatelessWidget {
   // Create object that manage routing throught our app.
   final AppRouter appRouter = AppRouter();
+  final AppLocalisationTools appLocals = GetIt.instance();
 
   MyApp({Key? key}) : super(key: key) {
     // And then make it an singleton that we can use from anywhere.
     GetIt.instance.registerSingleton(appRouter);
+    appLocals.setLocale(const Locale('fr', 'FR'));
   }
 
   @override

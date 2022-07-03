@@ -30,7 +30,7 @@ class UpdateOneDreamParams extends Params {
   final String title;
   final String content;
   final String pseudonym;
-  final DreamType dreamType;
+  final int dreamType;
   final List<String> tags;
 
   UpdateOneDreamParams({required this.id, required this.title, required this.content, required this.pseudonym, required this.dreamType, required this.tags});

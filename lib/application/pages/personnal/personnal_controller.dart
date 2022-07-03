@@ -12,13 +12,11 @@ class PersonnalController extends StatefulController {
   final AppRouter appRouter;
 
   // Private state TextField.
-  String _textfieldValue = '';
+  String? _textfieldValue;
 
   // State watchers.
   late final _dreamsProvider = FutureProvider<List<DreamEntity>>((ref) async {
-    return await getAllDreamsUsecase.perform(GetAllDreamsParams(
-      title: _textfieldValue,
-    ));
+    return await getAllDreamsUsecase.perform(GetAllDreamsParams());
   });
   AsyncValue<List<DreamEntity>> get dreams => ref.watch(_dreamsProvider);
 
@@ -30,6 +28,6 @@ class PersonnalController extends StatefulController {
   }
 
   void accessToCreateDreamFormPage() {
-    appRouter.navigate(context, dreamForm);
+    appRouter.navigate(context, '$dreamForm/none');
   }
 }

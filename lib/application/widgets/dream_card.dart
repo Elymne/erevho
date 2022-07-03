@@ -1,4 +1,4 @@
-import 'package:erevho/application/widgets/dream_tag.dart';
+import 'package:erevho/application/widgets/dream_chip_tag.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +53,7 @@ class DreamCard extends StatelessWidget {
               children: dream.tags
                   .map((tag) => Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: DreamTag(tag: tag),
+                        child: DreamChipTag(tag: tag),
                       ))
                   .toList(),
             ),

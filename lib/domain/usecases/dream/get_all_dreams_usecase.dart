@@ -18,6 +18,9 @@ class GetAllDreamsUsecase extends Usecase<List<DreamEntity>, GetAllDreamsParams>
   Future<List<DreamEntity>> perform(GetAllDreamsParams params) async {
     try {
       final dreams = await dreamLocalRepository.getAll();
+      // No filtering,
+      if (params.title == null && params.pseudonym == null && params.tagTitles == null) return dreams;
+      // Check filtering.
       return dreams.where((dream) {
         if (dream.title == params.title) return true;
         if (dream.pseudonym == params.pseudonym) return true;

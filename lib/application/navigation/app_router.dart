@@ -28,7 +28,7 @@ class AppRouter {
       transitionType: TransitionType.none,
     );
     _router.define(
-      dreamForm,
+      '$dreamForm/:id',
       handler: Handler(handlerFunc: (context, params) => DreamFormPage(dreamId: params['id']?[0])),
       transitionType: TransitionType.inFromBottom,
     );

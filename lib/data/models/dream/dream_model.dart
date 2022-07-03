@@ -15,7 +15,7 @@ class DreamModel extends DreamEntity with _$DreamModel {
     @HiveField(1) required String pseudonym,
     @HiveField(2) required String title,
     @HiveField(3) required String content,
-    @HiveField(4) required DreamType dreamType,
+    @HiveField(4) required int dreamType,
     @HiveField(5) required List<TagModel> tags,
     @HiveField(6) required DateTime created,
     @HiveField(7) DateTime? updated,

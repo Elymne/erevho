@@ -1,4 +1,5 @@
 import 'package:erevho/data/datasources/local/dream_local_data_source.dart';
+import 'package:erevho/data/models/dream/dream_model.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -11,7 +12,7 @@ class DreamLocalRepositoryImpl implements DreamLocalRepository {
 
   @override
   Future<int> createOne(DreamEntity dreamEntity) async {
-    return await dreamLocalDataSource.createOne(dreamEntity);
+    return await dreamLocalDataSource.createOne(dreamEntity as DreamModel);
   }
 
   @override
@@ -26,7 +27,7 @@ class DreamLocalRepositoryImpl implements DreamLocalRepository {
 
   @override
   Future updateOne(DreamEntity dreamEntity) async {
-    return dreamLocalDataSource.updateOne(dreamEntity);
+    return dreamLocalDataSource.updateOne(dreamEntity as DreamModel);
   }
 
   @override

@@ -7,7 +7,7 @@ abstract class DreamEntity extends Entity {
   final String pseudonym;
   final String title;
   final String content;
-  final DreamType dreamType;
+  final int dreamType;
   final List<TagEntity> tags;
   final DateTime created;
   final DateTime? updated;
@@ -22,7 +22,7 @@ abstract class DreamEntity extends Entity {
     required this.created,
     this.updated,
   }) : super(id: id);
-}
 
-/// Just use that to define a style for type of dream.
-enum DreamType { todo }
+  static const normal = 1;
+  static const horror = 2;
+}

@@ -1,6 +1,5 @@
 import 'package:erevho/application/widgets/custom_form_field.dart';
 import 'package:erevho/di/tools/app_localisation_tools.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:erevho/application/pages/dream_form/dream_form_controller.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -54,21 +53,15 @@ class DreamFormState extends ConsumerState<DreamFormPage> {
                     CustomFormField(
                       hintText: appLocals.current.title_form,
                       isContent: false,
-                      validator: (text) {
-                        if (text == null) return appLocals.current.title_form_error;
-                        if (text == '') return appLocals.current.title_form_error;
-                        return null;
-                      },
+                      validator: controller.validateTitle,
+                      onSaved: controller.saveTitle,
                     ),
                     const SizedBox(height: 10),
                     CustomFormField(
                       hintText: appLocals.current.content_form,
                       isContent: true,
-                      validator: (text) {
-                        if (text == null) return appLocals.current.content_form_error;
-                        if (text == '') return appLocals.current.content_form_error;
-                        return null;
-                      },
+                      validator: controller.validateContent,
+                      onSaved: controller.saveContent,
                     ),
                     const SizedBox(height: 10),
                     OutlinedButton(
@@ -78,7 +71,7 @@ class DreamFormState extends ConsumerState<DreamFormPage> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

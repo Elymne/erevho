@@ -7,8 +7,9 @@ class CustomFormField extends StatelessWidget {
   final String hintText;
   final bool isContent;
   final String? Function(String?) validator;
+  final void Function(String?) onSaved;
 
-  const CustomFormField({Key? key, required this.validator, required this.hintText, required this.isContent, this.initialValue}) : super(key: key);
+  const CustomFormField({Key? key, required this.validator, required this.hintText, required this.isContent, this.initialValue, required this.onSaved}) : super(key: key);
 
   /// TODO Styliser un peu tout ça
   @override
@@ -27,6 +28,7 @@ class CustomFormField extends StatelessWidget {
         fillColor: nightGreyDarker,
       ),
       validator: validator,
+      onSaved: onSaved,
     );
   }
 }

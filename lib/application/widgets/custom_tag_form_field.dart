@@ -1,4 +1,4 @@
-import 'package:erevho/application/widgets/dream_tag.dart';
+import 'package:erevho/application/widgets/dream_chip_tag.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/domain/entities/dream/tag_entity.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +38,7 @@ class CustomTagFormFieldState extends State<CustomTagFormField> {
     );
   }
 
-  List<DreamTag> buildTags() {
-    return widget.defaultValues.map((tag) => DreamTag(tag: tag)).toList();
+  List<DreamChipTag> buildTags() {
+    return widget.defaultValues.map((tag) => DreamChipTag(tag: tag)).toList();
   }
 }

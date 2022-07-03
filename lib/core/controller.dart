@@ -20,16 +20,20 @@ abstract class StatefulController {
 
 abstract class StatelessControllerWithParams<P extends Params> {
   late final BuildContext context;
+  late final P params;
   void init(BuildContext context, P params) async {
     this.context = context;
+    this.params = params;
   }
 }
 
 abstract class StatefulControllerWithParams<P extends Params> {
   late final BuildContext context;
   late final WidgetRef ref;
+  late final P? params;
   void init(BuildContext context, WidgetRef ref, P params) async {
     this.context = context;
     this.ref = ref;
+    this.params = params;
   }
 }
