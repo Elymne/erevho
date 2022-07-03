@@ -1,4 +1,6 @@
+import 'package:erevho/application/widgets/buttons/back_night_button.dart';
 import 'package:erevho/application/widgets/custom_form_field.dart';
+import 'package:erevho/application/widgets/buttons/night_button.dart';
 import 'package:erevho/di/tools/app_localisation_tools.dart';
 import 'package:erevho/application/pages/dream_form/dream_form_controller.dart';
 import 'package:erevho/core/themes/colors.dart';
@@ -36,12 +38,7 @@ class DreamFormState extends ConsumerState<DreamFormPage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: OutlinedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Retour'),
-              ),
+              child: BackNightButton(context: context),
             ),
             const SizedBox(height: 30),
             Padding(
@@ -52,21 +49,21 @@ class DreamFormState extends ConsumerState<DreamFormPage> {
                   children: [
                     CustomFormField(
                       hintText: appLocals.current.title_form,
-                      isContent: false,
+                      textFieldType: TextFieldType.title,
                       validator: controller.validateTitle,
                       onSaved: controller.saveTitle,
                     ),
                     const SizedBox(height: 10),
                     CustomFormField(
                       hintText: appLocals.current.content_form,
-                      isContent: true,
+                      textFieldType: TextFieldType.content,
                       validator: controller.validateContent,
                       onSaved: controller.saveContent,
                     ),
-                    const SizedBox(height: 10),
-                    OutlinedButton(
+                    const SizedBox(height: 30),
+                    NightButton(
                       onPressed: () => controller.onSubmit(),
-                      child: Text(appLocals.current.submit),
+                      text: appLocals.current.submit,
                     ),
                   ],
                 ),

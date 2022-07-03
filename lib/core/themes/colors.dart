@@ -15,6 +15,7 @@ const nightRedShadow = Color.fromARGB(100, 126, 29, 29);
 const nightOrange = Color.fromARGB(255, 194, 113, 93);
 const nightOrangeDarker = Color.fromARGB(255, 170, 80, 58);
 const nightOrangeShadow = Color.fromARGB(100, 170, 80, 58);
+const nightOrangeAccent = Color.fromARGB(255, 236, 114, 83);
 
 const nightBlue = Color.fromARGB(255, 44, 76, 163);
 const nightBlueDarker = Color.fromARGB(255, 28, 56, 133);
