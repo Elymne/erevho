@@ -9,7 +9,7 @@ import 'package:get_it/get_it.dart';
 class DreamFormPage extends ConsumerStatefulWidget {
   final String? dreamId;
 
-  const DreamFormPage({Key? key, this.dreamId}) : super(key: key);
+  const DreamFormPage({Key? key, required this.dreamId}) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => DreamFormState();

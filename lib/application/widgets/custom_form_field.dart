@@ -15,6 +15,7 @@ class CustomFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      minLines: isContent ? 8 : 1,
       maxLines: isContent ? null : 1,
       initialValue: initialValue,
       decoration: InputDecoration(

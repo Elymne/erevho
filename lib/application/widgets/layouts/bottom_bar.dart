@@ -25,16 +25,16 @@ class BottomBar extends StatelessWidget {
               onTap: () => _changePage(context, PageSelected.personnal == pageSelected ? PageSelected.none : PageSelected.personnal),
               child: Icon(
                 Icons.home,
-                color: PageSelected.personnal == pageSelected ? neonBlue : nightGrey,
+                color: PageSelected.personnal == pageSelected ? nightOrange : nightGrey,
                 size: 40,
               ),
             ),
           ),
           GestureDetector(
-            onTap: () => _changePage(context, PageSelected.group == pageSelected ? PageSelected.none : PageSelected.group),
+            onTap: () => _changePage(context, PageSelected.create == pageSelected ? PageSelected.none : PageSelected.create),
             child: Icon(
-              Icons.private_connectivity,
-              color: PageSelected.group == pageSelected ? neonBlue : nightGrey,
+              Icons.add,
+              color: PageSelected.group == pageSelected ? nightOrange : nightGrey,
               size: 40,
             ),
           ),
@@ -42,7 +42,7 @@ class BottomBar extends StatelessWidget {
             onTap: () => _changePage(context, PageSelected.online == pageSelected ? PageSelected.none : PageSelected.online),
             child: Icon(
               Icons.online_prediction,
-              color: PageSelected.online == pageSelected ? neonBlue : nightGrey,
+              color: PageSelected.online == pageSelected ? nightOrange : nightGrey,
               size: 40,
             ),
           ),
@@ -67,6 +67,9 @@ class BottomBar extends StatelessWidget {
       case PageSelected.online:
         print('Access to online page : Not implemented');
         break;
+      case PageSelected.create:
+        appRouter.navigate(context, dreamForm);
+        break;
     }
   }
 }
@@ -76,4 +79,4 @@ class BottomBar extends StatelessWidget {
 /// [personnal] Correponding to user offline dreams.
 /// [group] Corresponding to user group. //TODO to be defined
 /// [online] Corresponding to online dreams seach place. //TODO to be defined
-enum PageSelected { none, personnal, group, online }
+enum PageSelected { none, create, personnal, group, online }

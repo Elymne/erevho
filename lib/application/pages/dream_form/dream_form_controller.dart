@@ -55,7 +55,7 @@ class DreamFormController extends StatefulControllerWithParams<DreamFormParam> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
 
-      final ail = await createOneDreamUsecase.perform(CreateOneDreamParams(
+      await createOneDreamUsecase.perform(CreateOneDreamParams(
         title: _dreamForm.title,
         content: _dreamForm.content,
         pseudonym: 'NONE',
