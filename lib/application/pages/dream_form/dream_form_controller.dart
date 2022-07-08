@@ -57,7 +57,7 @@ class DreamFormController extends StatefulControllerWithParams<DreamFormParam> {
 
       await createOneDreamUsecase.perform(CreateOneDreamParams(
         title: _dreamForm.title,
-        content: _dreamForm.content,
+        chapters: [],
         pseudonym: 'NONE',
         dreamType: DreamEntity.normal,
         tags: _dreamForm.tags,

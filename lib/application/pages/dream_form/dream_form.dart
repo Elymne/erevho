@@ -12,6 +12,6 @@ class DreamForm extends Form<DreamEntity> {
   DreamForm({required this.title, required this.content, required this.tags});
 
   factory DreamForm.fromEntity(DreamEntity dreamEntity) {
-    return DreamForm(title: dreamEntity.title, content: dreamEntity.content, tags: dreamEntity.tags.map((e) => e.title).toList());
+    return DreamForm(title: dreamEntity.title, content: '', tags: dreamEntity.tags.map((e) => e.title).toList());
   }
 }
