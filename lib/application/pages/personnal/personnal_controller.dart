@@ -6,7 +6,7 @@ import 'package:erevho/domain/usecases/dream/get_all_dreams_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable()
+@injectable
 class PersonnalController extends StatefulController {
   final GetAllDreamsUsecase getAllDreamsUsecase;
   final AppRouter appRouter;

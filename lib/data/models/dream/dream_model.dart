@@ -1,4 +1,5 @@
 import 'package:erevho/core/data/hive_id.dart';
+import 'package:erevho/data/models/dream/chapter_model.dart';
 import 'package:erevho/data/models/dream/tag_model.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,7 +15,7 @@ class DreamModel extends DreamEntity with _$DreamModel {
     @JsonKey(name: 'id', required: true, disallowNullValue: true) @HiveField(0) required String id,
     @HiveField(1) required String pseudonym,
     @HiveField(2) required String title,
-    @HiveField(3) required String content,
+    @HiveField(3) required List<ChapterModel> chapters,
     @HiveField(4) required int dreamType,
     @HiveField(5) required List<TagModel> tags,
     @HiveField(6) required DateTime created,

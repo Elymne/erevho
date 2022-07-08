@@ -1,5 +1,6 @@
 import 'package:erevho/core/params.dart';
 import 'package:erevho/core/usecase.dart';
+import 'package:erevho/data/models/dream/chapter_model.dart';
 import 'package:erevho/data/models/dream/dream_model.dart';
 import 'package:erevho/data/models/dream/tag_model.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
@@ -28,19 +29,19 @@ class UpdateOneDreamUsecase extends Usecase<void, UpdateOneDreamParams> {
 class UpdateOneDreamParams extends Params {
   final String id;
   final String title;
-  final String content;
+  final String chapters;
   final String pseudonym;
   final int dreamType;
   final List<String> tags;
 
-  UpdateOneDreamParams({required this.id, required this.title, required this.content, required this.pseudonym, required this.dreamType, required this.tags});
+  UpdateOneDreamParams({required this.id, required this.title, required this.chapters, required this.pseudonym, required this.dreamType, required this.tags});
 
   /// That's what we'll use in our usecase.
   DreamModel createDreamEntity() {
     final result = DreamModel(
       id: id,
       title: title,
-      content: content,
+      chapters: chapters as List<ChapterModel>,
       pseudonym: pseudonym,
       dreamType: dreamType,
       tags: _createTags(),

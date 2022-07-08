@@ -12,7 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable()
+@injectable
 class DreamFormController extends StatefulControllerWithParams<DreamFormParam> {
   final AppRouter appRouter = GetIt.instance();
   final AppLocalisationTools appLocals = GetIt.instance();
