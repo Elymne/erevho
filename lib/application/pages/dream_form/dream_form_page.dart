@@ -1,5 +1,5 @@
 import 'package:erevho/application/widgets/buttons/back_night_button.dart';
-import 'package:erevho/application/widgets/custom_form_field.dart';
+import 'package:erevho/application/widgets/forms/custom_form_field.dart';
 import 'package:erevho/application/widgets/buttons/night_button.dart';
 import 'package:erevho/di/tools/app_localisation_tools.dart';
 import 'package:erevho/application/pages/dream_form/dream_form_controller.dart';
@@ -41,31 +41,36 @@ class DreamFormState extends ConsumerState<DreamFormPage> {
               child: BackNightButton(context: context),
             ),
             const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Form(
-                key: controller.formKey,
-                child: Column(
-                  children: [
-                    CustomFormField(
-                      hintText: appLocals.current.title_form,
-                      textFieldType: TextFieldType.title,
-                      validator: controller.validateTitle,
-                      onSaved: controller.saveTitle,
-                    ),
-                    const SizedBox(height: 10),
-                    CustomFormField(
-                      hintText: appLocals.current.content_form,
-                      textFieldType: TextFieldType.content,
-                      validator: controller.validateContent,
-                      onSaved: controller.saveContent,
-                    ),
-                    const SizedBox(height: 30),
-                    NightButton(
-                      onPressed: () => controller.onSubmit(),
-                      text: appLocals.current.submit,
-                    ),
-                  ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  key: controller.formKey,
+                  child: Column(
+                    children: [
+                      CustomFormField(
+                        hintText: appLocals.current.title_form,
+                        textFieldType: TextFieldType.title,
+                        validator: controller.validateTitle,
+                        onSaved: controller.saveTitle,
+                      ),
+                      const SizedBox(height: 10),
+                      Expanded(
+                        child: CustomFormField(
+                          hintText: appLocals.current.content_form,
+                          textFieldType: TextFieldType.content,
+                          validator: controller.validateContent,
+                          onSaved: controller.saveContent,
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      NightButton(
+                        onPressed: () => controller.onSubmit(),
+                        text: appLocals.current.submit,
+                      ),
+                      const SizedBox(height: 30),
+                    ],
+                  ),
                 ),
               ),
             ),

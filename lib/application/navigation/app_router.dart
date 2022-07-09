@@ -5,9 +5,11 @@ import 'package:erevho/application/pages/personnal/personnal_page.dart';
 import 'package:erevho/application/pages/splashscreen/splash_page.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 
 /// AppRouter class.
 /// Injected from app class as singleton.
+@singleton
 class AppRouter {
   final _router = FluroRouter();
 
