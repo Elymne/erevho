@@ -7,10 +7,10 @@ import 'package:get_it/get_it.dart';
 /// Custom bottom bar that should be displayed to HomePage.
 /// It will allow us to navigate into multiple features from the app.
 class BottomBar extends StatelessWidget {
-  final AppRouter appRouter = GetIt.instance();
+  final AppRouter appRouter;
   final PageSelected pageSelected;
 
-  BottomBar({Key? key, required this.pageSelected}) : super(key: key);
+  const BottomBar({Key? key, required this.pageSelected, required this.appRouter}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

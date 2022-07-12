@@ -20,10 +20,11 @@ class HomeState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomBar(pageSelected: PageSelected.none),
-      body: const Center(
-        child: Text('HOME PAGE'),
+      bottomNavigationBar: BottomBar(
+        pageSelected: PageSelected.none,
+        appRouter: controller.appRouter,
       ),
+      body: const Center(child: Text('HOME PAGE')),
       backgroundColor: nightGrey,
     );
   }

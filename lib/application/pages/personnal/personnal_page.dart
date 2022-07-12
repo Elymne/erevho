@@ -10,7 +10,6 @@ import 'package:get_it/get_it.dart';
 
 class PersonnalPage extends ConsumerStatefulWidget {
   const PersonnalPage({Key? key}) : super(key: key);
-
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => PersonnalPageState();
 }
@@ -21,12 +20,17 @@ class PersonnalPageState extends ConsumerState<PersonnalPage> {
   @override
   void initState() {
     super.initState();
-    controller.init(context, ref);
+    controller.init(context: context, ref: ref);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomBar(
+        pageSelected: PageSelected.personnal,
+        appRouter: controller.appRouter,
+      ),
+      backgroundColor: nightGrey,
       body: SafeArea(
         child: CustomPageView(
           pages: [
@@ -64,8 +68,6 @@ class PersonnalPageState extends ConsumerState<PersonnalPage> {
           pagesNames: const ['Mes rêves', 'Filtres'],
         ),
       ),
-      bottomNavigationBar: BottomBar(pageSelected: PageSelected.personnal),
-      backgroundColor: nightGrey,
     );
   }
 }

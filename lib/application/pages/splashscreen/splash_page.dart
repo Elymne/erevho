@@ -14,20 +14,18 @@ class SplashPage extends StatefulWidget {
 /// Je ferais bien une vue qu rempli entièrement l'espace avec du paralaxe etc..
 /// A voir si ça peut se faire rapidement avec des petits assets légers.
 class SplashState extends State<SplashPage> {
-  final SplashController controller = GetIt.instance();
+  final SplashController controller = GetIt.I();
 
   @override
   void initState() {
     super.initState();
-    controller.init(context);
+    controller.init(context: context);
   }
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('Splashscreen'),
-      ),
+      body: Center(child: Text('Splashscreen')),
       backgroundColor: nightGreyDarker,
     );
   }

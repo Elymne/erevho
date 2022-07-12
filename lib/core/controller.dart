@@ -1,39 +1,22 @@
-import 'package:erevho/core/params.dart';
+import 'package:erevho/application/navigation/app_router.dart';
+import 'package:erevho/di/tools/app_localisation_tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_it/get_it.dart';
 
-abstract class StatelessController {
-  late final BuildContext context;
-  void init(BuildContext context) async {
-    this.context = context;
-  }
-}
+abstract class Controller {
+  final AppRouter appRouter = GetIt.I();
+  final AppLocalisationTools appLocals = GetIt.I();
 
-abstract class StatefulController {
-  late final BuildContext context;
-  late final WidgetRef ref;
-  void init(BuildContext context, WidgetRef ref) async {
+  late final BuildContext? context;
+  late final WidgetRef? ref;
+
+  void init({BuildContext? context, WidgetRef? ref}) async {
     this.context = context;
     this.ref = ref;
   }
-}
 
-abstract class StatelessControllerWithParams<P extends Params> {
-  late final BuildContext context;
-  late final P params;
-  void init(BuildContext context, P params) async {
-    this.context = context;
-    this.params = params;
-  }
-}
+  void setBuildContext(BuildContext context) => this.context = context;
 
-abstract class StatefulControllerWithParams<P extends Params> {
-  late final BuildContext context;
-  late final WidgetRef ref;
-  late final P? params;
-  void init(BuildContext context, WidgetRef ref, P params) async {
-    this.context = context;
-    this.ref = ref;
-    this.params = params;
-  }
+  void setBuildRef(WidgetRef ref) => this.ref = ref;
 }

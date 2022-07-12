@@ -24,7 +24,8 @@ class DreamFormState extends ConsumerState<DreamFormPage> {
   @override
   void initState() {
     super.initState();
-    controller.init(context, ref, DreamFormParam(id: widget.dreamId));
+    controller.init(context: context, ref: ref);
+    controller.setGetOneDreamParams(widget.dreamId);
   }
 
   @override
