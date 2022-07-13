@@ -17,7 +17,7 @@ class DreamFormController extends Controller {
   late final GlobalKey<FormState> formKey;
 
   /// Provider to get the current state of the form at view launch.
-  AsyncValue<DreamForm> getDreamFormValue(String? id) => ref!.watch(dreamFormFutureProvider(id));
+  AsyncValue<DreamForm> getDreamFormValue(String? id) => ref!.watch(dreamFormFutureProvider(DreamFormFutureProviderParams(id: id)));
 
   /// Object that contain values from form that we will use later to store/update data in DB.
   final DreamForm _dreamFormToSave = DreamForm(title: '', content: '', tags: []);

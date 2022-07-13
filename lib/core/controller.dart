@@ -11,10 +11,13 @@ abstract class Controller {
   /// Translation service.
   final AppLocalisationTools alt = GetIt.I();
 
+  /// Basics views attributes.
   late final BuildContext? context;
   late final WidgetRef? ref;
 
-  void init({BuildContext? context, WidgetRef? ref}) async {
+  /// Init context and provider ref.
+  /// Should be called by Widget on init.
+  void init({BuildContext? context, WidgetRef? ref}) {
     this.context = context;
     this.ref = ref;
   }

@@ -70,4 +70,13 @@ class ChapterPagerFormState extends State<ChapterPagerForm> {
       ],
     );
   }
+
+  /// Use this when a user had a new chapter for his dream.
+  /// [index] I need the index to set the current page chapter as initialized.
+  void addChapter(int index) {
+    setState(() {
+      chapters[index].isInit = true;
+      chapters.add(ChapterForm(title: '', number: chapters.length + 1, content: '', isInit: false));
+    });
+  }
 }
