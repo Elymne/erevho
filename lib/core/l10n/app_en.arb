@@ -1,4 +1,5 @@
 {
+  "add_chapter_form": "Add a new chapter",
   "chapter_content_form": "Content",
   "chapter_content_form_error": "Content is incorrect",
   "chapter_title_form": "Chapter title",

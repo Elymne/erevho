@@ -68,7 +68,7 @@ class BottomBar extends StatelessWidget {
         print('Access to online page : Not implemented');
         break;
       case PageSelected.create:
-        appRouter.navigate(context, dreamForm);
+        appRouter.navigate(context, dreamFormCreate);
         break;
     }
   }

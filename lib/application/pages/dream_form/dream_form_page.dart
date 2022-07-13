@@ -42,28 +42,77 @@ class DreamFormState extends ConsumerState<DreamFormPage> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  key: controller.formKey,
-                  child: Column(
-                    children: [
-                      CustomFormField(
-                        hintText: controller.alt.current.title_form,
-                        textFieldType: TextFieldType.title,
-                        validator: controller.validateTitle,
-                        onSaved: controller.saveTitle,
-                      ),
-                      const SizedBox(height: 10),
-
-                      /// TODO Item to put here.
-                      const SizedBox(height: 30),
-                      NightButton(
-                        onPressed: () => controller.onSubmit(),
-                        text: controller.alt.current.submit,
-                      ),
-                      const SizedBox(height: 30),
-                    ],
-                  ),
-                ),
+                child: controller.loadFormValue(widget.dreamId).when(
+                      error: (err, stacktrace) => const Center(child: Text('ERROR')),
+                      loading: () => const Center(child: Text('LOADING')),
+                      data: (dreamForm) {
+                        controller.setDreamFormValue(dreamForm);
+                        return Form(
+                          key: controller.formKey,
+                          child: Column(
+                            children: [
+                              CustomFormField(
+                                initialValue: controller.dreamFormValue.title,
+                                hintText: controller.alt.current.title_form,
+                                textFieldType: TextFieldType.title,
+                                validator: controller.validateTitle,
+                                onSaved: controller.saveTitle,
+                              ),
+                              const SizedBox(height: 10),
+                              SizedBox(
+                                height: 40,
+                                child: PageView.builder(
+                                  itemCount: controller.dreamFormValue.chapters.length,
+                                  itemBuilder: (context, index) {
+                                    if (controller.dreamFormValue.chapters[index].isInit) {
+                                      return CustomFormField(
+                                        hintText: controller.alt.current.chapter_title_form,
+                                        textFieldType: TextFieldType.title,
+                                        initialValue: controller.dreamFormValue.chapters[index].title,
+                                        validator: (text) => 'PAS b1 gaidjdfjfhek',
+                                        onSaved: (text) {},
+                                      );
+                                    }
+                                    return Center(child: Text(controller.alt.current.add_chapter_form));
+                                  },
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Expanded(
+                                child: PageView.builder(
+                                  itemCount: controller.dreamFormValue.chapters.length,
+                                  itemBuilder: (context, index) {
+                                    if (controller.dreamFormValue.chapters[index].isInit) {
+                                      return CustomFormField(
+                                        hintText: controller.alt.current.chapter_content_form,
+                                        textFieldType: TextFieldType.title,
+                                        initialValue: controller.dreamFormValue.chapters[index].content,
+                                        validator: (text) => 'PAS b1 gaidjdfjfhek',
+                                        onSaved: (text) {},
+                                      );
+                                    }
+                                    return OutlinedButton(
+                                      onPressed: () {},
+                                      child: const Icon(
+                                        Icons.add,
+                                        color: pureWhite,
+                                        size: 100,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              const SizedBox(height: 30),
+                              NightButton(
+                                onPressed: () => controller.onSubmit(),
+                                text: controller.alt.current.submit,
+                              ),
+                              const SizedBox(height: 30),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
               ),
             ),
           ],

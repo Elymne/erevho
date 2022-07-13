@@ -30,12 +30,17 @@ class AppRouter {
       transitionType: TransitionType.none,
     );
     _router.define(
-      dreamForm,
+      dreamFormCreate,
       handler: Handler(handlerFunc: (context, params) => const DreamFormPage(dreamId: null)),
       transitionType: TransitionType.inFromBottom,
     );
     _router.define(
-      '$dreamForm/:id',
+      dreamFormCreate,
+      handler: Handler(handlerFunc: (context, params) => const DreamFormPage(dreamId: null)),
+      transitionType: TransitionType.inFromBottom,
+    );
+    _router.define(
+      '$dreamFormUpdate/:id',
       handler: Handler(handlerFunc: (context, params) => DreamFormPage(dreamId: params['id']?[0])),
       transitionType: TransitionType.inFromBottom,
     );
