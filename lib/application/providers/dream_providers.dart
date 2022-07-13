@@ -13,9 +13,9 @@ final dreamsFutureProvider = FutureProvider.family<List<DreamEntity>, GetAllDrea
 
 /// Watch the state of form data.
 /// Depending of create or update from, we want different data.
-/// Set params to null to get default form (without any data, create form simply).
-final dreamFormProvider = FutureProvider.family<DreamForm, GetOneDreamParams?>((ref, params) async {
+/// When [id] is null, we return a empty data structure form (createForm then).
+final dreamFormFutureProvider = FutureProvider.family<DreamForm, String?>((ref, id) async {
   final GetOneDreamUsecase getOneDreamUsecase = GetIt.I();
-  if (params != null) return DreamForm.fromEntity(await getOneDreamUsecase.perform(params));
+  if (id != null) return DreamForm.fromEntity(await getOneDreamUsecase.perform(GetOneDreamParams(id)));
   return DreamForm(title: '', content: '', tags: []);
 });

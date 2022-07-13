@@ -1,9 +1,7 @@
-// TODO Gérer les données du formulaire d'un coup enfaite mon gars.
-// Et faire une petite interface à la limite, on va voir.
 import 'package:erevho/core/form.dart';
+import 'package:erevho/domain/entities/dream/chapter_entity.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
 
-/// Attributes aren't final because I need to mutate them.
 class DreamForm extends Form<DreamEntity> {
   String title;
   String content;
@@ -13,5 +11,18 @@ class DreamForm extends Form<DreamEntity> {
 
   factory DreamForm.fromEntity(DreamEntity dreamEntity) {
     return DreamForm(title: dreamEntity.title, content: '', tags: dreamEntity.tags.map((e) => e.title).toList());
+  }
+}
+
+class ChapterForm extends Form<ChapterEntity> {
+  String title;
+  int number;
+  String content;
+  bool isInit;
+
+  ChapterForm({required this.title, required this.number, required this.content, required this.isInit});
+
+  factory ChapterForm.fromEntity(ChapterEntity chapterEntity) {
+    return ChapterForm(title: chapterEntity.title, number: chapterEntity.number, content: chapterEntity.content, isInit: true);
   }
 }

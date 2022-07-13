@@ -33,6 +33,7 @@ class PersonnalPageState extends ConsumerState<PersonnalPage> {
       backgroundColor: nightGrey,
       body: SafeArea(
         child: CustomPageView(
+          pagesNames: const ['Mes rêves', 'Filtres'],
           pages: [
             // Page one : dreams list \\
             Column(
@@ -42,12 +43,12 @@ class PersonnalPageState extends ConsumerState<PersonnalPage> {
                   child: CustomSearchBar(onSubmitted: (text) => controller.onSubmitted(text)),
                 ),
                 Expanded(
-                  child: controller.dreams.when<Widget>(
-                    loading: () => const Center(child: Text('Chargement des bidules')),
-                    error: (err, stack) => const Center(child: Text('Une erreur est survenue, allez bien vous faire enculer. Cordialement.')),
-                    data: (dreams) {
-                      return dreams.isNotEmpty
-                          ? ListView.builder(
+                  child: controller.getDreamsValue().when<Widget>(
+                        loading: () => const Center(child: Text('Chargement des bidules')),
+                        error: (err, stack) => const Center(child: Text('Une erreur est survenue, allez bien vous faire enculer. Cordialement.')),
+                        data: (dreams) {
+                          if (dreams.isNotEmpty) {
+                            return ListView.builder(
                               itemCount: dreams.length,
                               itemBuilder: (context, index) {
                                 return Padding(
@@ -55,17 +56,17 @@ class PersonnalPageState extends ConsumerState<PersonnalPage> {
                                   child: DreamCard(dream: dreams[index]),
                                 );
                               },
-                            )
-                          : const Center(child: Text('Pas de données trouvées'));
-                    },
-                  ),
+                            );
+                          }
+                          return const Center(child: Text('Pas de données trouvées'));
+                        },
+                      ),
                 ),
               ],
             ),
             // Page 2 : create one dream \\
             const Center(child: Text('FILTRAGE ETC (in prog'))
           ],
-          pagesNames: const ['Mes rêves', 'Filtres'],
         ),
       ),
     );

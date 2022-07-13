@@ -4,7 +4,6 @@ import 'package:erevho/application/providers/dream_providers.dart';
 import 'package:erevho/core/controller.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:erevho/domain/usecases/dream/create_one_dream_usecase.dart';
-import 'package:erevho/domain/usecases/dream/get_one_dream_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injectable/injectable.dart';
@@ -17,14 +16,10 @@ class DreamFormController extends Controller {
   /// Global key used to manage form.
   late final GlobalKey<FormState> formKey;
 
-  /// When updating dream, we need the current id of the dream to fetch data from DB.
-  late final GetOneDreamParams? _getOneDreamParams;
-  void setGetOneDreamParams(String? id) => _getOneDreamParams = id == null ? null : GetOneDreamParams(id);
+  /// Provider to get the current state of the form at view launch.
+  AsyncValue<DreamForm> getDreamFormValue(String? id) => ref!.watch(dreamFormFutureProvider(id));
 
-  /// Provider to get teh current state of the form.
-  AsyncValue<DreamForm> get initDreamForm => ref!.watch(dreamFormProvider(_getOneDreamParams));
-
-  /// Form that we will save.
+  /// Object that contain values from form that we will use later to store/update data in DB.
   final DreamForm _dreamFormToSave = DreamForm(title: '', content: '', tags: []);
 
   @override
@@ -33,23 +28,23 @@ class DreamFormController extends Controller {
     formKey = GlobalKey<FormState>();
   }
 
-  /// Check and title store.
+  /// Title checker and setter.
   void saveTitle(String? title) => _dreamFormToSave.title = title!;
   String? validateTitle(String? text) {
-    if (text == null) return appLocals.current.title_form_error;
-    if (text == '') return appLocals.current.title_form_error;
+    if (text == null) return alt.current.title_form_error;
+    if (text == '') return alt.current.title_form_error;
     return null;
   }
 
-  /// Check and content store.
+  /// Content checker and setter.
   void saveContent(String? content) => _dreamFormToSave.content = content!;
   String? validateContent(String? text) {
-    if (text == null) return appLocals.current.content_form_error;
-    if (text == '') return appLocals.current.content_form_error;
+    if (text == null) return alt.current.chapter_content_form_error;
+    if (text == '') return alt.current.chapter_content_form_error;
     return null;
   }
 
-  /// Now, we update or create new entry to db.
+  /// Called when user want to submit his changes/creation.
   void onSubmit() async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();

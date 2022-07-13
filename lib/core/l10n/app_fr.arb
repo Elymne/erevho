@@ -1,6 +1,8 @@
 {
-  "content_form": "Contenu",
-  "content_form_error": "Le contenu est incorrect",
+  "chapter_content_form": "Contenu",
+  "chapter_content_form_error": "Le contenu est incorrect",
+  "chapter_title_form": "Titre du chapitre",
+  "chapter_title_form_error": "Titre du chapitre incorrect",
   "research": "Rechercher",
   "submit": "Valider",
   "title_form": "Titre",

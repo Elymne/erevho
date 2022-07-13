@@ -5,8 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get_it/get_it.dart';
 
 abstract class Controller {
+  /// Routing service.
   final AppRouter appRouter = GetIt.I();
-  final AppLocalisationTools appLocals = GetIt.I();
+
+  /// Translation service.
+  final AppLocalisationTools alt = GetIt.I();
 
   late final BuildContext? context;
   late final WidgetRef? ref;

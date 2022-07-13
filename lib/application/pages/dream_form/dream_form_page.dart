@@ -1,7 +1,6 @@
 import 'package:erevho/application/widgets/buttons/back_night_button.dart';
 import 'package:erevho/application/widgets/forms/custom_form_field.dart';
 import 'package:erevho/application/widgets/buttons/night_button.dart';
-import 'package:erevho/di/tools/app_localisation_tools.dart';
 import 'package:erevho/application/pages/dream_form/dream_form_controller.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
@@ -19,13 +18,11 @@ class DreamFormPage extends ConsumerStatefulWidget {
 
 class DreamFormState extends ConsumerState<DreamFormPage> {
   final DreamFormController controller = GetIt.instance();
-  final AppLocalisationTools appLocals = GetIt.instance();
 
   @override
   void initState() {
     super.initState();
     controller.init(context: context, ref: ref);
-    controller.setGetOneDreamParams(widget.dreamId);
   }
 
   @override
@@ -50,24 +47,18 @@ class DreamFormState extends ConsumerState<DreamFormPage> {
                   child: Column(
                     children: [
                       CustomFormField(
-                        hintText: appLocals.current.title_form,
+                        hintText: controller.alt.current.title_form,
                         textFieldType: TextFieldType.title,
                         validator: controller.validateTitle,
                         onSaved: controller.saveTitle,
                       ),
                       const SizedBox(height: 10),
-                      Expanded(
-                        child: CustomFormField(
-                          hintText: appLocals.current.content_form,
-                          textFieldType: TextFieldType.content,
-                          validator: controller.validateContent,
-                          onSaved: controller.saveContent,
-                        ),
-                      ),
+
+                      /// TODO Item to put here.
                       const SizedBox(height: 30),
                       NightButton(
                         onPressed: () => controller.onSubmit(),
-                        text: appLocals.current.submit,
+                        text: controller.alt.current.submit,
                       ),
                       const SizedBox(height: 30),
                     ],
