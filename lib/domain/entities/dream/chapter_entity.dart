@@ -1,4 +1,4 @@
-import 'package:erevho/core/data/entity.dart';
+import 'package:erevho/core/data/hive/entity.dart';
 
 /// One chapter of a dream.
 abstract class ChapterEntity extends Entity {

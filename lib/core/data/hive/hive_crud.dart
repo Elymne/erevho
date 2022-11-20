@@ -1,4 +1,4 @@
-import 'package:erevho/core/data/entity.dart';
+import 'package:erevho/core/data/hive/entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class HiveCrud<T extends Entity, R> {

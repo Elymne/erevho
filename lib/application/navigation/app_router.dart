@@ -5,11 +5,12 @@ import 'package:erevho/application/pages/personnal/personnal_page.dart';
 import 'package:erevho/application/pages/splashscreen/splash_page.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final appRouterProvider = Provider((_) => AppRouter());
 
 /// AppRouter class.
-/// Injected from app class as singleton.
-@singleton
+/// Define each route + their arguments and params.
 class AppRouter {
   final _router = FluroRouter();
 
@@ -40,7 +41,7 @@ class AppRouter {
       transitionType: TransitionType.inFromBottom,
     );
     _router.define(
-      '$dreamFormUpdate/:id',
+      dreamFormUpdate,
       handler: Handler(handlerFunc: (context, params) => DreamFormPage(dreamId: params['id']?[0])),
       transitionType: TransitionType.inFromBottom,
     );

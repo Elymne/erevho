@@ -1,1 +1,3 @@
-abstract class Params {}
+abstract class Params {
+  const Params();
+}

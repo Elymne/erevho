@@ -2,9 +2,11 @@ import 'package:erevho/data/datasources/local/dream_local_data_source.dart';
 import 'package:erevho/data/models/dream/dream_model.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
-import 'package:injectable/injectable.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-@Singleton(as: DreamLocalRepository)
+final dreamLocalRepositoryProvider = Provider((ref) => DreamLocalRepositoryImpl(ref.read(dreamLocalDataSourceProvider)));
+
+/// Basic Repository through dreams dabatase data.
 class DreamLocalRepositoryImpl implements DreamLocalRepository {
   final DreamLocalDataSource dreamLocalDataSource;
 

@@ -1,4 +1,4 @@
-import 'package:erevho/core/data/hive_id.dart';
+import 'package:erevho/core/data/hive/hive_id.dart';
 import 'package:erevho/data/models/dream/chapter_model.dart';
 import 'package:erevho/data/models/dream/tag_model.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';

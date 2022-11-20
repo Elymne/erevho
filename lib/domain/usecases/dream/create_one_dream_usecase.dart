@@ -3,16 +3,21 @@ import 'package:erevho/core/usecase.dart';
 import 'package:erevho/data/models/dream/chapter_model.dart';
 import 'package:erevho/data/models/dream/dream_model.dart';
 import 'package:erevho/data/models/dream/tag_model.dart';
+import 'package:erevho/data/repositories/local/dream_local_repository_impl.dart';
 import 'package:erevho/domain/entities/dream/chapter_entity.dart';
-import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:erevho/domain/entities/dream/tag_entity.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
-import 'package:injectable/injectable.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
+
+// TODO to be defined.
+final createOneDreamProvider = FutureProvider.autoDispose.family<int, CreateOneDreamParams>((ref, arg) {
+  final usecase = CreateOneDreamUsecase(ref.read(dreamLocalRepositoryProvider));
+  return usecase.perform(arg);
+});
 
 /// Usecase to create a dream.
 /// ex: User has completed his form and validate it.
-@Injectable()
 class CreateOneDreamUsecase extends Usecase<int, CreateOneDreamParams> {
   final DreamLocalRepository dreamLocalRepository;
 

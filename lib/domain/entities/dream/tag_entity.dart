@@ -1,4 +1,4 @@
-import 'package:erevho/core/data/entity.dart';
+import 'package:erevho/core/data/hive/entity.dart';
 
 /// Entity class that represente Tags associated to DreamEntity class.
 /// Abstraction to respect Clean Architecture.
