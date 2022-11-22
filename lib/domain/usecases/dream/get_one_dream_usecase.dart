@@ -1,12 +1,17 @@
 import 'package:erevho/core/params.dart';
 import 'package:erevho/core/usecase.dart';
+import 'package:erevho/data/repositories/local/dream_local_repository_impl.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
-import 'package:injectable/injectable.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final getOneDreamProvider = FutureProvider.autoDispose.family<DreamEntity, GetOneDreamParams>((ref, arg) {
+  final usecase = GetOneDreamUsecase(ref.read(dreamLocalRepositoryProvider));
+  return usecase.perform(arg);
+});
 
 /// Usecase to get a detailed dream when user want to access to read one.
 /// ex: user click on a dream from list to access to detailed page.
-@Injectable()
 class GetOneDreamUsecase extends Usecase<DreamEntity, GetOneDreamParams> {
   final DreamLocalRepository dreamLocalRepository;
   GetOneDreamUsecase(this.dreamLocalRepository);
@@ -23,5 +28,5 @@ class GetOneDreamUsecase extends Usecase<DreamEntity, GetOneDreamParams> {
 
 class GetOneDreamParams extends Params {
   final String id;
-  GetOneDreamParams(this.id);
+  const GetOneDreamParams(this.id);
 }

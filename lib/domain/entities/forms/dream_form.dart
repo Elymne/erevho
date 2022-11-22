@@ -1,5 +1,5 @@
-import 'package:erevho/application/pages/dream_form/forms/chapter_form.dart';
 import 'package:erevho/domain/entities/dream/dream_entity.dart';
+import 'package:erevho/domain/entities/forms/chapter_form.dart';
 
 class DreamForm {
   String title;

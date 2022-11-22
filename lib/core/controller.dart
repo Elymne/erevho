@@ -1,28 +1,18 @@
 import 'package:erevho/application/navigation/app_router.dart';
-import 'package:erevho/di/tools/app_localisation_tools.dart';
-import 'package:flutter/material.dart';
+import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 
-abstract class Controller {
+class Controller {
+  /// Riverpod statemanagement value.
+  final ProviderRef ref;
+
   /// Routing service.
-  final AppRouter appRouter = GetIt.I();
+  final AppRouter appRouter;
 
   /// Translation service.
-  final AppLocalisationTools alt = GetIt.I();
+  final AppLocalisationTools alt;
 
-  /// Basics views attributes.
-  late final BuildContext? context;
-  late final WidgetRef? ref;
-
-  /// Init context and provider ref.
-  /// Should be called by Widget on init.
-  void init({BuildContext? context, WidgetRef? ref}) {
-    this.context = context;
-    this.ref = ref;
-  }
-
-  void setBuildContext(BuildContext context) => this.context = context;
-
-  void setBuildRef(WidgetRef ref) => this.ref = ref;
+  Controller(this.ref)
+      : appRouter = ref.read(appRouterProvider),
+        alt = ref.read(appLocalisationToolsProvider);
 }

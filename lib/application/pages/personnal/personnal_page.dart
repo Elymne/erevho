@@ -4,31 +4,19 @@ import 'package:erevho/application/widgets/custom_search_bar.dart';
 import 'package:erevho/application/widgets/dream_card.dart';
 import 'package:erevho/application/widgets/layouts/bottom_bar.dart';
 import 'package:erevho/core/themes/colors.dart';
+import 'package:erevho/domain/usecases/dream/get_all_dreams_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get_it/get_it.dart';
 
-class PersonnalPage extends ConsumerStatefulWidget {
-  const PersonnalPage({Key? key}) : super(key: key);
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() => PersonnalPageState();
-}
-
-class PersonnalPageState extends ConsumerState<PersonnalPage> {
-  final PersonnalController controller = GetIt.instance();
+class PersonnalPage extends ConsumerWidget {
+  const PersonnalPage({super.key});
 
   @override
-  void initState() {
-    super.initState();
-    controller.init(context: context, ref: ref);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       bottomNavigationBar: BottomBar(
         pageSelected: PageSelected.personnal,
-        appRouter: controller.appRouter,
+        appRouter: ref.watch(personnalControllerProvider).appRouter,
       ),
       backgroundColor: nightGrey,
       body: SafeArea(
@@ -40,12 +28,12 @@ class PersonnalPageState extends ConsumerState<PersonnalPage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
-                  child: CustomSearchBar(onSubmitted: (text) => controller.onSubmitted(text)),
+                  child: CustomSearchBar(onSubmitted: (text) => _filterDreams(ref, text)),
                 ),
                 Expanded(
-                  child: controller.getDreamsValue().when<Widget>(
-                        loading: () => const Center(child: Text('Chargement des bidules')),
-                        error: (err, stack) => const Center(child: Text('Une erreur est survenue, allez bien vous faire enculer. Cordialement.')),
+                  child: ref.watch(getAllDreamsProvider(const GetAllDreamsParams())).when<Widget>(
+                        loading: () => const Center(child: CircularProgressIndicator()),
+                        error: (err, stack) => const Center(child: Text('Une erreur est survenue.')),
                         data: (dreams) {
                           if (dreams.isNotEmpty) {
                             return ListView.builder(
@@ -70,5 +58,9 @@ class PersonnalPageState extends ConsumerState<PersonnalPage> {
         ),
       ),
     );
+  }
+
+  void _filterDreams(WidgetRef ref, String title) {
+    ref.read(personnalControllerProvider).filterDreams(title);
   }
 }

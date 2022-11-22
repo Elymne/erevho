@@ -2,18 +2,18 @@ import 'package:erevho/application/navigation/app_router.dart';
 import 'package:erevho/application/navigation/routes.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Custom bottom bar that should be displayed to HomePage.
 /// It will allow us to navigate into multiple features from the app.
-class BottomBar extends StatelessWidget {
+class BottomBar extends ConsumerWidget {
   final AppRouter appRouter;
   final PageSelected pageSelected;
 
   const BottomBar({Key? key, required this.pageSelected, required this.appRouter}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       color: nightGreyDarker,
       child: Row(

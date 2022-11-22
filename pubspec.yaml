@@ -19,10 +19,6 @@ dependencies:
     hive_flutter: ^1.1.0
     # UUID generator.
     uuid: ^3.0.6
-    # DI package.
-    injectable: ^1.5.3
-    # DI package
-    get_it: ^7.2.0
     # Entities helper package.
     freezed: ^2.0.3+1
     # Entities helper package.
@@ -58,7 +54,6 @@ dev_dependencies:
     # Generators packages.
     hive_generator: ^1.1.3
     retrofit_generator: ^4.0.1
-    injectable_generator: ^1.5.3
 
 flutter:
     uses-material-design: true

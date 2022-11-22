@@ -1,5 +1,8 @@
 import 'package:erevho/core/controller.dart';
-import 'package:injectable/injectable.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-@injectable
-class HomeController extends Controller {}
+final homeControllerProvider = Provider((ref) => HomeController(ref));
+
+class HomeController extends Controller {
+  HomeController(super.ref);
+}

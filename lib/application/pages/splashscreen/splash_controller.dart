@@ -2,15 +2,17 @@ import 'package:erevho/application/navigation/routes.dart';
 import 'package:erevho/core/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:injectable/injectable.dart';
 
-/// Splash
-@Injectable()
+final splashControllerProvider = Provider((ref) => SplashController(ref));
+
 class SplashController extends Controller {
-  @override
-  void init({BuildContext? context, WidgetRef? ref}) async {
-    super.init(context: context, ref: ref);
+  SplashController(super.ref);
+
+  /// Call all that we need to make the app start swmoothly.
+  /// Actualy, it just lainch a timer.
+  /// May add animation.
+  Future init(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 2));
-    appRouter.navigate(context!, home);
+    appRouter.navigate(context, home);
   }
 }
