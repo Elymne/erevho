@@ -1,5 +1,5 @@
 import 'package:erevho/core/themes/colors.dart';
-import 'package:erevho/domain/entities/dream/tag_entity.dart';
+import 'package:erevho/domain/entities/dream/tag.entity.dart';
 import 'package:flutter/material.dart';
 
 extension TagColorExtension on TagColor {

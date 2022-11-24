@@ -4,24 +4,24 @@ import 'package:erevho/data/models/dream/chapter_model.dart';
 import 'package:erevho/data/models/dream/dream_model.dart';
 import 'package:erevho/data/models/dream/tag_model.dart';
 import 'package:erevho/data/repositories/local/dream_local_repository_impl.dart';
-import 'package:erevho/domain/entities/dream/chapter_entity.dart';
-import 'package:erevho/domain/entities/dream/tag_entity.dart';
+import 'package:erevho/domain/entities/dream/chapter.entity.dart';
+import 'package:erevho/domain/entities/dream/tag.entity.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
 // TODO to be defined.
 final createOneDreamProvider = FutureProvider.autoDispose.family<int, CreateOneDreamParams>((ref, arg) {
-  final usecase = CreateOneDreamUsecase(ref.read(dreamLocalRepositoryProvider));
+  final usecase = CreateOneDream(ref.read(dreamLocalRepositoryProvider));
   return usecase.perform(arg);
 });
 
 /// Usecase to create a dream.
 /// ex: User has completed his form and validate it.
-class CreateOneDreamUsecase extends Usecase<int, CreateOneDreamParams> {
+class CreateOneDream extends Usecase<int, CreateOneDreamParams> {
   final DreamLocalRepository dreamLocalRepository;
 
-  CreateOneDreamUsecase(this.dreamLocalRepository);
+  CreateOneDream(this.dreamLocalRepository);
 
   @override
   Future<int> perform(CreateOneDreamParams params) async {
@@ -36,7 +36,7 @@ class CreateOneDreamUsecase extends Usecase<int, CreateOneDreamParams> {
 /// TODO Boilerplate here.
 class CreateOneDreamParams extends Params {
   final String title;
-  final List<ChapterEntity> chapters;
+  final List<Chapter> chapters;
   final String pseudonym;
   final int dreamType;
   final List<String> tags;

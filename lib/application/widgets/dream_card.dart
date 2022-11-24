@@ -1,11 +1,11 @@
 import 'package:erevho/application/widgets/dream_chip_tag.dart';
 import 'package:erevho/core/themes/colors.dart';
-import 'package:erevho/domain/entities/dream/dream_entity.dart';
+import 'package:erevho/domain/entities/dream/dream.entity.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DreamCard extends StatelessWidget {
-  final DreamEntity dream;
+  final Dream dream;
 
   const DreamCard({Key? key, required this.dream}) : super(key: key);
 

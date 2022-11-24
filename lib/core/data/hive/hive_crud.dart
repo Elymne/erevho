@@ -15,13 +15,13 @@ abstract class HiveCrud<T extends Entity, R> {
     return box.clear();
   }
 
-  /// Save one data.
+  /// Save one data and return the [key] from created value.
   Future<int> createOne(T element) async {
     final box = await open();
     return box.add(element);
   }
 
-  /// Save all data in table.
+  /// Save all data in table and return [keys] from created values.
   Future<Iterable<int>> createAll(List<T> elements) async {
     final box = await open();
     return box.addAll(elements);

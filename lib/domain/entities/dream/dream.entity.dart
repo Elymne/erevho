@@ -1,19 +1,19 @@
 import 'package:erevho/core/data/hive/entity.dart';
-import 'package:erevho/domain/entities/dream/chapter_entity.dart';
-import 'package:erevho/domain/entities/dream/tag_entity.dart';
+import 'package:erevho/domain/entities/dream/chapter.entity.dart';
+import 'package:erevho/domain/entities/dream/tag.entity.dart';
 
 /// Entity class that represente Dream post.
 /// Abstraction to respect Clean Architecture.
-abstract class DreamEntity extends Entity {
+abstract class Dream extends Entity {
   final String pseudonym;
   final String title;
-  final List<ChapterEntity> chapters;
+  final List<Chapter> chapters;
   final int dreamType;
-  final List<TagEntity> tags;
+  final List<Tag> tags;
   final DateTime created;
   final DateTime? updated;
 
-  DreamEntity({
+  Dream({
     required String id,
     required this.dreamType,
     required this.pseudonym,

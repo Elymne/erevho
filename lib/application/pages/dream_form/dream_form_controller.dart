@@ -1,10 +1,9 @@
 import 'package:erevho/core/controller.dart';
-import 'package:erevho/domain/usecases/dream/create_one_dream_usecase.dart';
-import 'package:erevho/domain/usecases/dream/get_one_dream_usecase.dart';
+import 'package:erevho/domain/usecases/dream/create_one_dream.usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DreamFormController extends Controller {
-  final CreateOneDreamUsecase createOneDreamUsecase;
+  final CreateOneDream createOneDreamUsecase;
   String? id;
 
   DreamFormController(super.ref, this.createOneDreamUsecase);

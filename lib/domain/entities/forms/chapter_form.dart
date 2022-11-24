@@ -1,4 +1,4 @@
-import 'package:erevho/domain/entities/dream/chapter_entity.dart';
+import 'package:erevho/domain/entities/dream/chapter.entity.dart';
 
 class ChapterForm {
   String title;
@@ -8,7 +8,7 @@ class ChapterForm {
 
   ChapterForm({required this.title, required this.number, required this.content, required this.isInit});
 
-  factory ChapterForm.fromEntity(ChapterEntity chapterEntity) {
+  factory ChapterForm.fromEntity(Chapter chapterEntity) {
     return ChapterForm(title: chapterEntity.title, number: chapterEntity.number, content: chapterEntity.content, isInit: true);
   }
 }

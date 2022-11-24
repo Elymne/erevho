@@ -1,9 +1,9 @@
 import 'package:erevho/core/extensions/tag_color_extension.dart';
-import 'package:erevho/domain/entities/dream/tag_entity.dart';
+import 'package:erevho/domain/entities/dream/tag.entity.dart';
 import 'package:flutter/material.dart';
 
 class DreamChipTag extends StatelessWidget {
-  final TagEntity tag;
+  final Tag tag;
   final bool _selected = false;
 
   const DreamChipTag({Key? key, required this.tag}) : super(key: key);

@@ -5,7 +5,7 @@ import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final deleteAllDreamsProvider = FutureProvider.autoDispose.family<int, DeleteAllDreamsParams>((ref, arg) {
-  final usecase = DeleteAllDreamsUsecase(ref.read(dreamLocalRepositoryProvider));
+  final usecase = DeleteAllDreams(ref.read(dreamLocalRepositoryProvider));
   return usecase.perform(arg);
 });
 
@@ -13,10 +13,10 @@ final deleteAllDreamsProvider = FutureProvider.autoDispose.family<int, DeleteAll
 /// Possibility to delete multiple dreams in one hit.
 /// ex: user just click to the trash icon from dream list and validate his selection.
 /// ex: user delete a dream from the detailed dream.
-class DeleteAllDreamsUsecase extends Usecase<int, DeleteAllDreamsParams> {
+class DeleteAllDreams extends Usecase<int, DeleteAllDreamsParams> {
   final DreamLocalRepository dreamLocalRepository;
 
-  DeleteAllDreamsUsecase(this.dreamLocalRepository);
+  DeleteAllDreams(this.dreamLocalRepository);
 
   @override
   Future<int> perform(DeleteAllDreamsParams params) async {

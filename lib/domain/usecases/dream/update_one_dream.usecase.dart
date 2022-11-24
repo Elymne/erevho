@@ -4,20 +4,20 @@ import 'package:erevho/data/models/dream/chapter_model.dart';
 import 'package:erevho/data/models/dream/dream_model.dart';
 import 'package:erevho/data/models/dream/tag_model.dart';
 import 'package:erevho/data/repositories/local/dream_local_repository_impl.dart';
-import 'package:erevho/domain/entities/dream/tag_entity.dart';
+import 'package:erevho/domain/entities/dream/tag.entity.dart';
 import 'package:erevho/domain/repositories/local/dream_local_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final updateOneDreamProvider = FutureProvider.autoDispose.family<void, UpdateOneDreamParams>((ref, arg) {
-  final usecase = UpdateOneDreamUsecase(ref.read(dreamLocalRepositoryProvider));
+  final usecase = UpdateOneDream(ref.read(dreamLocalRepositoryProvider));
   return usecase.perform(arg);
 });
 
 /// Usecase when user update his own dream.
-class UpdateOneDreamUsecase extends Usecase<void, UpdateOneDreamParams> {
+class UpdateOneDream extends Usecase<void, UpdateOneDreamParams> {
   final DreamLocalRepository dreamLocalRepository;
 
-  UpdateOneDreamUsecase(this.dreamLocalRepository);
+  UpdateOneDream(this.dreamLocalRepository);
 
   @override
   Future perform(UpdateOneDreamParams params) async {

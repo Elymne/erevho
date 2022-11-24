@@ -1,11 +1,11 @@
 import 'package:erevho/application/widgets/dream_chip_tag.dart';
 import 'package:erevho/core/themes/colors.dart';
-import 'package:erevho/domain/entities/dream/tag_entity.dart';
+import 'package:erevho/domain/entities/dream/tag.entity.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTagFormField extends StatefulWidget {
-  final List<TagEntity> defaultValues;
+  final List<Tag> defaultValues;
 
   const CustomTagFormField({Key? key, required this.defaultValues}) : super(key: key);
 

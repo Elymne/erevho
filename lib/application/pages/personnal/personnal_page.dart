@@ -4,7 +4,7 @@ import 'package:erevho/application/widgets/custom_search_bar.dart';
 import 'package:erevho/application/widgets/dream_card.dart';
 import 'package:erevho/application/widgets/layouts/bottom_bar.dart';
 import 'package:erevho/core/themes/colors.dart';
-import 'package:erevho/domain/usecases/dream/get_all_dreams_usecase.dart';
+import 'package:erevho/domain/usecases/dream/get_all_dreams.usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
