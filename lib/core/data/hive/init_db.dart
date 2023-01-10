@@ -1,5 +1,5 @@
-import 'package:erevho/data/models/dream/dream_model.dart';
-import 'package:erevho/data/models/dream/tag_model.dart';
+import 'package:erevho/features/dreams/data/models/dream/dream_model.dart';
+import 'package:erevho/features/dreams/data/models/dream/tag_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 /// Init NoSql DB from Hive.
