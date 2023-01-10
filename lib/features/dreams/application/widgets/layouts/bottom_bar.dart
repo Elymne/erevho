@@ -1,6 +1,6 @@
-import 'package:erevho/core/themes/colors.dart';
-import 'package:erevho/features/dreams/application/navigation/app_router.dart';
+import 'package:erevho/core/navigation/app_router.dart';
 import 'package:erevho/features/dreams/application/navigation/routes.dart';
+import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
