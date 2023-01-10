@@ -1,5 +1,5 @@
-import 'package:erevho/application/navigation/app_router.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
+import 'package:erevho/core/navigation/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Controller {
