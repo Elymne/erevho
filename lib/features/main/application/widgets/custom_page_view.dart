@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 
 /// The custom pager that I use on various page of my app.
 class CustomPageView extends StatefulWidget {
-  final List<Widget> pages;
-  final List<String> pagesNames;
+  final List<CustomPage> pages;
 
-  const CustomPageView({super.key, required this.pages, required this.pagesNames});
+  const CustomPageView({super.key, required this.pages});
 
   @override
   State<StatefulWidget> createState() => _CustomPageViewState();
@@ -39,11 +38,11 @@ class _CustomPageViewState extends State<CustomPageView> {
 
   /// Build each header.
   List<Widget> buildHeader(int index) {
-    return widget.pagesNames.asMap().entries.map((entry) {
+    return widget.pages.asMap().entries.map((entry) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 20),
         child: Text(
-          entry.value,
+          entry.value.name,
           style: TextStyle(
             fontSize: entry.key == currentPage ? 24 : 22,
             color: entry.key == currentPage ? pureWhite : fadeWhite,
@@ -55,7 +54,7 @@ class _CustomPageViewState extends State<CustomPageView> {
 
   /// Build each page.
   Widget onItemBuilder(BuildContext context, int index) {
-    return widget.pages[index];
+    return widget.pages[index].page;
   }
 
   /// Manage page change.
@@ -64,4 +63,11 @@ class _CustomPageViewState extends State<CustomPageView> {
       currentPage = index;
     });
   }
+}
+
+class CustomPage {
+  final String name;
+  final Widget page;
+
+  CustomPage(this.name, this.page);
 }

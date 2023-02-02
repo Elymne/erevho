@@ -22,39 +22,41 @@ class PersonnalPage extends ConsumerWidget {
       backgroundColor: nightGrey,
       body: SafeArea(
         child: CustomPageView(
-          pagesNames: const ['Mes rêves', 'Filtres'],
           pages: [
-            // Page one : dreams list \\
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
-                  child: CustomSearchBar(onSubmitted: (text) => _filterDreams(ref, text)),
-                ),
-                Expanded(
-                  child: ref.watch(getAllDreamsProvider(const GetAllDreamsParams())).when<Widget>(
-                        loading: () => const Center(child: CircularProgressIndicator()),
-                        error: (err, stack) => const Center(child: Text('Une erreur est survenue.')),
-                        data: (dreams) {
-                          if (dreams.isNotEmpty) {
-                            return ListView.builder(
-                              itemCount: dreams.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
-                                  child: DreamCard(dream: dreams[index]),
-                                );
-                              },
-                            );
-                          }
-                          return const Center(child: Text('Pas de données trouvées'));
-                        },
-                      ),
-                ),
-              ],
+            CustomPage(
+              // Page one : dreams list \\
+              'Mes rêves',
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+                    child: CustomSearchBar(onSubmitted: (text) => _filterDreams(ref, text)),
+                  ),
+                  Expanded(
+                    child: ref.watch(getAllDreamsProvider(const GetAllDreamsParams())).when<Widget>(
+                          loading: () => const Center(child: CircularProgressIndicator()),
+                          error: (err, stack) => const Center(child: Text('Une erreur est survenue.')),
+                          data: (dreams) {
+                            if (dreams.isNotEmpty) {
+                              return ListView.builder(
+                                itemCount: dreams.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 8.0),
+                                    child: DreamCard(dream: dreams[index]),
+                                  );
+                                },
+                              );
+                            }
+                            return const Center(child: Text('Pas de données trouvées'));
+                          },
+                        ),
+                  ),
+                ],
+              ),
             ),
             // Page 2 : create one dream \\
-            const Center(child: Text('FILTRAGE ETC (in prog'))
+            CustomPage('Filtrage', const Center(child: Text('FILTRAGE ETC (in prog'))),
           ],
         ),
       ),

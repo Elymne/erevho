@@ -1,4 +1,4 @@
-import 'package:erevho/features/dreams/application/navigation/dream_router.dart';
+import 'package:erevho/features/main/application/navigation/dream_router.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
