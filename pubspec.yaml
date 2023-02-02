@@ -43,6 +43,8 @@ dependencies:
     google_fonts: ^3.0.1
     # Translation provider.
     intl: ^0.17.0
+    # Bluetooth protocol flutter
+    flutter_blue: ^0.8.0
 
 dev_dependencies:
     flutter_test:
