@@ -1,5 +1,5 @@
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
-import 'package:erevho/features/dreams/application/pages/splashscreen/splash_page.dart';
+import 'package:erevho/features/main/application/pages/splashscreen/splash_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/core/themes/default.dart';
