@@ -1,13 +1,9 @@
 import 'package:erevho/core/params.dart';
 import 'package:erevho/core/usecase.dart';
-import 'package:erevho/features/main/data/models/dream/dream_model.dart';
-import 'package:erevho/features/main/data/models/dream/tag_model.dart';
 import 'package:erevho/features/main/data/repositories/local/dream_local_repository_impl.dart';
-import 'package:erevho/features/main/domain/entities/dream/tag.entity.dart';
+import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
 import 'package:erevho/features/main/domain/repositories/local/dream_local_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../data/models/dream/chapter_model.dart';
 
 final updateOneDreamProvider = FutureProvider.autoDispose.family<void, UpdateOneDreamParams>((ref, arg) {
   final usecase = UpdateOneDream(ref.read(dreamLocalRepositoryProvider));
@@ -23,7 +19,7 @@ class UpdateOneDream extends Usecase<void, UpdateOneDreamParams> {
   @override
   Future perform(UpdateOneDreamParams params) async {
     try {
-      dreamLocalRepository.updateOne(params.createDreamEntity());
+      dreamLocalRepository.putOne(params.createDreamEntity());
     } catch (e) {
       throw ('Error: $e');
     }
@@ -34,33 +30,25 @@ class UpdateOneDream extends Usecase<void, UpdateOneDreamParams> {
 class UpdateOneDreamParams extends Params {
   final String id;
   final String title;
-  final String chapters;
+  final String content;
   final String pseudonym;
   final int dreamType;
   final List<String> tags;
 
-  const UpdateOneDreamParams({required this.id, required this.title, required this.chapters, required this.pseudonym, required this.dreamType, required this.tags});
+  const UpdateOneDreamParams({required this.id, required this.title, required this.content, required this.pseudonym, required this.dreamType, required this.tags});
 
   /// That's what we'll use in our usecase.
-  DreamModel createDreamEntity() {
-    final result = DreamModel(
-      id: id,
+  Dream createDreamEntity() {
+    final result = Dream(
+      id: 0,
+      uuid: id,
       title: title,
-      chapters: chapters as List<ChapterModel>,
+      content: content,
       pseudonym: pseudonym,
-      dreamType: dreamType,
-      tags: _createTags(),
+      tags: tags,
       created: DateTime.now(),
+      updated: DateTime.now(),
     );
     return result;
-  }
-
-  /// Generate tag color depending of wording.
-  /// For example, if your tag is nsfw, red color is automatically setted to be red.
-  List<TagModel> _createTags() {
-    return tags.map<TagModel>((tag) {
-      if (tag == 'nsfw') return TagModel(id: '', title: tag, tagColor: TagColor.red);
-      return TagModel(id: '', title: tag, tagColor: TagColor.blue);
-    }).toList();
   }
 }

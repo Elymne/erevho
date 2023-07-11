@@ -1,13 +1,13 @@
 import 'package:erevho/core/params.dart';
 import 'package:erevho/core/usecase.dart';
-import 'package:erevho/features/main/domain/entities/dream/dream_form.entity.dart';
+import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final createDreamFormUseCaseProvider = Provider((_) => CreateDreamForm());
 
-class CreateDreamForm extends Usecase<DreamForm, CreateDreamFormUseCaseParams> {
+class CreateDreamForm extends Usecase<Dream, CreateDreamFormUseCaseParams> {
   @override
-  Future<DreamForm> perform(CreateDreamFormUseCaseParams params) {
+  Future<Dream> perform(CreateDreamFormUseCaseParams params) {
     // TODO: implement perform
     throw UnimplementedError();
   }
