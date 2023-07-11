@@ -28,9 +28,11 @@ dependencies:
     flutter_riverpod: ^2.3.6
     # Translation provider.
     intl: ^0.18.0
-    #
+    # Pathing tools.
     path_provider: ^2.0.15
     path: ^1.8.3
+    # Google fonts utilities
+    google_fonts: ^5.1.0
 
 dev_dependencies:
     flutter_test:

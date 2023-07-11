@@ -1,9 +1,7 @@
-import 'package:erevho/core/extensions/tag_color_extension.dart';
-import 'package:erevho/features/main/domain/entities/dream/tag.entity.dart';
 import 'package:flutter/material.dart';
 
 class DreamChipTag extends StatelessWidget {
-  final Tag tag;
+  final String tag;
   final bool _selected = false;
 
   const DreamChipTag({Key? key, required this.tag}) : super(key: key);
@@ -12,9 +10,9 @@ class DreamChipTag extends StatelessWidget {
   Widget build(BuildContext context) {
     return InputChip(
       selected: _selected,
-      label: Text(tag.title),
+      label: Text(tag),
       labelStyle: const TextStyle(color: Colors.white),
-      backgroundColor: tag.tagColor.color,
+      backgroundColor: Colors.blueGrey.shade300,
     );
   }
 }

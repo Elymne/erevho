@@ -1,6 +1,6 @@
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/widgets/dream_chip_tag.dart';
-import 'package:erevho/features/main/domain/entities/dream/dream.entity.dart';
+import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

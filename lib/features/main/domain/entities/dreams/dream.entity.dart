@@ -14,7 +14,7 @@ class Dream with _$Dream {
     required String pseudonym,
     required String title,
     required String content,
-    required String tags,
+    required List<String> tags,
     @Property(type: PropertyType.date) required DateTime created,
     @Property(type: PropertyType.date) required DateTime updated,
   }) = _Dream;
