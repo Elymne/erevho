@@ -6,7 +6,6 @@ import 'package:erevho/features/main/application/widgets/dream_card.dart';
 import 'package:erevho/features/main/application/widgets/layouts/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../domain/usecases/dream/get_all_dreams.usecase.dart';
 
 class PersonnalPage extends ConsumerWidget {
@@ -30,7 +29,9 @@ class PersonnalPage extends ConsumerWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
-                    child: CustomSearchBar(onSubmitted: (text) => _filterDreams(ref, text)),
+                    child: CustomSearchBar(
+                      onSubmitted: (text) => ref.read(personnalControllerProvider).filterDreams(text),
+                    ),
                   ),
                   Expanded(
                     child: ref.watch(getAllDreamsProvider(const GetAllDreamsParams())).when<Widget>(
@@ -56,14 +57,13 @@ class PersonnalPage extends ConsumerWidget {
               ),
             ),
             // Page 2 : create one dream \\
-            CustomPage('Filtrage', const Center(child: Text('FILTRAGE ETC (in prog'))),
+            CustomPage(
+              'Filtrage',
+              const Center(child: Text('FILTRAGE ETC (in prog')),
+            ),
           ],
         ),
       ),
     );
-  }
-
-  void _filterDreams(WidgetRef ref, String title) {
-    ref.read(personnalControllerProvider).filterDreams(title);
   }
 }

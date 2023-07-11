@@ -56,7 +56,7 @@ class BottomBar extends ConsumerWidget {
   void _changePage(BuildContext context, PageSelected pageSelected) {
     switch (pageSelected) {
       case PageSelected.none:
-        appRouter.navigate(context, home);
+        appRouter.navigate(context, home); // TODO Remettre par défaut le bon.
         break;
       case PageSelected.personnal:
         appRouter.navigate(context, personnal);

@@ -1,6 +1,6 @@
 import 'package:erevho/core/params.dart';
 import 'package:erevho/core/usecase.dart';
-import 'package:erevho/features/main/domain/entities/forms/dream_form.dart';
+import 'package:erevho/features/main/domain/entities/dream/dream_form.entity.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final createDreamFormUseCaseProvider = Provider((_) => CreateDreamForm());
