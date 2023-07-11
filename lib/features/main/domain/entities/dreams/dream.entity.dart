@@ -7,18 +7,6 @@ part 'dream.entity.g.dart';
 
 @freezed
 class Dream with _$Dream {
-  @override
-  @Unique()
-  late final String uuid;
-  @override
-  late final String pseudonym;
-  @override
-  late final String title;
-  @override
-  late final String content;
-  @override
-  late final String tags;
-
   @Entity(realClass: Dream)
   const factory Dream({
     @Id(assignable: true) required int id,

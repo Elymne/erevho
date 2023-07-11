@@ -1,44 +1,42 @@
 import 'package:erevho/features/main/data/datasources/local/dream_local_data_source.dart';
-import 'package:erevho/features/main/data/models/dream/dream_model.dart';
-import 'package:erevho/features/main/domain/entities/dream/dream.entity.dart';
+import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
 import 'package:erevho/features/main/domain/repositories/local/dream_local_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../../objectbox.g.dart';
 
 final dreamLocalRepositoryProvider = Provider<DreamLocalRepository>((ref) => DreamLocalRepositoryImpl(ref.read(dreamLocalDataSourceProvider)));
 
-/// Basic Repository through dreams dabatase data.
 class DreamLocalRepositoryImpl implements DreamLocalRepository {
   final DreamLocalDataSource dreamLocalDataSource;
 
   DreamLocalRepositoryImpl(this.dreamLocalDataSource);
 
   @override
-  Future<int> createOne(Dream dreamEntity) async {
-    return await dreamLocalDataSource.createOne(dreamEntity as DreamModel);
-  }
-
-  @override
-  Future<Dream> getOne(String id) {
-    return dreamLocalDataSource.readOne(id);
+  Future<Dream?> getOne(String id) async {
+    return dreamLocalDataSource.box.query(Dream_.uuid.equals(id)).build().findUnique();
   }
 
   @override
   Future<List<Dream>> getAll() async {
-    return dreamLocalDataSource.readAll();
+    return dreamLocalDataSource.box.getAll();
   }
 
   @override
-  Future updateOne(Dream dreamEntity) async {
-    return dreamLocalDataSource.updateOne(dreamEntity as DreamModel);
+  Future<int> putOne(Dream dream) async {
+    return dreamLocalDataSource.box.put(dream);
   }
 
   @override
-  Future deleteOne(String id) async {
-    dreamLocalDataSource.deleteOne(id);
+  Future<int> deleteOne(String id) async {
+    return dreamLocalDataSource.box.query(Dream_.uuid.equals(id)).build().remove();
   }
 
   @override
-  Future deleteAll(List<String> ids) async {
-    dreamLocalDataSource.deleteAll(ids);
+  Future<int> deleteAll(List<String> ids) async {
+    var removedNb = 0;
+    for (var id in ids) {
+      removedNb += dreamLocalDataSource.box.query(Dream_.uuid.contains(id)).build().remove();
+    }
+    return removedNb;
   }
 }

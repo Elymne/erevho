@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:objectbox/objectbox.dart';
 
-part 'dreamer.entity.freezed.dart';
-part 'dreamer.entity.g.dart';
+part 'user_params.entity.freezed.dart';
+part 'user_params.entity.g.dart';
 
 @freezed
 class UserParams with _$UserParams {
