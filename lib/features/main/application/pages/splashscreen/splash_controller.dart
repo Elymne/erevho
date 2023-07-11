@@ -12,7 +12,7 @@ class SplashController extends Controller {
   /// Actualy, it just lainch a timer.
   /// May add animation.
   Future init(BuildContext context) async {
-    await Future.delayed(const Duration(seconds: 2));
-    appRouter.navigate(context, home);
+    // await Future.delayed(const Duration(seconds: 2));
+    // appRouter.navigate(context, home);
   }
 }

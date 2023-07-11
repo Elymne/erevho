@@ -14,7 +14,16 @@ class SplashPage extends ConsumerWidget {
     final controller = ref.read(splashControllerProvider);
     controller.init(context);
     return const Scaffold(
-      body: Center(child: Text('Splashscreen')),
+      body: Stack(
+        children: [
+          // Set here the animation, what should we do ? Flutter Animation ? Stack of images ? Gif ?
+
+          // Clickable element.
+          Center(
+            child: Text('Splashscreen'),
+          ),
+        ],
+      ),
       backgroundColor: nightGreyDarker,
     );
   }
