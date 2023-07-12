@@ -1,5 +1,6 @@
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/splashscreen/splash_controller.dart';
+import 'package:erevho/features/main/application/widgets/background_animations/montain_and_tree_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -17,17 +18,18 @@ class SplashPage extends ConsumerWidget {
       body: Stack(
         children: [
           // Set here the animation, what should we do ? Flutter Animation ? Stack of images ? Gif ?
-
-          // Clickable element.
+          const MontainAndTreeBackground(),
+          // Clickable Screen.
           GestureDetector(
             onTap: () => controller.onScreenPress(context),
           ),
+          // Petit texte du swag.
           const Center(
-            child: Text('Toucher l\'éctan'),
+            child: Text('Toucher l\'écran'),
           ),
         ],
       ),
-      backgroundColor: nightGreyDarker,
+      backgroundColor: Colors.red,
     );
   }
 }
