@@ -1,16 +1,13 @@
-import 'package:erevho/core/navigation/app_router.dart';
 import 'package:erevho/core/themes/colors.dart';
-import 'package:erevho/features/main/application/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Custom bottom bar that should be displayed to HomePage.
 /// It will allow us to navigate into multiple features from the app.
 class BottomBar extends ConsumerWidget {
-  final AppRouter appRouter;
   final PageSelected pageSelected;
 
-  const BottomBar({Key? key, required this.pageSelected, required this.appRouter}) : super(key: key);
+  const BottomBar({Key? key, required this.pageSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,25 +50,7 @@ class BottomBar extends ConsumerWidget {
 
   /// [context] Context is needed to use navigation.
   /// [pageSelected] The selected page.
-  void _changePage(BuildContext context, PageSelected pageSelected) {
-    switch (pageSelected) {
-      case PageSelected.none:
-        appRouter.navigate(context, home); // TODO Remettre par défaut le bon.
-        break;
-      case PageSelected.personnal:
-        appRouter.navigate(context, personnal);
-        break;
-      case PageSelected.group:
-        print('Access to group page : Not implemented');
-        break;
-      case PageSelected.online:
-        print('Access to online page : Not implemented');
-        break;
-      case PageSelected.create:
-        appRouter.navigate(context, dreamFormCreate);
-        break;
-    }
-  }
+  void _changePage(BuildContext context, PageSelected pageSelected) {}
 }
 
 /// Define each state of bottom bar.

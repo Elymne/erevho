@@ -14,10 +14,10 @@ class PersonnalPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      bottomNavigationBar: BottomBar(
-        pageSelected: PageSelected.personnal,
-        appRouter: ref.watch(personnalControllerProvider).appRouter,
-      ),
+      // bottomNavigationBar: BottomBar(
+      //   pageSelected: PageSelected.personnal,
+      //   appRouter: ref.watch(personnalControllerProvider).appRouter,
+      // ),
       backgroundColor: nightGrey,
       body: SafeArea(
         child: CustomPageView(

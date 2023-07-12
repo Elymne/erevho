@@ -13,14 +13,17 @@ class SplashPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.read(splashControllerProvider);
     controller.init(context);
-    return const Scaffold(
+    return Scaffold(
       body: Stack(
         children: [
           // Set here the animation, what should we do ? Flutter Animation ? Stack of images ? Gif ?
 
           // Clickable element.
-          Center(
-            child: Text('Splashscreen'),
+          GestureDetector(
+            onTap: () => controller.onScreenPress(context),
+          ),
+          const Center(
+            child: Text('Toucher l\'éctan'),
           ),
         ],
       ),

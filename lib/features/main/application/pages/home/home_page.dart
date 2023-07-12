@@ -17,7 +17,6 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       bottomNavigationBar: BottomBar(
         pageSelected: PageSelected.none,
-        appRouter: controller.appRouter,
       ),
       body: const Center(child: Text('HOME PAGE')),
       backgroundColor: nightGrey,

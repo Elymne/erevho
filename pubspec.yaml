@@ -22,8 +22,6 @@ dependencies:
     cupertino_icons: ^1.0.5
     # Dart code analyzer package. (Not the last version dues to Hive compatibility)
     analyzer: ^5.12.0
-    # Routing package management.
-    fluro: ^2.0.5
     # State management.
     flutter_riverpod: ^2.3.6
     # Translation provider.
