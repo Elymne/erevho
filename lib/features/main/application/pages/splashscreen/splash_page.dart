@@ -4,24 +4,40 @@ import 'package:erevho/features/main/application/widgets/background_animations/m
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// TODO Créer une petite animation de loading.
-/// Je ferais bien une vue qu rempli entièrement l'espace avec du paralaxe etc..
-/// A voir si ça peut se faire rapidement avec des petits assets légers.
-class SplashPage extends ConsumerWidget {
-  const SplashPage({Key? key}) : super(key: key);
+class SplashPage extends ConsumerStatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.read(splashControllerProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() => SplashPageState();
+}
+
+class SplashPageState extends ConsumerState<SplashPage> {
+  late final SplashController controller = ref.read(splashControllerProvider);
+
+  @override
+  void initState() {
+    super.initState();
     controller.init(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final currentAnimationState = ref.watch(controller.backgroundAnimationStateProvider);
+
     return Scaffold(
       body: Stack(
         children: [
           // Set here the animation, what should we do ? Flutter Animation ? Stack of images ? Gif ?
-          const MontainAndTreeBackground(),
+          MontainAndTreeBackground(
+            currentState: currentAnimationState,
+          ),
           // Clickable Screen.
           GestureDetector(
-            onTap: () => controller.onScreenPress(context),
+            onTap: () {
+              if (currentAnimationState != BackgroundAnimationState.end) {
+                controller.onScreenPress(context);
+              }
+            },
           ),
           // Petit texte du swag.
           const Center(
@@ -29,7 +45,7 @@ class SplashPage extends ConsumerWidget {
           ),
         ],
       ),
-      backgroundColor: Colors.red,
+      backgroundColor: nightGrey,
     );
   }
 }
