@@ -24,28 +24,30 @@ class SplashPageState extends ConsumerState<SplashPage> {
   Widget build(BuildContext context) {
     final currentAnimationState = ref.watch(controller.backgroundAnimationStateProvider);
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Set here the animation, what should we do ? Flutter Animation ? Stack of images ? Gif ?
-          MontainAndTreeBackground(
-            currentState: currentAnimationState,
-          ),
-          // Clickable Screen.
-          GestureDetector(
-            onTap: () {
-              if (currentAnimationState != BackgroundAnimationState.end) {
-                controller.onScreenPress(context);
-              }
-            },
-          ),
-          // Petit texte du swag.
-          const Center(
-            child: Text('Toucher l\'écran'),
-          ),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            // Set here the animation, what should we do ? Flutter Animation ? Stack of images ? Gif ?
+            MontainAndTreeBackground(
+              currentState: currentAnimationState,
+            ),
+            // Clickable Screen.
+            GestureDetector(
+              onTap: () {
+                if (currentAnimationState != BackgroundAnimationState.end) {
+                  controller.onScreenPress(context);
+                }
+              },
+            ),
+            // Petit texte du swag.
+            const Center(
+              child: Text('Toucher l\'écran'),
+            ),
+          ],
+        ),
+        backgroundColor: nightGrey,
       ),
-      backgroundColor: nightGrey,
     );
   }
 }
