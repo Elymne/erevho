@@ -27,7 +27,7 @@ class MyApp extends ConsumerWidget {
 
     return MaterialApp(
       title: 'EREVHO',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       home: const SplashPage(),
       theme: defaultTheme,
       darkTheme: defaultTheme,

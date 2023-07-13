@@ -28,21 +28,28 @@ class SplashPageState extends ConsumerState<SplashPage> {
       child: Scaffold(
         body: Stack(
           children: [
-            // Set here the animation, what should we do ? Flutter Animation ? Stack of images ? Gif ?
             MontainAndTreeBackground(
               currentState: currentAnimationState,
             ),
-            // Clickable Screen.
+            AnimatedOpacity(
+              opacity: currentAnimationState == BackgroundAnimationState.end ? 0.0 : 1.0,
+              duration: const Duration(milliseconds: 500),
+              child: const Center(
+                child: Text(
+                  'Toucher l\'écran',
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w100,
+                  ),
+                ),
+              ),
+            ),
             GestureDetector(
               onTap: () {
                 if (currentAnimationState != BackgroundAnimationState.end) {
                   controller.onScreenPress(context);
                 }
               },
-            ),
-            // Petit texte du swag.
-            const Center(
-              child: Text('Toucher l\'écran'),
             ),
           ],
         ),
