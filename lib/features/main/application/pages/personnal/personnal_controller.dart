@@ -1,5 +1,5 @@
 import 'package:erevho/core/controller.dart';
-import 'package:erevho/features/main/domain/usecases/dream/get_all_dreams.usecase.dart';
+import 'package:erevho/features/main/domain/usecases/dreams/get_all_dreams.usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final personnalControllerProvider = Provider((ref) => PersonnalController(ref));

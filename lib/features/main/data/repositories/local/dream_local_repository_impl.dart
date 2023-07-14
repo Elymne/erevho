@@ -4,7 +4,9 @@ import 'package:erevho/features/main/domain/repositories/local/dream_local_repos
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../objectbox.g.dart';
 
-final dreamLocalRepositoryProvider = Provider<DreamLocalRepository>((ref) => DreamLocalRepositoryImpl(ref.read(dreamLocalDataSourceProvider)));
+final dreamLocalRepositoryProvider = Provider<DreamLocalRepository>((ref) {
+  return DreamLocalRepositoryImpl(ref.read(dreamLocalDataSourceProvider));
+});
 
 class DreamLocalRepositoryImpl implements DreamLocalRepository {
   final DreamLocalDataSource dreamLocalDataSource;

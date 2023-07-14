@@ -1,5 +1,5 @@
 import 'package:erevho/core/controller.dart';
-import 'package:erevho/features/main/domain/usecases/dream/create_one_dream.usecase.dart';
+import 'package:erevho/features/main/domain/usecases/dreams/create_one_dream.usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DreamFormController extends Controller {

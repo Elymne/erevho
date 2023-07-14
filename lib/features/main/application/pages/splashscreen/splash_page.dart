@@ -22,7 +22,7 @@ class SplashPageState extends ConsumerState<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    final currentAnimationState = ref.watch(controller.backgroundAnimationStateProvider);
+    late final currentAnimationState = ref.watch(controller.backgroundAnimationStateProvider);
 
     return SafeArea(
       child: Scaffold(

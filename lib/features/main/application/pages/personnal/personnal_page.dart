@@ -6,7 +6,7 @@ import 'package:erevho/features/main/application/widgets/dream_card.dart';
 import 'package:erevho/features/main/application/widgets/layouts/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain/usecases/dream/get_all_dreams.usecase.dart';
+import '../../../domain/usecases/dreams/get_all_dreams.usecase.dart';
 
 class PersonnalPage extends ConsumerWidget {
   const PersonnalPage({super.key});
