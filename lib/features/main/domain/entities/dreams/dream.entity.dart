@@ -1,4 +1,3 @@
-import 'package:erevho/objectbox.g.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:objectbox/objectbox.dart';
 
@@ -9,7 +8,7 @@ part 'dream.entity.g.dart';
 class Dream with _$Dream {
   @Entity(realClass: Dream)
   const factory Dream({
-    @Id(assignable: true) required int id,
+    @Id(assignable: true) int? id,
     @Unique() required String uuid,
     required String pseudonym,
     required String title,

@@ -33,36 +33,28 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: ClipRect(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(
-                        sigmaX: 10,
-                        sigmaY: 10,
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200.withOpacity(0.2),
-                        ),
-                        child: Form(
-                          key: controller.formKey,
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 30),
-                              const Text('Spécification du nom d\'utilisateur : '),
-                              const SizedBox(height: 30),
-                              TextFormField(
-                                validator: (value) => controller.validateTextfield(value),
-                              ),
-                              const SizedBox(height: 30),
-                              NightButton(
-                                onPressed: () => controller.onValidation(context),
-                                text: 'Valider',
-                              ),
-                              const SizedBox(height: 30),
-                            ],
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200.withOpacity(0.2),
+                    ),
+                    child: Form(
+                      key: controller.formKey,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 30),
+                          const Text('Spécification du nom d\'utilisateur : '),
+                          const SizedBox(height: 30),
+                          TextFormField(
+                            validator: (value) => controller.validateNameTextfield(value),
                           ),
-                        ),
+                          const SizedBox(height: 30),
+                          NightButton(
+                            onPressed: () => controller.onValidation(context),
+                            text: 'Valider',
+                          ),
+                          const SizedBox(height: 30),
+                        ],
                       ),
                     ),
                   ),

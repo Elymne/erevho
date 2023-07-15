@@ -8,7 +8,7 @@ part 'user_params.entity.g.dart';
 class UserParams with _$UserParams {
   @Entity(realClass: UserParams)
   const factory UserParams({
-    @Id(assignable: true) required int id,
+    @Id(assignable: true) int? id,
     @Unique() required String uuid,
     required String pseudonym,
   }) = _UserParams;

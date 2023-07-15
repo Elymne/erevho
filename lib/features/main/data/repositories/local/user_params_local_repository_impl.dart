@@ -21,4 +21,9 @@ class UserParamsLocalRepositoryImpl implements UserParamsLocalRepository {
   Future<int> putUserParams(UserParams userParams) async {
     return userParamsLocalDataSource.box.put(userParams);
   }
+
+  @override
+  Future<int> removeAllUserParams() async {
+    return userParamsLocalDataSource.box.removeAll();
+  }
 }
