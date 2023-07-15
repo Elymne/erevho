@@ -2,7 +2,6 @@ import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomSearchBar extends ConsumerWidget {
   final void Function(String text) onSubmitted;
@@ -19,7 +18,6 @@ class CustomSearchBar extends ConsumerWidget {
           borderRadius: BorderRadius.circular(20.0),
           borderSide: BorderSide.none,
         ),
-        hintStyle: GoogleFonts.robotoFlex(),
         hintText: appLocals.current.research,
         filled: true,
         fillColor: nightGreyDarker,

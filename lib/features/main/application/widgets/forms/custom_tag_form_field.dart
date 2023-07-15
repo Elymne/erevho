@@ -1,7 +1,6 @@
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/widgets/dream_chip_tag.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomTagFormField extends StatefulWidget {
   final List<String> defaultValues;
@@ -27,7 +26,7 @@ class CustomTagFormFieldState extends State<CustomTagFormField> {
               borderSide: BorderSide.none,
             ),
             filled: true,
-            hintStyle: GoogleFonts.robotoFlex(),
+            hintStyle: TextStyle(),
             hintText: 'Tags',
             fillColor: nightGreyDarker,
           ),

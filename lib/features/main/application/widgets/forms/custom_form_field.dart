@@ -1,6 +1,5 @@
 import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomFormField extends StatelessWidget {
   final String? initialValue;
@@ -24,7 +23,7 @@ class CustomFormField extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         filled: true,
-        hintStyle: GoogleFonts.robotoFlex(
+        hintStyle: TextStyle(
           fontSize: hintStyle,
         ),
         hintText: hintText,

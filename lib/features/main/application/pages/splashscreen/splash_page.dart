@@ -1,9 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:erevho/core/extensions/text_extension.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/splashscreen/splash_controller.dart';
-import 'package:erevho/features/main/application/widgets/background_animations/montain_and_tree_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rive/rive.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
@@ -15,6 +17,7 @@ class SplashPage extends ConsumerStatefulWidget {
 class SplashPageState extends ConsumerState<SplashPage> {
   late final SplashController controller = ref.read(splashControllerProvider);
   late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
+  late final RiveAnimationController riveAnimationController = SimpleAnimation('startingAnimation');
 
   @override
   void initState() {
@@ -22,28 +25,34 @@ class SplashPageState extends ConsumerState<SplashPage> {
     controller.init(context);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(controller.viewVisibilityProvider.notifier).state = true;
-      ref.read(controller.assetsPositionProvider.notifier).state = MontainAndTreeBackground.endingAnimationAssetsPosition;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final viewVisibility = ref.watch(controller.viewVisibilityProvider);
-    final assetsPosition = ref.watch(controller.assetsPositionProvider);
 
     return SafeArea(
       child: Scaffold(
         body: Stack(
           children: [
-            MontainAndTreeBackground(assetsPosition: assetsPosition),
+            RiveAnimation.asset(
+              'assets/rives/mountain_and_star.riv',
+              fit: BoxFit.cover,
+              controllers: [riveAnimationController],
+              onInit: (p0) {
+                riveAnimationController.isActive = true;
+              },
+            ),
             AnimatedOpacity(
               opacity: viewVisibility ? 1.0 : 0.0,
               duration: const Duration(milliseconds: 300),
               child: Center(
-                child: Text(
+                child: AutoSizeText(
                   ap.current.touch_screen,
+                  maxLines: 1,
                   style: const TextStyle(
-                    fontSize: 30,
+                    fontSize: 40,
                     fontWeight: FontWeight.w100,
                   ),
                 ),

@@ -5,12 +5,14 @@ import 'package:erevho/features/main/domain/usecases/user_data/create_new_user_d
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final userInitialisationControllerProvider = Provider((ref) => UserInitialisationController(ref));
+final userInitialisationControllerProvider =
+    Provider((ref) => UserInitialisationController(ref));
 
 class UserInitialisationController extends Controller {
   // Injections.
   late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
-  late final CreateNewUserParamsUsecase createNewUserParamsUsecase = ref.read(createNewUserParamsUsecaseProvider);
+  late final CreateNewUserParamsUsecase createNewUserParamsUsecase =
+      ref.read(createNewUserParamsUsecaseProvider);
 
   // State values for view.
   final viewVisibilityProvider = StateProvider((ref) => false);
@@ -32,7 +34,8 @@ class UserInitialisationController extends Controller {
   void onValidation(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       try {
-        await createNewUserParamsUsecase.perform(CreateNewUserParamsUsecaseParams(userName: nameText!));
+        await createNewUserParamsUsecase
+            .perform(CreateNewUserParamsUsecaseParams(userName: nameText!));
         ref.read(viewVisibilityProvider.notifier).state = false;
         await Future.delayed(const Duration(milliseconds: 1000));
         if (context.mounted) {

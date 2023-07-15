@@ -1,7 +1,6 @@
 import 'package:erevho/core/controller.dart';
 import 'package:erevho/features/main/application/pages/home/home_page.dart';
 import 'package:erevho/features/main/application/pages/user_initialisation/user_initialisation_page.dart';
-import 'package:erevho/features/main/application/widgets/background_animations/montain_and_tree_background.dart';
 import 'package:erevho/features/main/domain/usecases/user_data/is_first_launch_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +13,6 @@ class SplashController extends Controller {
 
   // State values for view.
   final viewVisibilityProvider = StateProvider((ref) => false);
-  final assetsPositionProvider = StateProvider((ref) => MontainAndTreeBackground.defaultAssetsPosition);
 
   // Controller values.
   late final bool isFirstLaunch;

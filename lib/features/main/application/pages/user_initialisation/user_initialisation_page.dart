@@ -1,10 +1,9 @@
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/user_initialisation/user_initialisation_controller.dart';
-import 'package:erevho/features/main/application/widgets/background_animations/moon_and_star_background.dart';
-import 'package:erevho/features/main/application/widgets/buttons/night_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rive/rive.dart';
 
 class UserInitialisationPage extends ConsumerStatefulWidget {
   const UserInitialisationPage({super.key});
@@ -16,6 +15,7 @@ class UserInitialisationPage extends ConsumerStatefulWidget {
 class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
   late final UserInitialisationController controller = ref.read(userInitialisationControllerProvider);
   late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
+  late final RiveAnimationController riveAnimationController = SimpleAnimation('startAnimation');
 
   @override
   void initState() {
@@ -30,10 +30,16 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
     final viewVisibility = ref.watch(controller.viewVisibilityProvider);
     return SafeArea(
       child: Scaffold(
-        backgroundColor: nightGreyDarker,
         body: Stack(
           children: [
-            const MoonAndStarBackground(),
+            RiveAnimation.asset(
+              'assets/rives/moon_sky.riv',
+              fit: BoxFit.cover,
+              controllers: [riveAnimationController],
+              onInit: (p0) {
+                riveAnimationController.isActive = true;
+              },
+            ),
             Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +49,12 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
                   child: Container(
                     padding: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade200.withOpacity(0.2),
+                      color: nightBlueDarker.withOpacity(0.9),
+                      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                      border: Border.all(
+                        color: nightGreyShadow,
+                        width: 1.0,
+                      ),
                     ),
                     child: Form(
                       key: controller.formKey,
@@ -56,9 +67,9 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
                             validator: (value) => controller.validateNameTextfield(value),
                           ),
                           const SizedBox(height: 30),
-                          NightButton(
+                          OutlinedButton(
                             onPressed: () => controller.onValidation(context),
-                            text: 'Valider',
+                            child: const Text('Valider'),
                           ),
                           const SizedBox(height: 30),
                         ],

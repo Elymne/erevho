@@ -2,7 +2,6 @@ import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/widgets/dream_chip_tag.dart';
 import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DreamCard extends StatelessWidget {
   final Dream dream;
@@ -40,11 +39,11 @@ class DreamCard extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, top: 10),
-            child: Text(dream.title, style: GoogleFonts.robotoFlex(fontSize: 18)),
+            child: Text(dream.title, style: TextStyle(fontSize: 18)),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, top: 4),
-            child: Text(dream.created.toString(), style: GoogleFonts.robotoFlex(fontSize: 14, fontStyle: FontStyle.italic)),
+            child: Text(dream.created.toString(), style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic)),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, top: 12, bottom: 10),

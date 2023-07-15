@@ -1,6 +1,5 @@
 import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class NightButton extends StatelessWidget {
   final String text;
@@ -19,7 +18,7 @@ class NightButton extends StatelessWidget {
         padding: const EdgeInsets.all(14.0),
         child: Text(
           text,
-          style: GoogleFonts.robotoFlex(
+          style: TextStyle(
             fontSize: 20,
             color: pureWhite,
           ),

@@ -1,9 +1,9 @@
 name: erevho
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 environment:
-    sdk: '>=3.0.0'
+    sdk: ">=3.0.0"
 
 dependencies:
     flutter:
@@ -29,8 +29,10 @@ dependencies:
     # Pathing tools.
     path_provider: ^2.0.15
     path: ^1.8.3
-    # Google fonts utilities
-    google_fonts: ^5.1.0
+    # Animation package.
+    rive: ^0.11.4
+    # Text Responsive.
+    auto_size_text: ^3.0.0
 
 dev_dependencies:
     flutter_test:
@@ -47,3 +49,4 @@ flutter:
     assets:
         - assets/backgrounds/
         - assets/images/
+        - assets/rives/
