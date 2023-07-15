@@ -1,4 +1,7 @@
 {
+  "appName": "Erevoh",
+  "touch_screen": "Touchez l'écran",
+  "@@context": "/!/! OLD TEXT /!/!",
   "add_chapter_form": "Ajouter un nouveau chapitre",
   "chapter_content_form": "Contenu",
   "chapter_content_form_error": "Le contenu est incorrect",

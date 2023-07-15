@@ -25,6 +25,8 @@ Run theses commands when you have cloned the project.
 
 > flutter pub run build_runner build --delete-conflicting-outputs
 
+> flutter gen-l10n
+
 ## Vscode settings that can help
 
 >

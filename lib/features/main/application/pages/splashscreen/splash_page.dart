@@ -1,3 +1,4 @@
+import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/splashscreen/splash_controller.dart';
 import 'package:erevho/features/main/application/widgets/background_animations/montain_and_tree_background.dart';
@@ -12,12 +13,12 @@ class SplashPage extends ConsumerStatefulWidget {
 }
 
 class SplashPageState extends ConsumerState<SplashPage> {
-  late final SplashController controller;
+  late final SplashController controller = ref.read(splashControllerProvider);
+  late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
 
   @override
   void initState() {
     super.initState();
-    controller = ref.read(splashControllerProvider);
     controller.init(context);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(controller.viewVisibilityProvider.notifier).state = true;
@@ -38,10 +39,10 @@ class SplashPageState extends ConsumerState<SplashPage> {
             AnimatedOpacity(
               opacity: viewVisibility ? 1.0 : 0.0,
               duration: const Duration(milliseconds: 300),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'Toucher l\'écran',
-                  style: TextStyle(
+                  ap.current.touch_screen,
+                  style: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w100,
                   ),
