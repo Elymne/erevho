@@ -2,7 +2,7 @@ import 'package:erevho/core/controller.dart';
 import 'package:erevho/features/main/application/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain/usecases/user_params/create_new_user_params_usecase.dart';
+import '../../../domain/usecases/user_data/create_new_user_data_usecase.dart';
 
 final userInitialisationControllerProvider = Provider((ref) => UserInitialisationController(ref));
 

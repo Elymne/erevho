@@ -1,11 +1,11 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
 class MontainAndTreeBackground extends StatefulWidget {
-  final BackgroundAnimationState currentState;
+  static const defaultAssetsPosition = 0;
+  static const endingAnimationAssetsPosition = 1;
+  final int assetsPosition;
 
-  const MontainAndTreeBackground({super.key, required this.currentState});
+  const MontainAndTreeBackground({super.key, required this.assetsPosition});
 
   @override
   State<StatefulWidget> createState() => MontainAndTreeBackgroundState();
@@ -28,7 +28,7 @@ class MontainAndTreeBackgroundState extends State<MontainAndTreeBackground> {
         Container(
           width: screenWidth,
           height: screenHeight * 4,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
               image: AssetImage(
@@ -68,9 +68,9 @@ class MontainAndTreeBackgroundState extends State<MontainAndTreeBackground> {
           bottom: 0,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 1000),
-            padding: EdgeInsets.only(bottom: 100),
+            padding: const EdgeInsets.only(bottom: 100),
             width: _currentThirdMountainWidth,
-            child: Image(
+            child: const Image(
               fit: BoxFit.fitHeight,
               image: AssetImage(
                 'assets/backgrounds/3stMountain.png',
@@ -113,9 +113,9 @@ class MontainAndTreeBackgroundState extends State<MontainAndTreeBackground> {
           left: 0,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 1500),
-            padding: EdgeInsets.only(bottom: 50),
+            padding: const EdgeInsets.only(bottom: 50),
             width: _currentSecondMountainWidth,
-            child: Image(
+            child: const Image(
               fit: BoxFit.fitHeight,
               image: AssetImage('assets/backgrounds/2stMountain.png'),
             ),
@@ -129,7 +129,7 @@ class MontainAndTreeBackgroundState extends State<MontainAndTreeBackground> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 2000),
             width: _currentFirstMountainWidth,
-            child: Image(
+            child: const Image(
               fit: BoxFit.fitHeight,
               image: AssetImage('assets/backgrounds/1stMountain.png'),
             ),
@@ -140,81 +140,72 @@ class MontainAndTreeBackgroundState extends State<MontainAndTreeBackground> {
   }
 
   double get _currentYStarsPosition {
-    switch (widget.currentState) {
-      case BackgroundAnimationState.start:
+    switch (widget.assetsPosition) {
+      case MontainAndTreeBackground.defaultAssetsPosition:
         return -screenHeight;
-      case BackgroundAnimationState.middle:
-        return 0;
-      case BackgroundAnimationState.end:
+      case MontainAndTreeBackground.endingAnimationAssetsPosition:
         return 0;
     }
+    return 0;
   }
 
   Alignment get _currentMoonAlignment {
-    switch (widget.currentState) {
-      case BackgroundAnimationState.start:
+    switch (widget.assetsPosition) {
+      case MontainAndTreeBackground.defaultAssetsPosition:
         return const Alignment(-20, 0);
-      case BackgroundAnimationState.middle:
-        return const Alignment(0, -1);
-      case BackgroundAnimationState.end:
+      case MontainAndTreeBackground.endingAnimationAssetsPosition:
         return const Alignment(0, -1);
     }
+    return const Alignment(0, -1);
   }
 
   double get _currentThirdMountainWidth {
-    switch (widget.currentState) {
-      case BackgroundAnimationState.start:
+    switch (widget.assetsPosition) {
+      case MontainAndTreeBackground.defaultAssetsPosition:
         return screenWidth + 100;
-      case BackgroundAnimationState.middle:
-        return screenWidth;
-      case BackgroundAnimationState.end:
+      case MontainAndTreeBackground.endingAnimationAssetsPosition:
         return screenWidth;
     }
+    return 0;
   }
 
   double get _currentSecondMountainWidth {
-    switch (widget.currentState) {
-      case BackgroundAnimationState.start:
+    switch (widget.assetsPosition) {
+      case MontainAndTreeBackground.defaultAssetsPosition:
         return screenWidth + 200;
-      case BackgroundAnimationState.middle:
-        return screenWidth;
-      case BackgroundAnimationState.end:
+      case MontainAndTreeBackground.endingAnimationAssetsPosition:
         return screenWidth;
     }
+    return 0;
   }
 
   double get _currentFirstMountainWidth {
-    switch (widget.currentState) {
-      case BackgroundAnimationState.start:
+    switch (widget.assetsPosition) {
+      case MontainAndTreeBackground.defaultAssetsPosition:
         return screenWidth + 300;
-      case BackgroundAnimationState.middle:
-        return screenWidth;
-      case BackgroundAnimationState.end:
+      case MontainAndTreeBackground.endingAnimationAssetsPosition:
         return screenWidth;
     }
+    return 0;
   }
 
   double get _currentXPositionCloud {
-    switch (widget.currentState) {
-      case BackgroundAnimationState.start:
+    switch (widget.assetsPosition) {
+      case MontainAndTreeBackground.defaultAssetsPosition:
         return -screenWidth;
-      case BackgroundAnimationState.middle:
-        return 0;
-      case BackgroundAnimationState.end:
+      case MontainAndTreeBackground.endingAnimationAssetsPosition:
         return 0;
     }
+    return 0;
   }
 
   double get _currentYPositionCloud {
-    switch (widget.currentState) {
-      case BackgroundAnimationState.start:
+    switch (widget.assetsPosition) {
+      case MontainAndTreeBackground.defaultAssetsPosition:
         return 0;
-      case BackgroundAnimationState.middle:
-        return 0;
-      case BackgroundAnimationState.end:
+      case MontainAndTreeBackground.endingAnimationAssetsPosition:
         return 0;
     }
+    return 0;
   }
 }
-
-enum BackgroundAnimationState { start, middle, end }

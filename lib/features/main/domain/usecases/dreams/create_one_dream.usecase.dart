@@ -42,7 +42,7 @@ class CreateOneDreamParams extends Params {
   /// That's what we'll use in our usecase.
   Dream createDreamEntity() {
     final result = Dream(
-      id: 0,
+   
       uuid: const Uuid().v4(),
       title: title,
       content: content,

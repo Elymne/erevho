@@ -1,29 +1,30 @@
-import 'package:erevho/features/main/data/datasources/local/user_params_local_data_source.dart';
-import 'package:erevho/features/main/domain/entities/user_params/user_params.entity.dart';
-import 'package:erevho/features/main/domain/repositories/local/user_params_local_repository.dart';
+import 'package:erevho/features/main/data/datasources/local/user_data_local_data_source.dart';
+import 'package:erevho/features/main/data/models/user_data/user_data.model.dart';
+import 'package:erevho/features/main/domain/repositories/local/user_data_local_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../domain/entities/user_data/user_data.entity.dart';
 
-final userParamsLocalRepositoryProvider = Provider<UserParamsLocalRepository>((ref) {
-  return UserParamsLocalRepositoryImpl(ref.read(userParamsLocalDataSourceProvider));
+final userDataLocalRepositoryProvider = Provider<UserDataLocalRepository>((ref) {
+  return UserDataLocalRepositoryImpl(ref.read(userDataLocalDataSourceProvider));
 });
 
-class UserParamsLocalRepositoryImpl implements UserParamsLocalRepository {
-  final UserParamsLocalDataSource userParamsLocalDataSource;
+class UserDataLocalRepositoryImpl implements UserDataLocalRepository {
+  final UserDataLocalDataSource userParamsLocalDataSource;
 
-  UserParamsLocalRepositoryImpl(this.userParamsLocalDataSource);
+  UserDataLocalRepositoryImpl(this.userParamsLocalDataSource);
 
   @override
-  Future<UserParams?> getUserParams() async {
-    return userParamsLocalDataSource.box.getAll().firstOrNull;
+  Future<UserData?> getUserData() async {
+    return userParamsLocalDataSource.box.getAll().firstOrNull?.toEntity();
   }
 
   @override
-  Future<int> putUserParams(UserParams userParams) async {
-    return userParamsLocalDataSource.box.put(userParams);
+  Future<int> putUserData(UserData userData) async {
+    return userParamsLocalDataSource.box.put(UserDataModel.fromEntity(userData));
   }
 
   @override
-  Future<int> removeAllUserParams() async {
+  Future<int> removeAllUserDatas() async {
     return userParamsLocalDataSource.box.removeAll();
   }
 }

@@ -1,5 +1,5 @@
-import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
-import 'package:erevho/features/main/domain/entities/user_params/user_params.entity.dart';
+import 'package:erevho/features/main/data/models/dreams/dream.model.dart';
+import 'package:erevho/features/main/data/models/user_data/user_data.model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -24,8 +24,8 @@ class ObjectBox {
   void clearData() {
     if (kDebugMode) {
       print('Clearing Db on debug mode');
-      store.box<Dream>().removeAllAsync();
-      store.box<UserParams>().removeAllAsync();
+      store.box<DreamModel>().removeAllAsync();
+      store.box<UserDataModel>().removeAllAsync();
     }
   }
 }

@@ -12,28 +12,34 @@ class SplashPage extends ConsumerStatefulWidget {
 }
 
 class SplashPageState extends ConsumerState<SplashPage> {
-  late final SplashController controller = ref.read(splashControllerProvider);
+  late final SplashController controller;
 
   @override
   void initState() {
     super.initState();
+    controller = ref.read(splashControllerProvider);
     controller.init(context);
+
+    // When view is builded, we show the view.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(controller.viewVisibilityProvider.notifier).state = true;
+      ref.read(controller.assetsPositionProvider.notifier).state = MontainAndTreeBackground.endingAnimationAssetsPosition;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    late final currentAnimationState = ref.watch(controller.backgroundAnimationStateProvider);
+    final viewVisibility = ref.watch(controller.viewVisibilityProvider);
+    final assetsPosition = ref.watch(controller.assetsPositionProvider);
 
     return SafeArea(
       child: Scaffold(
         body: Stack(
           children: [
-            MontainAndTreeBackground(
-              currentState: currentAnimationState,
-            ),
+            MontainAndTreeBackground(assetsPosition: assetsPosition),
             AnimatedOpacity(
-              opacity: currentAnimationState == BackgroundAnimationState.end ? 0.0 : 1.0,
-              duration: const Duration(milliseconds: 500),
+              opacity: viewVisibility ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 300),
               child: const Center(
                 child: Text(
                   'Toucher l\'écran',
@@ -44,9 +50,14 @@ class SplashPageState extends ConsumerState<SplashPage> {
                 ),
               ),
             ),
+            AnimatedOpacity(
+              opacity: viewVisibility ? 0.0 : 1.0,
+              duration: const Duration(milliseconds: 1000),
+              child: Container(color: Colors.black),
+            ),
             GestureDetector(
               onTap: () {
-                if (currentAnimationState != BackgroundAnimationState.end) {
+                if (viewVisibility) {
                   controller.onScreenPress(context);
                 }
               },
