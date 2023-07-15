@@ -1,14 +1,16 @@
 import 'package:erevho/core/controller.dart';
+import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/features/main/application/pages/home/home_page.dart';
+import 'package:erevho/features/main/domain/usecases/user_data/create_new_user_data_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain/usecases/user_data/create_new_user_data_usecase.dart';
 
 final userInitialisationControllerProvider = Provider((ref) => UserInitialisationController(ref));
 
 class UserInitialisationController extends Controller {
-  // Usecases injecteds.
-  late final createNewUserParamsUsecase = ref.read(createNewUserParamsUsecaseProvider);
+  // Injections.
+  late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
+  late final CreateNewUserParamsUsecase createNewUserParamsUsecase = ref.read(createNewUserParamsUsecaseProvider);
 
   // State values for view.
   final viewVisibilityProvider = StateProvider((ref) => false);
@@ -21,7 +23,7 @@ class UserInitialisationController extends Controller {
 
   String? validateNameTextfield(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Vous devez rentrer un p\'tit nom :(';
+      return ap.current.name_textfield_warning;
     }
     nameText = value;
     return null;
@@ -42,7 +44,7 @@ class UserInitialisationController extends Controller {
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Une erreur est survenue lors de la création du profil')),
+          SnackBar(content: Text(ap.current.user_init_snackbar_error)),
         );
       }
     }

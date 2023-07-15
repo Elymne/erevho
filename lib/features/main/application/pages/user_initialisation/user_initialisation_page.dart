@@ -1,3 +1,4 @@
+import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/user_initialisation/user_initialisation_controller.dart';
 import 'package:erevho/features/main/application/widgets/background_animations/moon_and_star_background.dart';
@@ -13,12 +14,12 @@ class UserInitialisationPage extends ConsumerStatefulWidget {
 }
 
 class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
-  late final UserInitialisationController controller;
+  late final UserInitialisationController controller = ref.read(userInitialisationControllerProvider);
+  late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
 
   @override
   void initState() {
     super.initState();
-    controller = ref.read(userInitialisationControllerProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(controller.viewVisibilityProvider.notifier).state = true;
     });
@@ -27,7 +28,6 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
   @override
   Widget build(BuildContext context) {
     final viewVisibility = ref.watch(controller.viewVisibilityProvider);
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: nightGreyDarker,
@@ -50,7 +50,7 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
                       child: Column(
                         children: [
                           const SizedBox(height: 30),
-                          const Text('Spécification du nom d\'utilisateur : '),
+                          Text(ap.current.name_textfield_label),
                           const SizedBox(height: 30),
                           TextFormField(
                             validator: (value) => controller.validateNameTextfield(value),
