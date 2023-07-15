@@ -25,15 +25,10 @@ class CreateNewUserParamsUsecase extends Usecase<void, CreateNewUserParamsUsecas
       userParamsLocalRepository.removeAllUserDatas();
     }
 
-    final createdUserParams = await userParamsLocalRepository.putUserData(UserData(
+    await userParamsLocalRepository.putUserData(UserData(
       uuid: const Uuid().v4(),
       pseudonym: params.userName,
     ));
-
-    // One value should be created, no less, no more.
-    if (createdUserParams != 1) {
-      throw ('User was not created');
-    }
   }
 }
 

@@ -7,7 +7,13 @@ import '../../../domain/usecases/user_data/create_new_user_data_usecase.dart';
 final userInitialisationControllerProvider = Provider((ref) => UserInitialisationController(ref));
 
 class UserInitialisationController extends Controller {
+  // Usecases injecteds.
   late final createNewUserParamsUsecase = ref.read(createNewUserParamsUsecaseProvider);
+
+  // State values for view.
+  final viewVisibilityProvider = StateProvider((ref) => false);
+
+  // Controller values.
   final formKey = GlobalKey<FormState>();
   String? nameText;
 
@@ -25,6 +31,8 @@ class UserInitialisationController extends Controller {
     if (formKey.currentState!.validate()) {
       try {
         await createNewUserParamsUsecase.perform(CreateNewUserParamsUsecaseParams(userName: nameText!));
+        ref.read(viewVisibilityProvider.notifier).state = false;
+        await Future.delayed(const Duration(milliseconds: 1000));
         if (context.mounted) {
           Navigator.pushAndRemoveUntil(
             context,

@@ -1,10 +1,9 @@
-import 'dart:ui';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/user_initialisation/user_initialisation_controller.dart';
+import 'package:erevho/features/main/application/widgets/background_animations/moon_and_star_background.dart';
+import 'package:erevho/features/main/application/widgets/buttons/night_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../widgets/background_animations/moon_and_star_background.dart';
-import '../../widgets/buttons/night_button.dart';
 
 class UserInitialisationPage extends ConsumerStatefulWidget {
   const UserInitialisationPage({super.key});
@@ -14,19 +13,27 @@ class UserInitialisationPage extends ConsumerStatefulWidget {
 }
 
 class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
-  late final controller = ref.read(userInitialisationControllerProvider);
+  late final UserInitialisationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ref.read(userInitialisationControllerProvider);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(controller.viewVisibilityProvider.notifier).state = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final viewVisibility = ref.watch(controller.viewVisibilityProvider);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: nightGreyDarker,
         body: Stack(
           children: [
-            // Animated background.
             const MoonAndStarBackground(),
-
-            // hummmmmm.
             Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -60,6 +67,13 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
                   ),
                 ),
               ],
+            ),
+            IgnorePointer(
+              child: AnimatedOpacity(
+                opacity: viewVisibility ? 0.0 : 1.0,
+                duration: const Duration(milliseconds: 1000),
+                child: Container(color: Colors.black),
+              ),
             ),
           ],
         ),

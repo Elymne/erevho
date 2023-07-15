@@ -19,8 +19,6 @@ class SplashPageState extends ConsumerState<SplashPage> {
     super.initState();
     controller = ref.read(splashControllerProvider);
     controller.init(context);
-
-    // When view is builded, we show the view.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(controller.viewVisibilityProvider.notifier).state = true;
       ref.read(controller.assetsPositionProvider.notifier).state = MontainAndTreeBackground.endingAnimationAssetsPosition;
@@ -50,17 +48,19 @@ class SplashPageState extends ConsumerState<SplashPage> {
                 ),
               ),
             ),
-            AnimatedOpacity(
-              opacity: viewVisibility ? 0.0 : 1.0,
-              duration: const Duration(milliseconds: 1000),
-              child: Container(color: Colors.black),
-            ),
             GestureDetector(
               onTap: () {
                 if (viewVisibility) {
                   controller.onScreenPress(context);
                 }
               },
+            ),
+            IgnorePointer(
+              child: AnimatedOpacity(
+                opacity: viewVisibility ? 0.0 : 1.0,
+                duration: const Duration(milliseconds: 1000),
+                child: Container(color: Colors.black),
+              ),
             ),
           ],
         ),
