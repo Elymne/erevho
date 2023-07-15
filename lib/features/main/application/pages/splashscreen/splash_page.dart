@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
+import 'package:erevho/core/rive/custom_one_shot_controller.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/splashscreen/splash_controller.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +18,13 @@ class SplashPageState extends ConsumerState<SplashPage> {
   late final SplashController controller = ref.read(splashControllerProvider);
   late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
 
-  late final RiveAnimationController startingAnimationController = OneShotAnimation(
+  late final RiveAnimationController startingAnimationController = CustomOneShotController(
     'startingAnimation',
-    onStop: () => timeFlow.isActive = true,
+    onStop: () {
+      timeFlowAnimation.isActive = true;
+    },
   );
-  late final RiveAnimationController timeFlow = SimpleAnimation('timeFlow');
+  late final RiveAnimationController timeFlowAnimation = SimpleAnimation('timeFlow');
 
   @override
   void initState() {
@@ -43,9 +46,13 @@ class SplashPageState extends ConsumerState<SplashPage> {
             RiveAnimation.asset(
               'assets/rives/mountain_and_star.riv',
               fit: BoxFit.cover,
-              controllers: [startingAnimationController, timeFlow],
+              controllers: [
+                startingAnimationController,
+                timeFlowAnimation,
+              ],
               onInit: (p0) {
                 startingAnimationController.isActive = true;
+                timeFlowAnimation.isActive = false;
               },
             ),
             AnimatedOpacity(
