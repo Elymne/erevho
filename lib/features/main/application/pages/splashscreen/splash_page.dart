@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:erevho/core/extensions/text_extension.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/splashscreen/splash_controller.dart';
@@ -17,7 +16,12 @@ class SplashPage extends ConsumerStatefulWidget {
 class SplashPageState extends ConsumerState<SplashPage> {
   late final SplashController controller = ref.read(splashControllerProvider);
   late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
-  late final RiveAnimationController riveAnimationController = SimpleAnimation('startingAnimation');
+
+  late final RiveAnimationController startingAnimationController = OneShotAnimation(
+    'startingAnimation',
+    onStop: () => timeFlow.isActive = true,
+  );
+  late final RiveAnimationController timeFlow = SimpleAnimation('timeFlow');
 
   @override
   void initState() {
@@ -39,9 +43,9 @@ class SplashPageState extends ConsumerState<SplashPage> {
             RiveAnimation.asset(
               'assets/rives/mountain_and_star.riv',
               fit: BoxFit.cover,
-              controllers: [riveAnimationController],
+              controllers: [startingAnimationController, timeFlow],
               onInit: (p0) {
-                riveAnimationController.isActive = true;
+                startingAnimationController.isActive = true;
               },
             ),
             AnimatedOpacity(
@@ -53,7 +57,7 @@ class SplashPageState extends ConsumerState<SplashPage> {
                   maxLines: 1,
                   style: const TextStyle(
                     fontSize: 40,
-                    fontWeight: FontWeight.w100,
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
               ),
