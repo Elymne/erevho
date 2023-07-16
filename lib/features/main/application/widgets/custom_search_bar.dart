@@ -20,7 +20,7 @@ class CustomSearchBar extends ConsumerWidget {
         ),
         hintText: appLocals.current.research,
         filled: true,
-        fillColor: nightGreyDarker,
+        fillColor: erevohDark,
       ),
       onSubmitted: (text) => onSubmitted(text),
     );

@@ -13,24 +13,29 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(appLocalisationToolsProvider).setLocale(const Locale('fr', 'FR'));
+    final apl = ref.read(appLocalisationToolsProvider);
+    // Définir un moyen pour attribuer la langue utilisé sur l'app. (la flemme mais c'est rapide).
+    apl.setLocale(const Locale('fr', 'FR'));
 
     // Update bottom bar navigation when on android device. Don't know why but the bottom navigation bar stay bright without this.
     if (Platform.isAndroid) {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        systemNavigationBarColor: nightGreyDarker,
-        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: erevohDark,
+        systemNavigationBarIconBrightness: Brightness.dark,
       ));
     }
 
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    // This app is only usable on portrait mode.
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      // DeviceOrientation.portraitDown,
+    ]);
 
     return MaterialApp(
-      title: 'EREVHO',
+      title: apl.current.appName,
       debugShowCheckedModeBanner: true,
       home: const SplashPage(),
       theme: defaultTheme,
-      darkTheme: defaultTheme,
       themeMode: ThemeMode.system,
       checkerboardOffscreenLayers: true,
       localizationsDelegates: AppLocalizations.localizationsDelegates,

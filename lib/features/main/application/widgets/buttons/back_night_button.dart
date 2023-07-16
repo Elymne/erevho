@@ -13,11 +13,11 @@ class BackNightButton extends StatelessWidget {
       style: ButtonStyle(
         shape: MaterialStateProperty.all(const CircleBorder()),
         padding: MaterialStateProperty.all(const EdgeInsets.all(18)),
-        backgroundColor: MaterialStateProperty.all(nightOrange), // <-- Button color
+        backgroundColor: MaterialStateProperty.all(erevohBlue), // <-- Button color
       ),
       child: const Icon(
         Icons.arrow_back_ios_new,
-        color: pureWhite,
+        color: erevohWhite,
       ),
     );
   }

@@ -50,3 +50,57 @@ flutter:
         - assets/backgrounds/
         - assets/images/
         - assets/rives/
+    fonts:
+    - family: Ysabeau 
+      fonts:
+        # Normal fonts.
+        - asset: assets/fonts/YsabeauInfant-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/YsabeauInfant-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/YsabeauInfant-Light.ttf
+          weight: 300
+        - asset: assets/fonts/YsabeauInfant-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/YsabeauInfant-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/YsabeauInfant-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/YsabeauInfant-Bold.ttf.ttf
+          weight: 700
+        - asset: assets/fonts/YsabeauInfant-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/YsabeauInfant-Black.ttf
+          weight: 900
+
+          # Italic fonts.
+        - asset: assets/fonts/YsabeauInfant-ThinItalic.ttf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/YsabeauInfant-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/YsabeauInfant-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/YsabeauInfant-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/YsabeauInfant-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/YsabeauInfant-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/YsabeauInfant-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/YsabeauInfant-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/YsabeauInfant-BlackItalic.ttf
+          weight: 900
+          style: italic
+
+
+

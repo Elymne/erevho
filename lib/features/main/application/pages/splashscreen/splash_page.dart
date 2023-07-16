@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/rive/custom_one_shot_controller.dart';
-import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/splashscreen/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -85,7 +84,7 @@ class SplashPageState extends ConsumerState<SplashPage> {
             ),
           ],
         ),
-        backgroundColor: nightGrey,
+        backgroundColor: Theme.of(context).colorScheme.background,
       ),
     );
   }

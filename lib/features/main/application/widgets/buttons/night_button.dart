@@ -12,7 +12,7 @@ class NightButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStateColor.resolveWith((states) => nightOrange),
+        backgroundColor: MaterialStateColor.resolveWith((states) => erevohBlue),
       ),
       child: Padding(
         padding: const EdgeInsets.all(14.0),
@@ -20,7 +20,7 @@ class NightButton extends StatelessWidget {
           text,
           style: TextStyle(
             fontSize: 20,
-            color: pureWhite,
+            color: erevohWhite,
           ),
         ),
       ),

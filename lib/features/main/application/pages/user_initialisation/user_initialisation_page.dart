@@ -1,5 +1,5 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
-import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/user_initialisation/user_initialisation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,10 +49,10 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
                   child: Container(
                     padding: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
-                      color: nightBlueDarker.withOpacity(0.9),
+                      color: Theme.of(context).colorScheme.primary,
                       borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                       border: Border.all(
-                        color: nightGreyShadow,
+                        color: Theme.of(context).colorScheme.primary,
                         width: 1.0,
                       ),
                     ),
@@ -61,7 +61,14 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
                       child: Column(
                         children: [
                           const SizedBox(height: 30),
-                          Text(ap.current.name_textfield_label),
+                          AutoSizeText(
+                            maxLines: 1,
+                            ap.current.name_textfield_label,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 24,
+                            ),
+                          ),
                           const SizedBox(height: 30),
                           TextFormField(
                             validator: (value) => controller.validateNameTextfield(value),

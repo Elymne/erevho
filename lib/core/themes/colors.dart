@@ -1,28 +1,9 @@
 import 'package:flutter/material.dart';
 
-const nightGrey = Color.fromARGB(255, 51, 49, 66);
-const nightGreyLight = Color.fromARGB(255, 95, 92, 119);
-const nightGreyDarker = Color.fromARGB(255, 33, 32, 43);
-const nightGreyShadow = Color.fromARGB(100, 33, 32, 43);
-
-const pureWhite = Color.fromARGB(255, 255, 255, 255);
-const fadeWhite = Color.fromARGB(99, 255, 255, 255);
-
-const nightRed = Color.fromARGB(255, 189, 60, 60);
-const nightRedDarker = Color.fromARGB(255, 126, 29, 29);
-const nightRedShadow = Color.fromARGB(100, 126, 29, 29);
-
-const nightOrange = Color.fromARGB(255, 194, 113, 93);
-const nightOrangeDarker = Color.fromARGB(255, 170, 80, 58);
-const nightOrangeShadow = Color.fromARGB(100, 170, 80, 58);
-const nightOrangeAccent = Color.fromARGB(255, 236, 114, 83);
-
-const nightBlue = Color.fromARGB(255, 44, 76, 163);
-const nightBlueDarker = Color.fromARGB(255, 28, 56, 133);
-const nightBlueShadow = Color.fromARGB(100, 28, 56, 133);
-
-const nightGreen = Color.fromARGB(255, 43, 97, 61);
-const nightGreenDarker = Color.fromARGB(255, 31, 73, 45);
-const nightGreenShadow = Color.fromARGB(100, 31, 73, 45);
-
-const neonBlue = Color.fromARGB(255, 100, 102, 199);
+// News colors because I can't manage the multitude of color ahead.
+const erevohWhite = Color.fromARGB(255, 255, 255, 255);
+const erevohBlue = Color.fromARGB(255, 74, 93, 143);
+const erevohRed = Color.fromARGB(255, 175, 73, 73);
+const erevohGreen = Color.fromARGB(255, 90, 117, 99);
+const erevohGrey = Color.fromARGB(255, 51, 58, 94);
+const erevohDark = Color.fromARGB(255, 32, 35, 51);
