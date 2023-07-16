@@ -49,7 +49,7 @@ class SplashPageState extends ConsumerState<SplashPage> {
             RiveAnimation.asset(
               'assets/rives/mountain_and_star.riv',
               antialiasing: false,
-              fit: BoxFit.fitHeight,
+              fit: BoxFit.cover,
               controllers: [
                 startingAnimationController,
                 timeFlowAnimationController,

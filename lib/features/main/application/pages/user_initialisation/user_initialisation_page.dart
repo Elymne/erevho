@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
+import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/user_initialisation/user_initialisation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +15,7 @@ class UserInitialisationPage extends ConsumerStatefulWidget {
 
 class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
   late final UserInitialisationController controller = ref.read(userInitialisationControllerProvider);
-  late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
+  late final AppLocalisationTools apt = ref.read(appLocalisationToolsProvider);
   late final RiveAnimationController riveAnimationController = SimpleAnimation('startAnimation');
 
   @override
@@ -49,7 +50,7 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
                   child: Container(
                     padding: const EdgeInsets.all(10.0),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
+                      color: erevohDark.withOpacity(0.9),
                       borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                       border: Border.all(
                         color: Theme.of(context).colorScheme.primary,
@@ -59,26 +60,64 @@ class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
                     child: Form(
                       key: controller.formKey,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          const SizedBox(height: 30),
-                          AutoSizeText(
-                            maxLines: 1,
-                            ap.current.name_textfield_label,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 24,
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: AutoSizeText(
+                              maxLines: 1,
+                              apt.current.name_textfield_label,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 30,
+                              ),
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: AutoSizeText(
+                              maxLines: 2,
+                              apt.current.name_textfield_label_more,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w200,
+                                fontSize: 18,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
                           TextFormField(
                             validator: (value) => controller.validateNameTextfield(value),
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                                borderSide: BorderSide.none,
+                              ),
+                              hintText: apt.current.name_textfield_hint,
+                              filled: true,
+                              fillColor: erevohGrey,
+                              errorStyle: const TextStyle(
+                                fontSize: 18,
+                                color: erevohRed,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
                           ),
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 40),
                           OutlinedButton(
                             onPressed: () => controller.onValidation(context),
-                            child: const Text('Valider'),
+                            style: OutlinedButton.styleFrom(
+                              backgroundColor: erevohGreen,
+                            ),
+                            child: const AutoSizeText(
+                              'Valider',
+                              style: TextStyle(
+                                color: erevohWhite,
+                                fontSize: 24,
+                              ),
+                            ),
                           ),
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 10),
                         ],
                       ),
                     ),
