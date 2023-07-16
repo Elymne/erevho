@@ -12,7 +12,8 @@ class SplashController extends Controller {
   late final IsFirstLaunchUsecase isFirstLaunchUsecase = ref.read(isFirstLaunchUsecaseProvider);
 
   // State values for view.
-  final viewVisibilityProvider = StateProvider((ref) => false);
+  final viewVisibilityProvider = StateProvider((ref) => true);
+  final titleVisibilityProvider = StateProvider((ref) => false);
 
   // Controller values.
   late final bool isFirstLaunch;
@@ -25,7 +26,8 @@ class SplashController extends Controller {
 
   Future onScreenPress(BuildContext context) async {
     ref.read(viewVisibilityProvider.notifier).state = false;
-    await Future.delayed(const Duration(milliseconds: 1000));
+    ref.read(titleVisibilityProvider.notifier).state = false;
+    await Future.delayed(const Duration(milliseconds: 2000));
     if (context.mounted) {
       // In that case, user should set a name to use application from the init page.
       if (isFirstLaunch) {

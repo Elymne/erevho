@@ -6,4 +6,5 @@ const erevohBlue = Color.fromARGB(255, 74, 93, 143);
 const erevohRed = Color.fromARGB(255, 175, 73, 73);
 const erevohGreen = Color.fromARGB(255, 90, 117, 99);
 const erevohGrey = Color.fromARGB(255, 51, 58, 94);
+const erevohBlack = Color.fromARGB(255, 13, 13, 19);
 const erevohDark = Color.fromARGB(255, 32, 35, 51);
