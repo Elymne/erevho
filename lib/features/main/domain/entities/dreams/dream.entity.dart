@@ -8,6 +8,7 @@ class Dream with _$Dream {
   const factory Dream({
     required String uuid,
     required String pseudonym,
+    required String userUuid,
     required String title,
     required String content,
     required List<String> tags,

@@ -8,10 +8,10 @@ class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => HomePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _State();
 }
 
-class HomePageState extends ConsumerState<HomePage> {
+class _State extends ConsumerState<HomePage> {
   late final HomeController controller = ref.read(homeControllerProvider);
 
   late final double screenWidth = MediaQuery.of(context).size.width;

@@ -11,10 +11,10 @@ class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => SplashPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _State();
 }
 
-class SplashPageState extends ConsumerState<SplashPage> {
+class _State extends ConsumerState<SplashPage> {
   late final SplashController controller = ref.read(splashControllerProvider);
   late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
 

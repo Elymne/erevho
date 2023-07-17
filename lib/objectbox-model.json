@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "5:6397945848419530350",
-      "lastPropertyId": "8:2708732848820368173",
+      "lastPropertyId": "9:7116884154894207299",
       "name": "DreamModel",
       "properties": [
         {
@@ -50,6 +50,11 @@
           "id": "8:2708732848820368173",
           "name": "updated",
           "type": 10
+        },
+        {
+          "id": "9:7116884154894207299",
+          "name": "userUuid",
+          "type": 9
         }
       ],
       "relations": []

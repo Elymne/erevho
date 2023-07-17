@@ -44,6 +44,7 @@ class UpdateOneDreamParams extends Params {
       title: title,
       content: content,
       pseudonym: pseudonym,
+      userUuid: pseudonym,
       tags: tags,
       created: DateTime.now(),
       updated: DateTime.now(),

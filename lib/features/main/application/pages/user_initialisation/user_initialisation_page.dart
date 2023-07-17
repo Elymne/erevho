@@ -10,10 +10,10 @@ class UserInitialisationPage extends ConsumerStatefulWidget {
   const UserInitialisationPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => UserInitialisationState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _State();
 }
 
-class UserInitialisationState extends ConsumerState<UserInitialisationPage> {
+class _State extends ConsumerState<UserInitialisationPage> {
   late final UserInitialisationController controller = ref.read(userInitialisationControllerProvider);
   late final AppLocalisationTools apt = ref.read(appLocalisationToolsProvider);
   late final RiveAnimationController riveAnimationController = SimpleAnimation('startAnimation');

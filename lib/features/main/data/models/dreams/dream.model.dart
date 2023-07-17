@@ -10,6 +10,8 @@ class DreamModel {
 
   final String pseudonym;
 
+  final String userUuid;
+
   final String title;
 
   final String content;
@@ -22,11 +24,12 @@ class DreamModel {
   @Property(type: PropertyType.date)
   final DateTime updated;
 
-  DreamModel(this.uuid, this.pseudonym, this.title, this.content, this.tags, this.created, this.updated);
+  DreamModel(this.uuid, this.pseudonym, this.userUuid, this.title, this.content, this.tags, this.created, this.updated);
 
   DreamModel.fromEntity(Dream dream)
       : uuid = dream.uuid,
         pseudonym = dream.pseudonym,
+        userUuid = dream.userUuid,
         title = dream.title,
         content = dream.content,
         tags = dream.tags,
@@ -39,6 +42,7 @@ class DreamModel {
       content: content,
       created: created,
       pseudonym: pseudonym,
+      userUuid: userUuid,
       tags: tags,
       title: title,
       updated: updated,
