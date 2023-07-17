@@ -42,4 +42,24 @@ class DreamLocalRepositoryImpl implements DreamLocalRepository {
     }
     return removedNb;
   }
+
+  @override
+  Future<List<Dream>> getAllFiltered({String? uuid, String? pseudonym, String? userUuid, String? title, String? content, List<String> tags = const []}) async {
+    // I want to get all dreams if no filter is selected, and no uuid can't be equals to an empty String, thus allow me to get all dreams.
+    final Condition<DreamModel> query = DreamModel_.uuid.notEquals('');
+
+    // Filters conditions.
+    if (uuid != null) query.and(DreamModel_.uuid.equals(uuid));
+    if (pseudonym != null) query.and(DreamModel_.uuid.equals(pseudonym));
+    if (userUuid != null) query.and(DreamModel_.uuid.equals(userUuid));
+    if (title != null) query.and(DreamModel_.uuid.equals(title));
+    if (content != null) query.and(DreamModel_.uuid.equals(content));
+    if (tags.isNotEmpty) {
+      for (var tag in tags) {
+        query.and(DreamModel_.tags.containsElement(tag));
+      }
+    }
+
+    return dreamLocalDataSource.box.query(query).build().find().map((e) => e.toEntity()).toList();
+  }
 }

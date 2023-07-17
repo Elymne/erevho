@@ -1,13 +1,15 @@
 import 'package:erevho/core/controller.dart';
+import 'package:erevho/core/rive/custom_one_shot_controller.dart';
 import 'package:erevho/features/main/application/pages/home/home_page.dart';
 import 'package:erevho/features/main/application/pages/user_initialisation/user_initialisation_page.dart';
 import 'package:erevho/features/main/domain/usecases/user_data/is_first_launch_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rive/rive.dart';
 
-final splashControllerProvider = Provider((ref) => SplashController(ref));
+final splashControllerProvider = Provider((ref) => SplashScreenController(ref));
 
-class SplashController extends Controller {
+class SplashScreenController extends Controller {
   // Usecases injecteds.
   late final IsFirstLaunchUsecase isFirstLaunchUsecase = ref.read(isFirstLaunchUsecaseProvider);
 
@@ -15,10 +17,23 @@ class SplashController extends Controller {
   final viewVisibilityProvider = StateProvider((ref) => true);
   final titleVisibilityProvider = StateProvider((ref) => false);
 
+  // Animation controller for rive Widget. Each controller stock an animation.
+  late final RiveAnimationController startingAnimationController = CustomOneShotController(
+    'startingAnimation',
+    onStop: () {
+      // When the first animation 'startingAnimation' ends, we start the loop one 'timeFlow'.
+      // We also display the center text that is attached to the OpacityAnimation widget.
+      timeFlowAnimationController.isActive = true;
+      ref.read(titleVisibilityProvider.notifier).state = true;
+    },
+  );
+  late final RiveAnimationController timeFlowAnimationController = SimpleAnimation('timeFlow');
+  late final RiveAnimationController endingAnimationController = SimpleAnimation('endingAnimation');
+
   // Controller values.
   late final bool isFirstLaunch;
 
-  SplashController(super.ref);
+  SplashScreenController(super.ref);
 
   Future init(BuildContext context) async {
     isFirstLaunch = await isFirstLaunchUsecase.perform();

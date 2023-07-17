@@ -1,32 +1,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
-import 'package:erevho/core/rive/custom_one_shot_controller.dart';
 import 'package:erevho/core/themes/colors.dart';
-import 'package:erevho/features/main/application/pages/splashscreen/splash_controller.dart';
+import 'package:erevho/features/main/application/pages/splashscreen/splash_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rive/rive.dart';
 
-class SplashPage extends ConsumerStatefulWidget {
-  const SplashPage({super.key});
+class SplashScreenPage extends ConsumerStatefulWidget {
+  const SplashScreenPage({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _State();
 }
 
-class _State extends ConsumerState<SplashPage> {
-  late final SplashController controller = ref.read(splashControllerProvider);
-  late final AppLocalisationTools ap = ref.read(appLocalisationToolsProvider);
-
-  late final RiveAnimationController startingAnimationController = CustomOneShotController(
-    'startingAnimation',
-    onStop: () {
-      timeFlowAnimationController.isActive = true;
-      ref.read(controller.titleVisibilityProvider.notifier).state = true;
-    },
-  );
-  late final RiveAnimationController timeFlowAnimationController = SimpleAnimation('timeFlow');
-  late final RiveAnimationController endingAnimationController = SimpleAnimation('endingAnimation');
+class _State extends ConsumerState<SplashScreenPage> {
+  late final SplashScreenController controller = ref.read(splashControllerProvider);
+  late final AppLocalisationTools alt = ref.read(appLocalisationToolsProvider);
 
   @override
   void initState() {
@@ -51,14 +40,14 @@ class _State extends ConsumerState<SplashPage> {
               antialiasing: false,
               fit: BoxFit.cover,
               controllers: [
-                startingAnimationController,
-                timeFlowAnimationController,
-                endingAnimationController,
+                controller.startingAnimationController,
+                controller.timeFlowAnimationController,
+                controller.endingAnimationController,
               ],
               onInit: (p0) {
-                startingAnimationController.isActive = true;
-                timeFlowAnimationController.isActive = false;
-                endingAnimationController.isActive = false;
+                controller.startingAnimationController.isActive = true;
+                controller.timeFlowAnimationController.isActive = false;
+                controller.endingAnimationController.isActive = false;
               },
             ),
             AnimatedOpacity(
@@ -79,7 +68,7 @@ class _State extends ConsumerState<SplashPage> {
                     ],
                   ),
                   child: AutoSizeText(
-                    ap.current.touch_screen,
+                    alt.current.touch_screen,
                     maxLines: 1,
                     style: const TextStyle(
                       fontSize: 40,
@@ -92,8 +81,8 @@ class _State extends ConsumerState<SplashPage> {
             GestureDetector(
               onTap: () {
                 if (viewVisibility) {
-                  timeFlowAnimationController.isActive = false;
-                  endingAnimationController.isActive = true;
+                  controller.timeFlowAnimationController.isActive = false;
+                  controller.endingAnimationController.isActive = true;
                   controller.goToNextPage(context);
                 }
               },

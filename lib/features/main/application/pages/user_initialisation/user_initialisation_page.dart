@@ -15,8 +15,7 @@ class UserInitialisationPage extends ConsumerStatefulWidget {
 
 class _State extends ConsumerState<UserInitialisationPage> {
   late final UserInitialisationController controller = ref.read(userInitialisationControllerProvider);
-  late final AppLocalisationTools apt = ref.read(appLocalisationToolsProvider);
-  late final RiveAnimationController riveAnimationController = SimpleAnimation('startAnimation');
+  late final AppLocalisationTools alt = ref.read(appLocalisationToolsProvider);
 
   @override
   void initState() {
@@ -36,9 +35,9 @@ class _State extends ConsumerState<UserInitialisationPage> {
             RiveAnimation.asset(
               'assets/rives/moon_sky.riv',
               fit: BoxFit.cover,
-              controllers: [riveAnimationController],
+              controllers: [controller.riveAnimationController],
               onInit: (p0) {
-                riveAnimationController.isActive = true;
+                controller.riveAnimationController.isActive = true;
               },
             ),
             Column(
@@ -66,7 +65,7 @@ class _State extends ConsumerState<UserInitialisationPage> {
                             alignment: Alignment.centerLeft,
                             child: AutoSizeText(
                               maxLines: 1,
-                              apt.current.name_textfield_label,
+                              alt.current.name_textfield_label,
                               style: const TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 30,
@@ -77,7 +76,7 @@ class _State extends ConsumerState<UserInitialisationPage> {
                             alignment: Alignment.centerLeft,
                             child: AutoSizeText(
                               maxLines: 2,
-                              apt.current.name_textfield_label_more,
+                              alt.current.name_textfield_label_more,
                               style: const TextStyle(
                                 fontWeight: FontWeight.w200,
                                 fontSize: 18,
@@ -93,7 +92,7 @@ class _State extends ConsumerState<UserInitialisationPage> {
                                 borderRadius: BorderRadius.circular(20.0),
                                 borderSide: BorderSide.none,
                               ),
-                              hintText: apt.current.name_textfield_hint,
+                              hintText: alt.current.name_textfield_hint,
                               filled: true,
                               fillColor: erevohGrey,
                               errorStyle: const TextStyle(
