@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 const erevohWhite = Color.fromARGB(255, 255, 255, 255);
 const erevohBlue = Color.fromARGB(255, 74, 93, 143);
 const erevohRed = Color.fromARGB(255, 175, 73, 73);
+const erevohOrange = Color.fromARGB(255, 192, 133, 94);
 const erevohGreen = Color.fromARGB(255, 90, 117, 99);
 const erevohGrey = Color.fromARGB(255, 51, 58, 94);
 const erevohBlack = Color.fromARGB(255, 13, 13, 19);
