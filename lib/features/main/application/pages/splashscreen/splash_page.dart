@@ -94,7 +94,7 @@ class _State extends ConsumerState<SplashPage> {
                 if (viewVisibility) {
                   timeFlowAnimationController.isActive = false;
                   endingAnimationController.isActive = true;
-                  controller.onScreenPress(context);
+                  controller.goToNextPage(context);
                 }
               },
             ),

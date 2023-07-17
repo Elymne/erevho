@@ -24,7 +24,7 @@ class SplashController extends Controller {
     isFirstLaunch = await isFirstLaunchUsecase.perform();
   }
 
-  Future onScreenPress(BuildContext context) async {
+  Future goToNextPage(BuildContext context) async {
     ref.read(viewVisibilityProvider.notifier).state = false;
     ref.read(titleVisibilityProvider.notifier).state = false;
     await Future.delayed(const Duration(milliseconds: 2000));

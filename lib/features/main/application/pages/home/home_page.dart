@@ -24,7 +24,7 @@ class _State extends ConsumerState<HomePage> {
   }
 
   @override
-  Widget build(Object context) {
+  Widget build(BuildContext context) {
     final homeMessage = ref.watch(controller.homeMessageProvider);
 
     return SafeArea(
@@ -32,6 +32,7 @@ class _State extends ConsumerState<HomePage> {
         backgroundColor: erevohDark,
         body: Column(
           children: [
+            // Start text.
             const SizedBox(height: 30.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -66,10 +67,10 @@ class _State extends ConsumerState<HomePage> {
               ),
             ),
             const SizedBox(height: 30.0),
+
+            // Containers clickable.
             GestureDetector(
-              onTap: () {
-                print('ITEM 1');
-              },
+              onTap: () => controller.goToUserHomePage(context),
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 height: screenHeight / 6,
