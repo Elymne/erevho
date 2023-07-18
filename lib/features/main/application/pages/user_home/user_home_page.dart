@@ -79,6 +79,7 @@ class _State extends ConsumerState<UserHomePage> {
                 Expanded(
                   child: PageView(
                     controller: controller.pageController,
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       const UserAddDreamPage(),
                       UserMainHomePage(
