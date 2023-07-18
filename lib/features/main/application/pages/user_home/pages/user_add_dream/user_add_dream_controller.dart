@@ -7,7 +7,7 @@ final userAddDreamControllerProvider = Provider((ref) => UserAddDreamController(
 
 class UserAddDreamController extends Controller {
   final formKey = GlobalKey<FormState>();
-
+  final textFieldController = TextEditingController();
   String? username;
 
   UserAddDreamController(super.ref);
@@ -24,11 +24,20 @@ class UserAddDreamController extends Controller {
   void onValidation(BuildContext context) {
     if (formKey.currentState!.validate()) {
       if (context.mounted) {
+        final username = this.username;
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DreamFormPage(newTitle: username)),
+          MaterialPageRoute(
+            builder: (context) => DreamFormPage(newTitle: username),
+          ),
         );
+        _resetPage();
       }
     }
+  }
+
+  void _resetPage() {
+    textFieldController.clear();
+    username = null;
   }
 }

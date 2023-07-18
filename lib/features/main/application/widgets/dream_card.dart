@@ -50,10 +50,12 @@ class DreamCard extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: dream.tags
-                  .map((tag) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: DreamChipTag(tag: tag),
-                      ))
+                  .map(
+                    (tag) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: DreamChipTag(tag: tag),
+                    ),
+                  )
                   .toList(),
             ),
           ),

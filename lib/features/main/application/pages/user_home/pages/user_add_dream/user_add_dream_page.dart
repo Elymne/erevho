@@ -39,6 +39,7 @@ class _State extends ConsumerState<UserAddDreamPage> {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              controller: controller.textFieldController,
               validator: (value) => controller.validateDreamTitle(value),
               decoration: InputDecoration(
                 hintText: 'Rentrez le titre de votre rêve',
