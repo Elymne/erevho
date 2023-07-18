@@ -15,8 +15,8 @@ class UserDreamsListPage extends ConsumerStatefulWidget {
 }
 
 class _State extends ConsumerState<UserDreamsListPage> {
-  late final controller = ref.read(userDreamsListControllerProvider);
-  late final alt = ref.read(appLocalisationToolsProvider);
+  late final UserDreamsListController controller = ref.read(userDreamsListControllerProvider);
+  late final AppLocalisationTools alt = ref.read(appLocalisationToolsProvider);
 
   @override
   void initState() {
@@ -34,7 +34,10 @@ class _State extends ConsumerState<UserDreamsListPage> {
         body: Column(
           children: [
             Expanded(
-              child: _CustomDreamsListView(userDreams),
+              child: _CustomDreamsListView(
+                userDreams: userDreams,
+                onCardTap: (uuid) => controller.goToDreamFormPage(context, uuid),
+              ),
             ),
           ],
         ),
@@ -45,8 +48,9 @@ class _State extends ConsumerState<UserDreamsListPage> {
 
 class _CustomDreamsListView extends StatelessWidget {
   final List<Dream>? userDreams;
+  final Function(String uuid) onCardTap;
 
-  const _CustomDreamsListView(this.userDreams);
+  const _CustomDreamsListView({required this.onCardTap, this.userDreams});
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +63,7 @@ class _CustomDreamsListView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
           child: DreamCard(
             dream: userDreams![index],
+            onTap: (uuid) => onCardTap(uuid),
           ),
         );
       },
