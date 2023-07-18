@@ -1,10 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
+import 'package:erevho/features/main/application/pages/user_home/pages/user_main_home/user_main_home_page.dart';
 import 'package:erevho/features/main/application/pages/user_home/user_home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'pages/user_add_dream/user_add_dream_page.dart';
 import 'pages/user_dreams_list/user_dreams_list_page.dart';
 
 class UserHomePage extends ConsumerStatefulWidget {
@@ -15,12 +16,8 @@ class UserHomePage extends ConsumerStatefulWidget {
 }
 
 class _State extends ConsumerState<UserHomePage> {
-  late final controller = ref.read(userHomeControllerProvider);
-  late final alt = ref.read(appLocalisationToolsProvider);
-
-  late final double screenWidth = MediaQuery.of(context).size.width;
-  late final double screenHeight = MediaQuery.of(context).size.height;
-  final double containerDivider = 5;
+  late final UserHomeController controller = ref.read(userHomeControllerProvider);
+  late final AppLocalisationTools alt = ref.read(appLocalisationToolsProvider);
 
   @override
   void initState() {
@@ -30,6 +27,10 @@ class _State extends ConsumerState<UserHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final currentPage = ref.watch(controller.currentPageProvider);
+    final currentTitleText = ref.watch(controller.currentTitleTextProvider);
+    final isTopContentVisible = ref.watch(controller.isTopContentVisibleProvider);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: erevohDark,
@@ -37,12 +38,41 @@ class _State extends ConsumerState<UserHomePage> {
           children: [
             Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: AutoSizeText(
-                    'Ton profils wallouh',
-                    style: TextStyle(
-                      fontSize: 30,
+                AnimatedOpacity(
+                  duration: const Duration(milliseconds: 200),
+                  opacity: isTopContentVisible ? 1.0 : 0.0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Row(
+                      children: [
+                        const SizedBox(height: 60), // Just to minimize the jump effect when changing current page.
+                        if (currentPage == 2)
+                          ElevatedButton(
+                            onPressed: () => controller.goToMainHomePage(),
+                            style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
+                              backgroundColor: erevohOrange,
+                              fixedSize: const Size(40, 40),
+                            ),
+                            child: const Icon(Icons.arrow_left_outlined),
+                          ),
+                        if (currentPage == 2 || currentPage == 1) const Expanded(child: SizedBox()),
+                        AutoSizeText(
+                          currentTitleText,
+                          style: const TextStyle(fontSize: 30),
+                        ),
+                        if (currentPage == 0 || currentPage == 1) const Expanded(child: SizedBox()),
+                        if (currentPage == 0)
+                          ElevatedButton(
+                            onPressed: () => controller.goToMainHomePage(),
+                            style: ElevatedButton.styleFrom(
+                              shape: const CircleBorder(),
+                              backgroundColor: erevohOrange,
+                              fixedSize: const Size(40, 40),
+                            ),
+                            child: const Icon(Icons.arrow_right_outlined),
+                          ),
+                      ],
                     ),
                   ),
                 ),
@@ -50,56 +80,16 @@ class _State extends ConsumerState<UserHomePage> {
                   child: PageView(
                     controller: controller.pageController,
                     children: [
+                      const UserAddDreamPage(),
+                      UserMainHomePage(
+                        onFirstContainerTap: () {
+                          controller.goToListPage();
+                        },
+                        onSecondContainerTap: () {
+                          controller.goToCreatePage();
+                        },
+                      ),
                       const UserDreamsListPage(),
-                      Column(
-                        children: [
-                          // Main page.
-                          GestureDetector(
-                            onTap: () {
-                              controller.goToListPage();
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 20),
-                              height: screenHeight / containerDivider,
-                              decoration: BoxDecoration(
-                                color: erevohGrey,
-                                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                border: Border.all(
-                                  color: erevohBlack.withOpacity(0.6),
-                                  width: 2,
-                                ),
-                              ),
-                              child: const Center(
-                                child: AutoSizeText(
-                                  'Liste des rêves',
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          // Containers clickable.
-                          GestureDetector(
-                            onTap: () => null,
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 20),
-                              height: screenHeight / containerDivider,
-                              decoration: BoxDecoration(
-                                color: erevohGrey,
-                                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                                border: Border.all(
-                                  color: erevohBlack.withOpacity(0.6),
-                                  width: 2,
-                                ),
-                              ),
-                              child: const Center(
-                                child: AutoSizeText(
-                                  "Ajouter un rêve",
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
                     ],
                   ),
                 ),

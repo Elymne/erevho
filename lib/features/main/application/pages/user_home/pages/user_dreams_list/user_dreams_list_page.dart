@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
@@ -33,13 +32,6 @@ class _State extends ConsumerState<UserDreamsListPage> {
         backgroundColor: erevohDark,
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: AutoSizeText(
-                alt.current.home_user_title,
-                style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w300),
-              ),
-            ),
             Expanded(
               child: Center(
                 child: _CustomDreamsListView(userDreams),
@@ -59,8 +51,8 @@ class _CustomDreamsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (userDreams == null) return Center(child: Text('Chargement'));
-    if (userDreams!.isEmpty) return Center(child: Text('Pas de rêves enregsitrés'));
-    return Center(child: Text('Liste de rêves'));
+    if (userDreams == null) return const Center(child: Text('Chargement'));
+    if (userDreams!.isEmpty) return const Center(child: Text('Pas de rêves enregsitrés'));
+    return const Center(child: Text('Liste de rêves'));
   }
 }
