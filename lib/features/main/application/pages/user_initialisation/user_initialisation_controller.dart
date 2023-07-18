@@ -26,9 +26,8 @@ class UserInitialisationController extends Controller {
   UserInitialisationController(super.ref);
 
   String? validateNameTextfield(String? value) {
-    if (value == null || value.isEmpty) {
-      return ap.current.name_textfield_warning;
-    }
+    if (value == null || value.isEmpty) return ap.current.name_textfield_warning_empty;
+    if (value.length > 30) return ap.current.name_textfield_warning_too_long;
     nameText = value;
     return null;
   }

@@ -1,6 +1,6 @@
 import 'package:erevho/core/controller.dart';
 import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
-import 'package:erevho/features/main/domain/usecases/dreams/get_all_user_dreams_filtered.dart';
+import 'package:erevho/features/main/domain/usecases/dreams/get_all_user_dreams_filtered_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userDreamsListControllerProvider = Provider((ref) => UserDreamsListController(ref));
