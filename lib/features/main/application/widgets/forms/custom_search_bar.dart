@@ -18,7 +18,7 @@ class CustomSearchBar extends ConsumerWidget {
           borderRadius: BorderRadius.circular(20.0),
           borderSide: BorderSide.none,
         ),
-        hintText: appLocals.current.research,
+        hintText: appLocals.current.dream_form_title_textfield,
         filled: true,
         fillColor: erevohDark,
       ),

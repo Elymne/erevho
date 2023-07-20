@@ -1,3 +1,4 @@
+import 'package:erevho/features/main/domain/entities/dreams/chapter.entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'dream.entity.freezed.dart';
@@ -10,7 +11,7 @@ class Dream with _$Dream {
     required String pseudonym,
     required String userUuid,
     required String title,
-    required String content,
+    required List<Chapter> chapters,
     required List<String> tags,
     required DateTime created,
     required DateTime updated,

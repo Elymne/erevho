@@ -22,7 +22,7 @@ class GetAllUserDreamsFilteredUsecase extends Usecase<List<Dream>, GetAllUserDre
 
   @override
   Future<List<Dream>> perform(GetAllUserDreamsFilteredUsecaseParams params) async {
-    final userData = await userDataLocalRepository.getUserData();
+    final userData = await userDataLocalRepository.getCurrent();
 
     if (userData == null) {
       throw ("User data can't be found. Can't get dreams object from an object that don't even exists");

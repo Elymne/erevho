@@ -14,37 +14,42 @@ class DreamFormController extends Controller {
   late final UpdateDreamUsecase updateDreamUsecase = ref.read(updateDreamUsecaseProvider);
 
   final dreamProvider = StateProvider<Dream?>((ref) => null);
+  late final Dream? initialDream;
+
+  final formKey = GlobalKey<FormState>();
 
   DreamFormController(super.ref);
 
   Future init(BuildContext context, {String? newTitle, String? dreamUuid}) async {
-    if (newTitle == null && dreamUuid == null) {
-      if (context.mounted) {
-        return Navigator.pop(context);
+    try {
+      if (newTitle == null && dreamUuid == null) {
+        if (context.mounted) return Navigator.pop(context);
       }
-    }
-    if (newTitle != null) {
-      try {
-        ref.read(dreamProvider.notifier).state = await addNewDreamUsecase.perform(AddNewDreamUsecaseParams(newTitle));
+
+      if (newTitle != null) {
+        final result = await addNewDreamUsecase.perform(AddNewDreamUsecaseParams(newTitle));
+        ref.read(dreamProvider.notifier).state = result;
+        initialDream = result;
         return;
-      } catch (e) {
-        if (context.mounted) {
-          return Navigator.pop(context);
-        }
       }
-    }
-    if (dreamUuid != null) {
-      try {
-        ref.read(dreamProvider.notifier).state = await getOneDreamByUuidUsecase.perform(GetOneDreamByUuidUsecaseParams(dreamUuid));
+
+      if (dreamUuid != null) {
+        final result = await getOneDreamByUuidUsecase.perform(GetOneDreamByUuidUsecaseParams(dreamUuid));
+        ref.read(dreamProvider.notifier).state = result;
+        initialDream = result;
         return;
-      } catch (e) {
-        if (context.mounted) {
-          return Navigator.pop(context);
-        }
       }
+    } catch (e) {
+      if (context.mounted) return Navigator.pop(context);
     }
-    if (context.mounted) {
-      Navigator.pop(context);
-    }
+    if (context.mounted) Navigator.pop(context);
+  }
+
+  String? validateDreamTitle(String? value) {
+    if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ton rêve !';
+    if (value.length > 40) return 'Ton titre doit-être moins long (4O caractères maximum) !';
+
+    ref.read(dreamProvider.notifier).state = ref.read(dreamProvider)!.copyWith(title: value);
+    return null;
   }
 }

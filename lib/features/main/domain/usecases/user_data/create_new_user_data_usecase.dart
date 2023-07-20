@@ -18,14 +18,14 @@ class CreateNewUserParamsUsecase extends Usecase<void, CreateNewUserParamsUsecas
   @override
   Future<void> perform(CreateNewUserParamsUsecaseParams params) async {
     // Here we check that user has no users params by fetching user params.
-    final userParams = await userParamsLocalRepository.getUserData();
+    final userParams = await userParamsLocalRepository.getCurrent();
 
     // If user already have settings (that's not normal if this usecase is used) we remove all user params data.
     if (userParams != null) {
-      userParamsLocalRepository.removeAllUserDatas();
+      userParamsLocalRepository.clear();
     }
 
-    await userParamsLocalRepository.putUserData(UserData(
+    await userParamsLocalRepository.create(UserData(
       uuid: const Uuid().v4(),
       pseudonym: params.userName,
     ));

@@ -14,17 +14,24 @@ class UserDataLocalRepositoryImpl implements UserDataLocalRepository {
   UserDataLocalRepositoryImpl(this.userParamsLocalDataSource);
 
   @override
-  Future<UserData?> getUserData() async {
+  Future<UserData?> getCurrent() async {
     return userParamsLocalDataSource.box.getAll().firstOrNull?.toEntity();
   }
 
   @override
-  Future<int> putUserData(UserData userData) async {
-    return userParamsLocalDataSource.box.put(UserDataModel.fromEntity(userData));
+  Future<int> clear() async {
+    return userParamsLocalDataSource.box.removeAll();
   }
 
   @override
-  Future<int> removeAllUserDatas() async {
-    return userParamsLocalDataSource.box.removeAll();
+  Future<int> create(UserData userData) async {
+    return userParamsLocalDataSource.box.put(UserDataModel.fromEntity(userData: userData));
+  }
+
+  @override
+  Future<int> update(UserData userData) async {
+    final userDataModel = userParamsLocalDataSource.box.getAll().firstOrNull;
+    if (userDataModel == null) throw ('No userData with uuid : ${userData.uuid}');
+    return userParamsLocalDataSource.box.put(UserDataModel.fromEntity(userData: userData, id: userDataModel.id));
   }
 }

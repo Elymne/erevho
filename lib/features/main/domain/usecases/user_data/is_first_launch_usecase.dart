@@ -16,7 +16,7 @@ class IsFirstLaunchUsecase extends UsecaseNoParams<bool> {
 
   @override
   Future<bool> perform() async {
-    final userData = await userDataLocalRepository.getUserData();
+    final userData = await userDataLocalRepository.getCurrent();
     return userData == null;
   }
 }

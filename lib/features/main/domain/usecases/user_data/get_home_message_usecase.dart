@@ -15,7 +15,7 @@ class GetHomeMessageUsecase extends UsecaseNoParams<GetHomeMessageUsecaseResult>
 
   @override
   Future<GetHomeMessageUsecaseResult> perform() async {
-    final userData = await userDataLocalRepository.getUserData();
+    final userData = await userDataLocalRepository.getCurrent();
     final userName = userData?.pseudonym ?? '';
     final datetime = DateTime.now();
 

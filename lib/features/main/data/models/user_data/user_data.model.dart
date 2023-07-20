@@ -12,8 +12,9 @@ class UserDataModel {
 
   UserDataModel(this.uuid, this.pseudonym);
 
-  UserDataModel.fromEntity(UserData userData)
-      : uuid = userData.uuid,
+  UserDataModel.fromEntity({required UserData userData, int? id})
+      : id = id ?? 0,
+        uuid = userData.uuid,
         pseudonym = userData.pseudonym;
 
   UserData toEntity() {

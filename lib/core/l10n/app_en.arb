@@ -19,14 +19,8 @@
     "home_user_title_3": "Add a new dream",
     "home_user_dream_list_access": "Accéder à ma liste de rêves !",
     "home_user_add_dream_access": "Ajouter un nouveau rêve !",
-    "@_OLD_KEY_COMMENT": {},
-    "add_chapter_form": "Add a new chapter",
-    "chapter_content_form": "Content",
-    "chapter_content_form_error": "Content is incorrect",
-    "chapter_title_form": "Chapter title",
-    "chapter_title_form_error": "CHapter title incorrect",
-    "research": "Research",
-    "submit": "Submit",
-    "title_form": "Title",
-    "title_form_error": "Title is incorrect"
+    "@_DREAM_FORM": {},
+    "dream_form_title": "Edition du rêve",
+    "dream_form_title_textfield": "Titre du rêve :",
+    "@_OLD_KEY_COMMENT": {}
 }

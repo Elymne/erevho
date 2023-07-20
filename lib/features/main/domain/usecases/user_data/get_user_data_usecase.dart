@@ -14,6 +14,6 @@ class GetUserDataUsecase extends UsecaseNoParams<UserData?> {
 
   @override
   Future<UserData?> perform() async {
-    return userDataLocalRepository.getUserData();
+    return userDataLocalRepository.getCurrent();
   }
 }

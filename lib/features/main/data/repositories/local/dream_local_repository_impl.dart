@@ -25,8 +25,15 @@ class DreamLocalRepositoryImpl implements DreamLocalRepository {
   }
 
   @override
-  Future<int> putOne(Dream dream) async {
-    return dreamLocalDataSource.box.put(DreamModel.fromEntity(dream));
+  Future<int> createOne(Dream dream) async {
+    return dreamLocalDataSource.box.put(DreamModel.fromEntity(dream: dream));
+  }
+
+  @override
+  Future<int> updateOne(Dream dream) async {
+    final dreamModel = dreamLocalDataSource.box.query(DreamModel_.uuid.equals(dream.uuid)).build().findUnique();
+    if (dreamModel == null) throw ('No Dream with uuid : ${dream.uuid}');
+    return dreamLocalDataSource.box.put(DreamModel.fromEntity(dream: dream, id: dreamModel.id));
   }
 
   @override
