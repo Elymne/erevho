@@ -5,9 +5,9 @@ import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/widgets/forms/erevoh_text_field.dart';
 import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ContentDreamForm extends ConsumerWidget {
+class ContentDreamForm extends StatelessWidget {
+  final AppLocalisationTools alt;
   final Dream dream;
   final String? Function(int index, String? value) validateDreamChapter;
   final String? Function(int index, String? value) validateDreamContent;
@@ -19,12 +19,11 @@ class ContentDreamForm extends ConsumerWidget {
     required this.validateDreamChapter,
     required this.validateDreamContent,
     required this.onMainDreamFormAccess,
+    required this.alt,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final AppLocalisationTools alt = ref.read(appLocalisationToolsProvider);
-
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

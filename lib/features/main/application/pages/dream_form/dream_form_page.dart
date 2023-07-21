@@ -45,11 +45,13 @@ class _State extends ConsumerState<DreamFormPage> {
             controller: controller.pageController,
             children: [
               MainDreamForm(
+                alt: alt,
                 validator: (value) => controller.validateDreamTitle(value),
                 dreamTitle: dream.title,
                 onContentDreamFormAccess: () => controller.goToContentFormPage(),
               ),
               ContentDreamForm(
+                alt: alt,
                 dream: dream,
                 validateDreamChapter: (index, value) => controller.validateDreamChapter(index, value),
                 validateDreamContent: (index, value) => controller.validateDreamContent(index, value),

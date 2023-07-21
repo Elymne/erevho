@@ -3,9 +3,9 @@ import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/widgets/forms/erevoh_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MainDreamForm extends ConsumerWidget {
+class MainDreamForm extends StatelessWidget {
+  final AppLocalisationTools alt;
   final String? dreamTitle;
   final String? Function(String? value) validator;
   final void Function() onContentDreamFormAccess;
@@ -15,12 +15,11 @@ class MainDreamForm extends ConsumerWidget {
     required this.validator,
     required this.dreamTitle,
     required this.onContentDreamFormAccess,
+    required this.alt,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final AppLocalisationTools alt = ref.read(appLocalisationToolsProvider);
-
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
