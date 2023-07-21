@@ -1,7 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
+import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/dream_form/dream_form_controller.dart';
-import 'package:erevho/features/main/application/widgets/forms/erevoh_text_field.dart';
+import 'package:erevho/features/main/application/pages/dream_form/pages/content_dream_form.dart';
+import 'package:erevho/features/main/application/pages/dream_form/pages/main_dream_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,48 +38,22 @@ class _State extends ConsumerState<DreamFormPage> {
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: erevohDark,
         body: Form(
           key: controller.formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: PageView(
+            controller: controller.pageController,
             children: [
-              const SizedBox(height: 20),
-              AutoSizeText(
-                alt.current.dream_form_title,
-                style: const TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w300,
-                ),
+              MainDreamForm(
+                validator: (value) => controller.validateDreamTitle(value),
+                dreamTitle: dream.title,
+                onContentDreamFormAccess: () => controller.goToContentFormPage(),
               ),
-              const SizedBox(height: 40),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: ErevohTextField(
-                  labelText: alt.current.dream_form_title_textfield,
-                  initialValue: dream.title,
-                  validator: (value) => controller.validateDreamTitle(value),
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              //
-              Expanded(
-                child: PageView.builder(
-                  itemCount: dream.chapters.length + 1,
-                  itemBuilder: ((context, index) {
-                    if (index > dream.chapters.length) {
-                      return Center(
-                        child: Text("ADD ONE CHAPTER LEL"),
-                      );
-                    }
-
-                    return ErevohTextField(
-                      labelText: alt.current.dream_form_title_textfield,
-                      initialValue: dream.title,
-                      validator: (value) => controller.validateDreamTitle(value),
-                    );
-                  }),
-                ),
+              ContentDreamForm(
+                dream: dream,
+                validateDreamChapter: (index, value) => controller.validateDreamChapter(index, value),
+                validateDreamContent: (index, value) => controller.validateDreamContent(index, value),
+                onMainDreamFormAccess: () => controller.goToMainFormPage(),
               ),
             ],
           ),

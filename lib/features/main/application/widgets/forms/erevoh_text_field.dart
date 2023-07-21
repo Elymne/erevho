@@ -6,6 +6,7 @@ class ErevohTextField extends StatelessWidget {
   final String? labelText;
   final String? hintText;
   final String? initialValue;
+  final int? maxLines;
   final String? Function(String?) validator;
 
   const ErevohTextField({
@@ -14,6 +15,7 @@ class ErevohTextField extends StatelessWidget {
     this.hintText,
     this.initialValue,
     super.key,
+    this.maxLines,
   });
 
   @override
@@ -33,6 +35,7 @@ class ErevohTextField extends StatelessWidget {
         TextFormField(
           validator: (value) => validator(value),
           initialValue: initialValue,
+          maxLines: maxLines,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: const TextStyle(

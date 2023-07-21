@@ -21,6 +21,8 @@
     "home_user_add_dream_access": "Ajouter un nouveau rêve !",
     "@_DREAM_FORM": {},
     "dream_form_title": "Edition du rêve",
-    "dream_form_title_textfield": "Titre du rêve :",
+    "dream_form_title_textfield": "Titre du rêve",
+    "dream_form_chapter_textfield": "Titre du chapitre ",
+    "dream_form_content_textfield": "Contenu du chapitre",
     "@_OLD_KEY_COMMENT": {}
 }

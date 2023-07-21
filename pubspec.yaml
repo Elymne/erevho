@@ -102,5 +102,9 @@ flutter:
           weight: 900
           style: italic
 
+    - family: Lunasima 
+      fonts:
+        - asset: assets/fonts/Lunasima-Regular.ttf
+          weight: 400
 
 
