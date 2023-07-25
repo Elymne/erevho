@@ -1,8 +1,8 @@
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/dream_form/dream_form_controller.dart';
-import 'package:erevho/features/main/application/pages/dream_form/widgets/content_dream_form.dart';
-import 'package:erevho/features/main/application/pages/dream_form/widgets/main_dream_form.dart';
+import 'package:erevho/features/main/application/pages/dream_form/pages/content_dream_form.dart';
+import 'package:erevho/features/main/application/pages/dream_form/pages/main_dream_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -51,7 +51,6 @@ class _State extends ConsumerState<DreamFormPage> {
                 onContentDreamFormAccess: () => controller.goToContentFormPage(),
               ),
               ContentDreamForm(
-                alt: alt,
                 dream: dream,
                 validateDreamChapter: (index, value) => controller.validateDreamChapter(index, value),
                 validateDreamContent: (index, value) => controller.validateDreamContent(index, value),
