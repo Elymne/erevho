@@ -8,7 +8,10 @@ class MainDreamForm extends StatelessWidget {
   final AppLocalisationTools alt;
   final String? dreamTitle;
   final String? Function(String? value) validator;
+
   final void Function() onContentDreamFormAccess;
+  final void Function() onSave;
+  final void Function() onPushBack;
 
   const MainDreamForm({
     super.key,
@@ -16,6 +19,8 @@ class MainDreamForm extends StatelessWidget {
     required this.dreamTitle,
     required this.onContentDreamFormAccess,
     required this.alt,
+    required this.onSave,
+    required this.onPushBack,
   });
 
   @override
@@ -23,18 +28,11 @@ class MainDreamForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(height: 20),
-        AutoSizeText(
-          alt.current.dream_form_title,
-          style: const TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.w300,
-          ),
-        ),
-        const SizedBox(height: 40),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: ErevohTextField(
+            expanded: false,
+            maxLines: 1,
             labelText: alt.current.dream_form_title_textfield,
             initialValue: dreamTitle,
             validator: (value) => validator(value),
@@ -52,6 +50,44 @@ class MainDreamForm extends StatelessWidget {
               color: erevohWhite,
               fontSize: 24,
             ),
+          ),
+        ),
+
+        const Expanded(child: SizedBox()),
+
+        /// VALIDATION
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            children: [
+              OutlinedButton(
+                onPressed: () => onPushBack(),
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: erevohRed,
+                ),
+                child: const AutoSizeText(
+                  'Retour',
+                  style: TextStyle(
+                    color: erevohWhite,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              const Expanded(child: SizedBox()),
+              OutlinedButton(
+                onPressed: () => onSave(),
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: erevohGreen,
+                ),
+                child: const AutoSizeText(
+                  'Sauvegarder',
+                  style: TextStyle(
+                    color: erevohWhite,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],

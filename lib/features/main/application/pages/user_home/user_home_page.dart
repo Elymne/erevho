@@ -34,6 +34,7 @@ class _State extends ConsumerState<UserHomePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: erevohDark,
+        resizeToAvoidBottomInset: true,
         body: Stack(
           children: [
             Column(

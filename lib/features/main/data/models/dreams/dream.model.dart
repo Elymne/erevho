@@ -27,8 +27,11 @@ class DreamModel {
 
   DreamModel(this.uuid, this.pseudonym, this.userUuid, this.title, this.tags, this.created, this.updated);
 
-  DreamModel.fromEntity({required Dream dream, int? id})
-      : id = id ?? 0,
+  DreamModel.fromEntity({
+    int? id,
+    required Dream dream,
+    List<ChapterModel>? chapters,
+  })  : id = id ?? 0,
         uuid = dream.uuid,
         pseudonym = dream.pseudonym,
         userUuid = dream.userUuid,
@@ -36,7 +39,7 @@ class DreamModel {
         tags = dream.tags,
         created = dream.created,
         updated = dream.updated {
-    chapters.addAll(dream.chapters.map((e) => ChapterModel.fromEntity(e)));
+    if (chapters != null) this.chapters.addAll(chapters);
   }
 
   Dream toEntity() {

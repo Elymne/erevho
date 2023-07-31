@@ -4,22 +4,22 @@ import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/widgets/forms/erevoh_text_field.dart';
 import 'package:erevho/features/main/application/widgets/pager/pager_style.dart';
-import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
+import 'package:erevho/features/main/domain/entities/dreams/chapter.entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ContentDreamForm extends ConsumerStatefulWidget {
-  final Dream dream;
+  final List<Chapter> chapters;
   final String? Function(int index, String? value) validateDreamChapter;
   final String? Function(int index, String? value) validateDreamContent;
-  final void Function() onMainDreamFormAccess;
+  final Function() onChapterAdd;
 
   const ContentDreamForm({
     super.key,
-    required this.dream,
     required this.validateDreamChapter,
     required this.validateDreamContent,
-    required this.onMainDreamFormAccess,
+    required this.onChapterAdd,
+    required this.chapters,
   });
 
   @override
@@ -40,41 +40,44 @@ class _State extends ConsumerState<ContentDreamForm> {
         Expanded(
           child: PageView.builder(
             controller: _pageController,
-            itemCount: widget.dream.chapters.length + 1,
+            itemCount: widget.chapters.length + 1,
             onPageChanged: (index) {
               ref.read(_currentPageProvider.notifier).state = index;
             },
             itemBuilder: ((context, index) {
-              if (index >= widget.dream.chapters.length) {
-                return const Center(
-                  child: Text("ADD ONE CHAPTER LEL"),
+              if (index >= widget.chapters.length) {
+                // Loul.
+                return Center(
+                  child: GestureDetector(
+                    onTap: () => widget.onChapterAdd(),
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                        border: Border.fromBorderSide(BorderSide(
+                          color: erevohWhite,
+                          width: 1,
+                        )),
+                      ),
+                      child: const Icon(
+                        Icons.add,
+                        size: 40,
+                      ),
+                    ),
+                  ),
                 );
               }
+
+              // Lel.
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        const SizedBox(height: 60), // Just to minimize the jump effect when changing current page.
-                        ElevatedButton(
-                          onPressed: () => widget.onMainDreamFormAccess(),
-                          style: ElevatedButton.styleFrom(
-                            shape: const CircleBorder(),
-                            backgroundColor: erevohOrange,
-                            fixedSize: const Size(40, 40),
-                          ),
-                          child: const Icon(Icons.arrow_left_outlined),
-                        ),
-                        const Expanded(child: SizedBox()),
-                        const AutoSizeText(
-                          'Modifier le contenu',
-                          style: TextStyle(fontSize: 30),
-                        ),
-                      ],
-                    ),
                     const SizedBox(height: 20),
                     AutoSizeText.rich(
                       TextSpan(
@@ -97,15 +100,16 @@ class _State extends ConsumerState<ContentDreamForm> {
                     ),
                     const SizedBox(height: 6),
                     ErevohTextField(
-                      initialValue: widget.dream.chapters[index].title,
+                      initialValue: widget.chapters[index].title,
                       validator: (value) => widget.validateDreamChapter(index, value),
+                      maxLines: 1,
                     ),
                     const SizedBox(height: 6),
                     Expanded(
                       child: ErevohTextField(
                         labelText: alt.current.dream_form_content_textfield,
-                        initialValue: widget.dream.chapters[index].content,
-                        maxLines: 10,
+                        initialValue: widget.chapters[index].content,
+                        maxLines: null,
                         validator: (value) => widget.validateDreamContent(index, value),
                       ),
                     ),
@@ -119,7 +123,7 @@ class _State extends ConsumerState<ContentDreamForm> {
           alignment: Alignment.center,
           child: PagerDots(
             currentPage: currentPage,
-            totalPages: widget.dream.chapters.length + 1,
+            totalPages: widget.chapters.length + 1,
           ),
         ),
         const SizedBox(height: 30),
