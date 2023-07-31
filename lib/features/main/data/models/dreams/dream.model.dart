@@ -27,22 +27,18 @@ class DreamModel {
 
   DreamModel(this.uuid, this.pseudonym, this.userUuid, this.title, this.tags, this.created, this.updated);
 
-  DreamModel.fromEntity({
-    int? id,
-    required Dream dream,
-    List<ChapterModel>? chapters,
-  })  : id = id ?? 0,
+  DreamModel.fromEntity({int? id, required Dream dream})
+      : id = id ?? 0,
         uuid = dream.uuid,
         pseudonym = dream.pseudonym,
         userUuid = dream.userUuid,
         title = dream.title,
         tags = dream.tags,
         created = dream.created,
-        updated = dream.updated {
-    if (chapters != null) this.chapters.addAll(chapters);
-  }
+        updated = dream.updated;
 
   Dream toEntity() {
+    chapters.sort((a, b) => a.number.compareTo(b.number));
     return Dream(
       uuid: uuid,
       title: title,

@@ -88,7 +88,7 @@
     },
     {
       "id": "7:7450544512754138898",
-      "lastPropertyId": "6:6332038431507105468",
+      "lastPropertyId": "7:2656183105430649781",
       "name": "ChapterModel",
       "properties": [
         {
@@ -123,6 +123,11 @@
           "id": "6:6332038431507105468",
           "name": "updated",
           "type": 10
+        },
+        {
+          "id": "7:2656183105430649781",
+          "name": "number",
+          "type": 6
         }
       ],
       "relations": []

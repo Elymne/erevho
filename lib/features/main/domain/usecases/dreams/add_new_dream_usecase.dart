@@ -36,6 +36,7 @@ class AddNewDreamUsecase extends Usecase<Dream, AddNewDreamUsecaseParams> {
       chapters: [
         Chapter(
           uuid: uuidTool.v4(),
+          number: 1,
           title: '',
           content: '',
           created: DateTime.now(),

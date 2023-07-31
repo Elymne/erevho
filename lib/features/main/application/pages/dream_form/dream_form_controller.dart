@@ -16,7 +16,6 @@ class DreamFormController extends Controller {
   late final UpdateDreamUsecase updateDreamUsecase = ref.read(updateDreamUsecaseProvider);
 
   final dreamProvider = StateProvider<Dream?>((ref) => null);
-  final chaptersProvider = StateProvider<List<Chapter>?>((ref) => null);
 
   final isDreamUpdatedProvider = StateProvider<bool>((ref) => false);
   final currentPageIndexProvider = StateProvider<int>((ref) => 0);
@@ -35,14 +34,12 @@ class DreamFormController extends Controller {
       if (newTitle != null) {
         final result = await addNewDreamUsecase.perform(AddNewDreamUsecaseParams(newTitle));
         ref.read(dreamProvider.notifier).state = result;
-        ref.read(chaptersProvider.notifier).state = result.chapters;
         return;
       }
 
       if (dreamUuid != null) {
         final result = await getOneDreamByUuidUsecase.perform(GetOneDreamByUuidUsecaseParams(dreamUuid));
         ref.read(dreamProvider.notifier).state = result;
-        ref.read(chaptersProvider.notifier).state = result.chapters;
         return;
       }
     } catch (e) {
@@ -87,11 +84,16 @@ class DreamFormController extends Controller {
     if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ce chapitre !';
     if (value.length > 60) return 'Le titre de ce chapitre doit-être moins long (4O caractères maximum) !';
 
-    final chapter = ref.read(chaptersProvider);
+    final dream = ref.read(dreamProvider);
+    if (dream == null) return "Can't find the dream, strange";
 
-    if (chapter == null) return 'mmmh ???';
+    ref.read(dreamProvider.notifier).state = dream.copyWith(
+      chapters: [
+        for (var chapter in dream.chapters)
+          if (chapter.number == dream.chapters[index].number) chapter.copyWith(title: value) else chapter
+      ],
+    );
 
-    ref.read(chaptersProvider.notifier).state?[index] = chapter[index].copyWith(title: value);
     _isDreamModified();
     return null;
   }
@@ -101,11 +103,16 @@ class DreamFormController extends Controller {
     if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ce chapitre !';
     if (value.length > 255) return 'Le titre de ce chapitre doit-être moins long (255 caractères maximum) !';
 
-    final chapter = ref.read(chaptersProvider);
+    final dream = ref.read(dreamProvider);
+    if (dream == null) return "Can't find the dream, strange";
 
-    if (chapter == null) return 'mmmh ???';
+    ref.read(dreamProvider.notifier).state = dream.copyWith(
+      chapters: [
+        for (var chapter in dream.chapters)
+          if (chapter.number == dream.chapters[index].number) chapter.copyWith(content: value) else chapter
+      ],
+    );
 
-    ref.read(chaptersProvider.notifier).state?[index] = chapter[index].copyWith(content: value);
     _isDreamModified();
     return null;
   }
@@ -115,17 +122,14 @@ class DreamFormController extends Controller {
     if (formKey.currentState!.validate()) {
       /// Display loading screen.
       final updatedDream = ref.read(dreamProvider);
-      final updatedChapters = ref.read(chaptersProvider);
 
-      if (updatedDream == null || updatedChapters == null) {
+      if (updatedDream == null) {
         /// Hide loading. Display screen error maybe ? We'll see.
         return;
       }
 
       try {
-        await updateDreamUsecase.perform(UpdateDreamUsecaseParams(
-          updatedDream.copyWith(chapters: updatedChapters),
-        ));
+        await updateDreamUsecase.perform(UpdateDreamUsecaseParams(updatedDream));
 
         /// Hide loading. The dream is saved, gg enculé.
       } catch (_) {
@@ -145,8 +149,11 @@ class DreamFormController extends Controller {
     final dream = ref.read(dreamProvider);
     if (dream == null) return;
 
+    final newChapterNumber = dream.chapters.length + 1;
+
     final blankChapter = Chapter(
       uuid: const Uuid().v4(),
+      number: newChapterNumber,
       title: '',
       content: '',
       created: DateTime.now(),

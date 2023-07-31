@@ -7,7 +7,8 @@ part 'chapter.entity.g.dart';
 class Chapter with _$Chapter {
   const factory Chapter({
     required String uuid,
-    required String? title,
+    required int number,
+    required String title,
     required String content,
     required DateTime created,
     required DateTime updated,

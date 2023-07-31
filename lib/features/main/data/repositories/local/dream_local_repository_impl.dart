@@ -40,17 +40,17 @@ class DreamLocalRepositoryImpl implements DreamLocalRepository {
     final dreamModel = dreamLocalDataSource.box.query(DreamModel_.uuid.equals(dream.uuid)).build().findUnique();
     if (dreamModel == null) throw ('No Dream with uuid : ${dream.uuid}');
 
-    final List<ChapterModel> chapters = [];
     for (var chapter in dream.chapters) {
-      final chapterModel = await chapterLocalDataSource.box.query(ChapterModel_.uuid.equals(chapter.uuid)).build().findUnique();
-      chapters.add(ChapterModel.fromEntity(chapter, chapterModel?.id ?? 0));
+      final chapterModel = chapterLocalDataSource.box.query(ChapterModel_.uuid.equals(chapter.uuid)).build().findUnique();
+      if (chapterModel != null) {
+        chapterLocalDataSource.box.put(ChapterModel.fromEntity(chapter, chapterModel.id));
+      }
     }
 
-    return dreamLocalDataSource.box.put(DreamModel.fromEntity(
-      dream: dream,
-      id: dreamModel.id,
-      chapters: chapters,
-    ));
+    // TODO Enfaite, je devrais pas me faire chier. Je devrais juste pouvoir ajouter un nouveau chapitre. La modif d'un chapitre existant se ferait dans le repo Chapter.
+    // DE LA MERDE.
+    final updatedDreamModel = DreamModel.fromEntity(id: dreamModel.id, dream: dream);
+    return dreamLocalDataSource.box.put(updatedDreamModel);
   }
 
   @override

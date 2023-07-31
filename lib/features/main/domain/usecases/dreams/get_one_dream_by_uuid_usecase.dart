@@ -29,13 +29,15 @@ class GetOneDreamByUuidUsecase extends Usecase<Dream, GetOneDreamByUuidUsecasePa
       final updatedResult = result.copyWith(chapters: [
         Chapter(
           uuid: const Uuid().v4(),
+          number: 1,
           title: '',
           content: '',
           created: DateTime.now(),
           updated: DateTime.now(),
         ),
       ]);
-      dreamLocalRepository.updateOne(updatedResult);
+
+      await dreamLocalRepository.updateOne(updatedResult);
       final updatedDream = await dreamLocalRepository.getOne(updatedResult.uuid);
       if (updatedDream == null) throw ('Cannot find the updated dream');
       if (updatedDream.chapters.isEmpty) throw ("The added chapter can't be found");

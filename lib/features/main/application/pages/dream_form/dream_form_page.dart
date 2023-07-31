@@ -30,10 +30,9 @@ class _State extends ConsumerState<DreamFormPage> {
   @override
   Widget build(BuildContext context) {
     final dream = ref.watch(controller.dreamProvider);
-    final chapters = ref.watch(controller.chaptersProvider);
     final currentPageIndex = ref.watch(controller.currentPageIndexProvider);
 
-    if (dream == null || chapters == null) {
+    if (dream == null) {
       return const Center(
         child: Text("loading"),
       );
@@ -95,7 +94,7 @@ class _State extends ConsumerState<DreamFormPage> {
                       onSave: () => controller.saveCurrentDream(),
                     ),
                     ContentDreamForm(
-                      chapters: chapters,
+                      dream: dream,
                       validateDreamChapter: (index, value) => controller.validateDreamChapter(index, value),
                       validateDreamContent: (index, value) => controller.validateDreamContent(index, value),
                       onChapterAdd: () => controller.addNewChapter(),

@@ -1,3 +1,4 @@
+import 'package:erevho/features/main/data/models/dreams/chapter.model.dart';
 import 'package:erevho/features/main/data/models/dreams/dream.model.dart';
 import 'package:erevho/features/main/data/models/user_data/user_data.model.dart';
 import 'package:flutter/foundation.dart';
@@ -25,6 +26,7 @@ class ObjectBox {
     if (kDebugMode) {
       print('Clearing Db on debug mode');
       store.box<DreamModel>().removeAllAsync();
+      store.box<ChapterModel>().removeAllAsync();
       store.box<UserDataModel>().removeAllAsync();
     }
   }

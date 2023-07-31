@@ -8,7 +8,9 @@ class ChapterModel {
   @Unique()
   final String uuid;
 
-  final String? title;
+  final int number;
+
+  final String title;
 
   final String content;
 
@@ -18,10 +20,11 @@ class ChapterModel {
   @Property(type: PropertyType.date)
   final DateTime updated;
 
-  ChapterModel(this.uuid, this.title, this.content, this.created, this.updated);
+  ChapterModel(this.uuid, this.number, this.title, this.content, this.created, this.updated);
 
   ChapterModel.fromEntity(Chapter chapter, int? id)
       : id = id ?? 0,
+        number = chapter.number,
         uuid = chapter.uuid,
         title = chapter.title,
         content = chapter.content,
@@ -31,6 +34,7 @@ class ChapterModel {
   Chapter toEntity() {
     return Chapter(
       uuid: uuid,
+      number: number,
       title: title,
       content: content,
       created: created,
