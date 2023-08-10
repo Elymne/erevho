@@ -41,7 +41,7 @@ class AddNewDreamUsecase extends Usecase<Dream, AddNewDreamUsecaseParams> {
           content: '',
           created: DateTime.now(),
           updated: DateTime.now(),
-        )
+        ),
       ],
       tags: [],
       created: DateTime.now(),

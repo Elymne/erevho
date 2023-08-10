@@ -4,6 +4,7 @@ import 'package:erevho/features/main/data/models/dreams/chapter.model.dart';
 import 'package:erevho/features/main/data/models/dreams/dream.model.dart';
 import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
 import 'package:erevho/features/main/domain/repositories/local/dream_local_repository.dart';
+import 'package:erevho/main.dart';
 import 'package:erevho/objectbox.g.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,50 +22,77 @@ class DreamLocalRepositoryImpl implements DreamLocalRepository {
   DreamLocalRepositoryImpl(this.dreamLocalDataSource, this.chapterLocalDataSource);
 
   @override
-  Future<Dream?> getOne(String id) async {
-    return dreamLocalDataSource.box.query(DreamModel_.uuid.equals(id)).build().findUnique()?.toEntity();
+  Future<Dream?> getOne(String uuid) async {
+    return objectbox.store.runInTransaction(TxMode.read, () {
+      final chapters = chapterLocalDataSource.box.query(ChapterModel_.dreamUuid.equals(uuid)).build().find().map((chapterModel) {
+        return chapterModel.toEntity();
+      }).toList();
+      return dreamLocalDataSource.box.query(DreamModel_.uuid.equals(uuid)).build().findUnique()?.toEntity(chapters: chapters);
+    });
   }
 
   @override
   Future<List<Dream>> getAll() async {
-    return dreamLocalDataSource.box.getAll().map((e) => e.toEntity()).toList();
+    return objectbox.store.runInTransaction(TxMode.read, () {
+      return dreamLocalDataSource.box.getAll().map((dreamModel) {
+        final chapters = chapterLocalDataSource.box.query(ChapterModel_.dreamUuid.equals(dreamModel.uuid)).build().find().map((chapterModel) {
+          return chapterModel.toEntity();
+        }).toList();
+        return dreamModel.toEntity(chapters: chapters);
+      }).toList();
+    });
   }
 
   @override
-  Future<int> createOne(Dream dream) async {
-    return dreamLocalDataSource.box.put(DreamModel.fromEntity(dream: dream));
+  Future<void> createOne(Dream dream) async {
+    final dreamModel = dreamLocalDataSource.box.query(DreamModel_.uuid.equals(dream.uuid)).build().findUnique();
+    if (dreamModel != null) throw ('A dream already exists with this uuid : ${dream.uuid}. Do not use an existing dream with createOne function.');
+
+    for (final chapter in dream.chapters) {
+      final chapterModel = chapterLocalDataSource.box.query(ChapterModel_.uuid.equals(chapter.uuid)).build().findUnique();
+      if (chapterModel != null) throw ('A Chapter already exists with this uuid : ${dream.uuid}. Do not use an existing chapter with createOne function');
+    }
+
+    objectbox.store.runInTransaction(TxMode.write, () {
+      dreamLocalDataSource.box.put(DreamModel.fromEntity(dream: dream));
+      chapterLocalDataSource.box.putMany(dream.chapters.map((chapter) {
+        return ChapterModel.fromEntity(chapter: chapter, dreamUuid: dream.uuid);
+      }).toList());
+    });
   }
 
+  // todo suppression de la diff de chapitres.
   @override
-  Future<int> updateOne(Dream dream) async {
+  Future<void> updateOne(Dream dream) async {
     final dreamModel = dreamLocalDataSource.box.query(DreamModel_.uuid.equals(dream.uuid)).build().findUnique();
     if (dreamModel == null) throw ('No Dream with uuid : ${dream.uuid}');
 
-    for (var chapter in dream.chapters) {
-      final chapterModel = chapterLocalDataSource.box.query(ChapterModel_.uuid.equals(chapter.uuid)).build().findUnique();
-      if (chapterModel != null) {
-        chapterLocalDataSource.box.put(ChapterModel.fromEntity(chapter, chapterModel.id));
+    objectbox.store.runInTransaction(TxMode.write, () {
+      dreamLocalDataSource.box.put(DreamModel.fromEntity(id: dreamModel.id, dream: dream));
+      chapterLocalDataSource.box.putMany(dream.chapters.map((chapter) {
+        final chapterModel = chapterLocalDataSource.box.query(ChapterModel_.uuid.equals(chapter.uuid)).build().findUnique();
+        return ChapterModel.fromEntity(chapter: chapter, id: chapterModel?.id, dreamUuid: dream.uuid);
+      }).toList());
+      // Suppression des chapitres en trop.
+    });
+  }
+
+  @override
+  Future<void> deleteOne(String uuid) async {
+    objectbox.store.runInTransaction(TxMode.write, () {
+      chapterLocalDataSource.box.query(ChapterModel_.dreamUuid.equals(uuid)).build().remove();
+      dreamLocalDataSource.box.query(DreamModel_.uuid.equals(uuid)).build().remove();
+    });
+  }
+
+  @override
+  Future<void> deleteAll(List<String> uuids) async {
+    objectbox.store.runInTransaction(TxMode.write, () {
+      for (final uuid in uuids) {
+        chapterLocalDataSource.box.query(ChapterModel_.dreamUuid.equals(uuid)).build().remove();
+        dreamLocalDataSource.box.query(DreamModel_.uuid.equals(uuid)).build().remove();
       }
-    }
-
-    // TODO Enfaite, je devrais pas me faire chier. Je devrais juste pouvoir ajouter un nouveau chapitre. La modif d'un chapitre existant se ferait dans le repo Chapter.
-    // DE LA MERDE.
-    final updatedDreamModel = DreamModel.fromEntity(id: dreamModel.id, dream: dream);
-    return dreamLocalDataSource.box.put(updatedDreamModel);
-  }
-
-  @override
-  Future<int> deleteOne(String id) async {
-    return dreamLocalDataSource.box.query(DreamModel_.uuid.equals(id)).build().remove();
-  }
-
-  @override
-  Future<int> deleteAll(List<String> ids) async {
-    var removedNb = 0;
-    for (var id in ids) {
-      removedNb += dreamLocalDataSource.box.query(DreamModel_.uuid.contains(id)).build().remove();
-    }
-    return removedNb;
+    });
   }
 
   @override
@@ -84,6 +112,13 @@ class DreamLocalRepositoryImpl implements DreamLocalRepository {
       }
     }
 
-    return dreamLocalDataSource.box.query(query).build().find().map((e) => e.toEntity()).toList();
+    return objectbox.store.runInTransaction(TxMode.read, () {
+      return dreamLocalDataSource.box.query(query).build().find().map((dreamModel) {
+        final chapters = chapterLocalDataSource.box.query(ChapterModel_.dreamUuid.equals(dreamModel.uuid)).build().find().map((chapterModel) {
+          return chapterModel.toEntity();
+        }).toList();
+        return dreamModel.toEntity(chapters: chapters);
+      }).toList();
+    });
   }
 }

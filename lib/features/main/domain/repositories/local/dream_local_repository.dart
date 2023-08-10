@@ -13,9 +13,8 @@ abstract class DreamLocalRepository {
   });
   Future<Dream?> getOne(String id);
 
-  Future<int> createOne(Dream dream);
-  Future<int> updateOne(Dream dream);
-
-  Future<int> deleteOne(String id);
-  Future<int> deleteAll(List<String> ids);
+  Future<void> createOne(Dream dream);
+  Future<void> updateOne(Dream dream);
+  Future<void> deleteOne(String id);
+  Future<void> deleteAll(List<String> ids);
 }

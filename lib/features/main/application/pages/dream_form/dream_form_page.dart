@@ -90,7 +90,7 @@ class _State extends ConsumerState<DreamFormPage> {
                       validator: (value) => controller.validateDreamTitle(value),
                       dreamTitle: dream.title,
                       onContentDreamFormAccess: () => controller.goToContentFormPage(),
-                      onPushBack: () => controller.popBack(context),
+                      onPushBack: () => controller.returnToUserHomePage(context),
                       onSave: () => controller.saveCurrentDream(),
                     ),
                     ContentDreamForm(
