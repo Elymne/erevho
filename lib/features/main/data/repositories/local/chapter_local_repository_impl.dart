@@ -9,8 +9,26 @@ class ChapterLocalRepositoryImpl extends ChapterLocalRepository {
   ChapterLocalRepositoryImpl(this.chapterLocalDataSource);
 
   @override
-  ChapterModel getOne(String uuid) {
+  Future<ChapterModel> getOne(String uuid) {
     // TODO: implement getOne
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<int> createOne() {
+    // TODO: implement createOne
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<ChapterModel>> getAll() {
+    // TODO: implement getAll
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<int> updateOne() {
+    // TODO: implement updateOne
     throw UnimplementedError();
   }
 }

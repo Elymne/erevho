@@ -43,8 +43,10 @@ class DreamFormController extends Controller {
         return;
       }
     } catch (e) {
+      // todo message d'erreur.
       if (context.mounted) return Navigator.pop(context);
     }
+    // todo message d'erreur.
     if (context.mounted) Navigator.pop(context);
   }
 
@@ -64,12 +66,10 @@ class DreamFormController extends Controller {
     );
   }
 
-  ///
-  popBack(BuildContext context) {
+  void returnToUserHomePage(BuildContext context) {
     Navigator.pop(context);
   }
 
-  ///
   String? validateDreamTitle(String? value) {
     if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ton rêve !';
     if (value.length > 60) return 'Ton titre doit-être moins long (4O caractères maximum) !';
@@ -79,7 +79,6 @@ class DreamFormController extends Controller {
     return null;
   }
 
-  ///
   String? validateDreamChapter(int index, String? value) {
     if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ce chapitre !';
     if (value.length > 60) return 'Le titre de ce chapitre doit-être moins long (4O caractères maximum) !';
@@ -98,7 +97,6 @@ class DreamFormController extends Controller {
     return null;
   }
 
-  ///
   String? validateDreamContent(int index, String? value) {
     if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ce chapitre !';
     if (value.length > 255) return 'Le titre de ce chapitre doit-être moins long (255 caractères maximum) !';
@@ -117,7 +115,6 @@ class DreamFormController extends Controller {
     return null;
   }
 
-  ///
   Future saveCurrentDream() async {
     if (formKey.currentState!.validate()) {
       /// Display loading screen.

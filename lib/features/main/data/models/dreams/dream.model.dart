@@ -1,4 +1,4 @@
-import 'package:erevho/features/main/data/models/dreams/chapter.model.dart';
+import 'package:erevho/features/main/domain/entities/dreams/chapter.entity.dart';
 import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
 import 'package:objectbox/objectbox.dart';
 
@@ -14,8 +14,6 @@ class DreamModel {
   final String userUuid;
 
   final String title;
-
-  final ToMany<ChapterModel> chapters = ToMany<ChapterModel>();
 
   final List<String> tags;
 
@@ -37,13 +35,12 @@ class DreamModel {
         created = dream.created,
         updated = dream.updated;
 
-  Dream toEntity() {
-    chapters.sort((a, b) => a.number.compareTo(b.number));
+  Dream toEntity({List<Chapter>? chapters}) {
     return Dream(
       uuid: uuid,
       title: title,
       pseudonym: pseudonym,
-      chapters: chapters.map((element) => element.toEntity()).toList(),
+      chapters: chapters ?? [],
       tags: tags,
       userUuid: userUuid,
       created: created,

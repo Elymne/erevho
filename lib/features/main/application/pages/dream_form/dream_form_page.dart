@@ -81,6 +81,7 @@ class _State extends ConsumerState<DreamFormPage> {
                 key: controller.formKey,
                 child: PageView(
                   controller: controller.pageController,
+                  physics: const NeverScrollableScrollPhysics(),
                   onPageChanged: (index) {
                     controller.changeCurrentPageIndex(index);
                   },
@@ -90,7 +91,7 @@ class _State extends ConsumerState<DreamFormPage> {
                       validator: (value) => controller.validateDreamTitle(value),
                       dreamTitle: dream.title,
                       onContentDreamFormAccess: () => controller.goToContentFormPage(),
-                      onPushBack: () => controller.popBack(context),
+                      onPushBack: () => controller.returnToUserHomePage(context),
                       onSave: () => controller.saveCurrentDream(),
                     ),
                     ContentDreamForm(
