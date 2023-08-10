@@ -68,12 +68,31 @@ class DreamLocalRepositoryImpl implements DreamLocalRepository {
     if (dreamModel == null) throw ('No Dream with uuid : ${dream.uuid}');
 
     objectbox.store.runInTransaction(TxMode.write, () {
+      // Updating dream data.
       dreamLocalDataSource.box.put(DreamModel.fromEntity(id: dreamModel.id, dream: dream));
-      chapterLocalDataSource.box.putMany(dream.chapters.map((chapter) {
-        final chapterModel = chapterLocalDataSource.box.query(ChapterModel_.uuid.equals(chapter.uuid)).build().findUnique();
-        return ChapterModel.fromEntity(chapter: chapter, id: chapterModel?.id, dreamUuid: dream.uuid);
-      }).toList());
-      // Suppression des chapitres en trop.
+
+      // Removing deleted chapters.
+      final deletedChaptersId = chapterLocalDataSource.box
+          .query(ChapterModel_.dreamUuid.equals(dream.uuid))
+          .build()
+          .find()
+          .map((chapter) => chapter.uuid)
+          .toSet()
+          .difference(dream.chapters.map((e) => e.uuid).toSet())
+          .toList();
+      for (var delectedChapterUuid in deletedChaptersId) {
+        chapterLocalDataSource.box.query(ChapterModel_.dreamUuid.equals(delectedChapterUuid)).build().remove();
+      }
+
+      // Update chapters.
+      final updatedChapters = dream.chapters.map((chapter) {
+        return ChapterModel.fromEntity(
+          id: chapterLocalDataSource.box.query(ChapterModel_.uuid.equals(chapter.uuid)).build().findUnique()?.id,
+          chapter: chapter,
+          dreamUuid: dream.uuid,
+        );
+      }).toList();
+      chapterLocalDataSource.box.putMany(updatedChapters);
     });
   }
 

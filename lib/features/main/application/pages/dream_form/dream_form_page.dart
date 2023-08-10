@@ -81,6 +81,7 @@ class _State extends ConsumerState<DreamFormPage> {
                 key: controller.formKey,
                 child: PageView(
                   controller: controller.pageController,
+                  physics: const NeverScrollableScrollPhysics(),
                   onPageChanged: (index) {
                     controller.changeCurrentPageIndex(index);
                   },

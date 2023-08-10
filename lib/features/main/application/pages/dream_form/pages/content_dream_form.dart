@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/extensions/int_extension.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
+import 'package:erevho/features/main/application/widgets/forms/erevoh_chapter_title_textfield.dart';
 import 'package:erevho/features/main/application/widgets/forms/erevoh_text_field.dart';
 import 'package:erevho/features/main/application/widgets/pager/pager_style.dart';
 import 'package:erevho/features/main/domain/entities/dreams/dream.entity.dart';
@@ -46,7 +47,7 @@ class _State extends ConsumerState<ContentDreamForm> {
             },
             itemBuilder: ((context, index) {
               if (index >= widget.dream.chapters.length) {
-                // Loul.
+                // Widget for chapters add
                 return Center(
                   child: GestureDetector(
                     onTap: () => widget.onChapterAdd(),
@@ -71,38 +72,17 @@ class _State extends ConsumerState<ContentDreamForm> {
                 );
               }
 
-              // Lel.
+              // Chapter title and content update.
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 20),
-                    const SizedBox(height: 20),
-                    AutoSizeText.rich(
-                      TextSpan(
-                        text: alt.current.dream_form_chapter_textfield,
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w300,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: (index + 1).romanNumber,
-                            style: const TextStyle(
-                              fontSize: 22,
-                              color: erevohOrange,
-                              fontFamily: 'Lunasima',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    ErevohTextField(
+                    ErevohChapterTitleTextField(
+                      title: alt.current.dream_form_chapter_textfield,
+                      chapterNumber: (index + 1),
                       initialValue: widget.dream.chapters[index].title,
                       validator: (value) => widget.validateDreamChapter(index, value),
-                      maxLines: 1,
                     ),
                     const SizedBox(height: 6),
                     Expanded(
