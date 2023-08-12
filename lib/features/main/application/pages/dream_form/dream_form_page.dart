@@ -2,8 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/dream_form/dream_form_controller.dart';
-import 'package:erevho/features/main/application/pages/dream_form/pages/content_dream_form.dart';
+import 'package:erevho/features/main/application/pages/dream_form/pages/chapter_form.dart';
+import 'package:erevho/features/main/application/pages/dream_form/pages/chapter_form_add.dart';
 import 'package:erevho/features/main/application/pages/dream_form/pages/main_dream_form.dart';
+import 'package:erevho/features/main/application/widgets/pager/pager_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -42,21 +44,24 @@ class _State extends ConsumerState<DreamFormPage> {
       child: Scaffold(
         backgroundColor: erevohDark,
         body: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 60),
-                if (currentPageIndex == 0)
-                  AutoSizeText(
-                    alt.current.dream_form_title,
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                if (currentPageIndex == 1)
+            // Title for main content.
+            if (currentPageIndex == 0)
+              AutoSizeText(
+                alt.current.dream_form_title,
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+
+            // Title for chapters contents.
+            if (currentPageIndex == 1)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   ElevatedButton(
                     onPressed: () => controller.goToMainFormPage(),
                     style: ElevatedButton.styleFrom(
@@ -66,44 +71,62 @@ class _State extends ConsumerState<DreamFormPage> {
                     ),
                     child: const Icon(Icons.arrow_left_outlined),
                   ),
-                if (currentPageIndex == 1) const Expanded(child: SizedBox()),
-                if (currentPageIndex == 1)
+                  const Expanded(child: SizedBox()),
                   const AutoSizeText(
                     'Modifier le contenu',
                     style: TextStyle(fontSize: 28),
                   ),
-                if (currentPageIndex == 1) const SizedBox(width: 20),
-              ],
-            ),
-            const SizedBox(height: 40),
+                ],
+              ),
+            const SizedBox(height: 20),
             Expanded(
               child: Form(
                 key: controller.formKey,
-                child: PageView(
+                child: PageView.builder(
                   controller: controller.pageController,
-                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 1 + dream.chapters.length + 1,
                   onPageChanged: (index) {
                     controller.changeCurrentPageIndex(index);
                   },
-                  children: [
-                    MainDreamForm(
+                  itemBuilder: (context, index) {
+                    // Lel.
+                    if (index == 0) {
+                      return MainDreamForm(
+                        alt: alt,
+                        validator: (value) => controller.validateDreamTitle(value),
+                        dreamTitle: dream.title,
+                        onContentDreamFormAccess: () => controller.goToContentFormPage(),
+                        onPushBack: () => controller.returnToUserHomePage(context),
+                        onSave: () => controller.saveCurrentDream(),
+                      );
+                    }
+                    // Lel.
+                    if (index == (1 + dream.chapters.length)) {
+                      return ChapterFormAdd(
+                        alt: alt,
+                        onChapterAdd: () => controller.addNewChapter(),
+                      );
+                    }
+                    // Lel.
+                    return ChapterForm(
                       alt: alt,
-                      validator: (value) => controller.validateDreamTitle(value),
-                      dreamTitle: dream.title,
-                      onContentDreamFormAccess: () => controller.goToContentFormPage(),
-                      onPushBack: () => controller.returnToUserHomePage(context),
-                      onSave: () => controller.saveCurrentDream(),
-                    ),
-                    ContentDreamForm(
-                      dream: dream,
-                      validateDreamChapter: (index, value) => controller.validateDreamChapter(index, value),
-                      validateDreamContent: (index, value) => controller.validateDreamContent(index, value),
-                      onChapterAdd: () => controller.addNewChapter(),
-                    ),
-                  ],
+                      validateChapterTitle: (index, value) => controller.validateDreamChapter(index, value),
+                      validateChapterContent: (index, value) => controller.validateDreamContent(index, value),
+                      chapter: dream.chapters[index - 1],
+                    );
+                  },
                 ),
               ),
             ),
+
+            Align(
+              alignment: Alignment.center,
+              child: PagerDots(
+                currentPage: currentPageIndex,
+                totalPages: dream.chapters.length + 1,
+              ),
+            ),
+            const SizedBox(height: 30),
           ],
         ),
       ),

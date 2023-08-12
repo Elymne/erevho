@@ -52,44 +52,7 @@ class MainDreamForm extends StatelessWidget {
             ),
           ),
         ),
-
         const Expanded(child: SizedBox()),
-
-        /// VALIDATION
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Row(
-            children: [
-              OutlinedButton(
-                onPressed: () => onPushBack(),
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: erevohRed,
-                ),
-                child: const AutoSizeText(
-                  'Retour',
-                  style: TextStyle(
-                    color: erevohWhite,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-              const Expanded(child: SizedBox()),
-              OutlinedButton(
-                onPressed: () => onSave(),
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: erevohGreen,
-                ),
-                child: const AutoSizeText(
-                  'Sauvegarder',
-                  style: TextStyle(
-                    color: erevohWhite,
-                    fontSize: 24,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }

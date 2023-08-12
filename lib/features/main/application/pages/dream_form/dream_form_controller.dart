@@ -16,11 +16,10 @@ class DreamFormController extends Controller {
   late final UpdateDreamUsecase updateDreamUsecase = ref.read(updateDreamUsecaseProvider);
 
   final dreamProvider = StateProvider<Dream?>((ref) => null);
-
   final isDreamUpdatedProvider = StateProvider<bool>((ref) => false);
   final currentPageIndexProvider = StateProvider<int>((ref) => 0);
 
-  final PageController pageController = PageController(initialPage: 0);
+  final PageController pageController = PageController(initialPage: 0, keepPage: true);
   final formKey = GlobalKey<FormState>();
 
   DreamFormController(super.ref);

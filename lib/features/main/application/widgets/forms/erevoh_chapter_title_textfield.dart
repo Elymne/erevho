@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/extensions/int_extension.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
