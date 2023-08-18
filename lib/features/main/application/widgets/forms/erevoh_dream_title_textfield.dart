@@ -1,20 +1,18 @@
-import 'package:erevho/core/extensions/int_extension.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 
-class ErevohChapterTitleTextField extends StatelessWidget {
+class ErevohDreamTitleTextField extends StatelessWidget {
   final String title;
-  final int chapterNumber;
   final String? hintText;
   final String? initialValue;
   final String? Function(String?) validator;
-  final void Function(String) onChanged;
+  final void Function(String) onChange;
 
-  const ErevohChapterTitleTextField({
+  const ErevohDreamTitleTextField({
     required this.validator,
     required this.title,
-    required this.chapterNumber,
-    required this.onChanged,
+    required this.onChange,
     this.hintText,
     this.initialValue,
     super.key,
@@ -25,10 +23,20 @@ class ErevohChapterTitleTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        AutoSizeText.rich(
+          TextSpan(
+            text: title,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w300,
+            ),
+            children: const [],
+          ),
+        ),
         const SizedBox(height: 6),
         TextFormField(
           validator: (value) => validator(value),
-          onChanged: (value) => onChanged(value),
+          onChanged: (value) => onChange(value),
           initialValue: initialValue,
           maxLines: 1,
           style: const TextStyle(
@@ -36,7 +44,7 @@ class ErevohChapterTitleTextField extends StatelessWidget {
             fontSize: 24,
           ),
           decoration: InputDecoration(
-            hintText: '$title ${chapterNumber.romanNumber}',
+            hintText: title,
             hintStyle: const TextStyle(
               fontWeight: FontWeight.w300,
               fontSize: 30,

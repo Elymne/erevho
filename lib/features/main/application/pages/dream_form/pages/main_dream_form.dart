@@ -1,13 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
-import 'package:erevho/features/main/application/widgets/forms/erevoh_text_field.dart';
+import 'package:erevho/features/main/application/widgets/forms/erevoh_dream_title_textfield.dart';
 import 'package:flutter/material.dart';
 
 class MainDreamForm extends StatelessWidget {
   final AppLocalisationTools alt;
   final String? dreamTitle;
   final String? Function(String? value) validator;
+  final void Function(String value) onDreamTitleChange;
 
   final void Function() onContentDreamFormAccess;
   final void Function() onSave;
@@ -21,6 +22,7 @@ class MainDreamForm extends StatelessWidget {
     required this.alt,
     required this.onSave,
     required this.onPushBack,
+    required this.onDreamTitleChange,
   });
 
   @override
@@ -30,12 +32,11 @@ class MainDreamForm extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: ErevohTextField(
-            expanded: false,
-            maxLines: 1,
-            labelText: alt.current.dream_form_title_textfield,
+          child: ErevohDreamTitleTextField(
+            title: alt.current.dream_form_title_textfield,
             initialValue: dreamTitle,
             validator: (value) => validator(value),
+            onChange: (value) => onDreamTitleChange(value),
           ),
         ),
         const SizedBox(height: 20),

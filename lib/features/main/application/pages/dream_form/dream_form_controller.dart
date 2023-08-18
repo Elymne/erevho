@@ -16,6 +16,7 @@ class DreamFormController extends Controller {
   late final UpdateDreamUsecase updateDreamUsecase = ref.read(updateDreamUsecaseProvider);
 
   final dreamProvider = StateProvider<Dream?>((ref) => null);
+
   final isDreamUpdatedProvider = StateProvider<bool>((ref) => false);
   final currentPageIndexProvider = StateProvider<int>((ref) => 0);
 
@@ -69,21 +70,20 @@ class DreamFormController extends Controller {
     Navigator.pop(context);
   }
 
+  void onDreamTitleChanged(String value) {
+    ref.read(dreamProvider.notifier).state = ref.read(dreamProvider)!.copyWith(title: value);
+    _isDreamModified();
+  }
+
   String? validateDreamTitle(String? value) {
     if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ton rêve !';
     if (value.length > 60) return 'Ton titre doit-être moins long (4O caractères maximum) !';
-
-    ref.read(dreamProvider.notifier).state = ref.read(dreamProvider)!.copyWith(title: value);
-    _isDreamModified();
     return null;
   }
 
-  String? validateDreamChapter(int index, String? value) {
-    if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ce chapitre !';
-    if (value.length > 60) return 'Le titre de ce chapitre doit-être moins long (4O caractères maximum) !';
-
+  void onDreamChapterTitleChanged(int index, String value) {
     final dream = ref.read(dreamProvider);
-    if (dream == null) return "Can't find the dream, strange";
+    if (dream == null) return;
 
     ref.read(dreamProvider.notifier).state = dream.copyWith(
       chapters: [
@@ -93,15 +93,21 @@ class DreamFormController extends Controller {
     );
 
     _isDreamModified();
-    return null;
   }
 
-  String? validateDreamContent(int index, String? value) {
+  String? validateDreamChapterTitle(String? value) {
     if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ce chapitre !';
-    if (value.length > 255) return 'Le titre de ce chapitre doit-être moins long (255 caractères maximum) !';
+    if (value.length > 60) return 'Le titre de ce chapitre doit-être moins long (4O caractères maximum) !';
 
     final dream = ref.read(dreamProvider);
     if (dream == null) return "Can't find the dream, strange";
+
+    return null;
+  }
+
+  void onDreamChapterContentChanged(int index, String value) {
+    final dream = ref.read(dreamProvider);
+    if (dream == null) return;
 
     ref.read(dreamProvider.notifier).state = dream.copyWith(
       chapters: [
@@ -111,6 +117,15 @@ class DreamFormController extends Controller {
     );
 
     _isDreamModified();
+  }
+
+  String? validateDreamChapterContent(String? value) {
+    if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ce chapitre !';
+    if (value.length > 255) return 'Le titre de ce chapitre doit-être moins long (255 caractères maximum) !';
+
+    final dream = ref.read(dreamProvider);
+    if (dream == null) return "Can't find the dream, strange";
+
     return null;
   }
 
@@ -135,12 +150,10 @@ class DreamFormController extends Controller {
     }
   }
 
-  ///
-  void changeCurrentPageIndex(int index) {
+  void onPageChange(int index) {
     ref.read(currentPageIndexProvider.notifier).state = index;
   }
 
-  ///
   void addNewChapter() {
     final dream = ref.read(dreamProvider);
     if (dream == null) return;

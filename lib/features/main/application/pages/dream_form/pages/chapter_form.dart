@@ -6,16 +6,20 @@ import 'package:flutter/material.dart';
 
 class ChapterForm extends StatelessWidget {
   final AppLocalisationTools alt;
-  final String? Function(int number, String? value) validateChapterTitle;
-  final String? Function(int number, String? value) validateChapterContent;
+  final String? Function(String? value) validateTitle;
+  final String? Function(String? value) validateContent;
+  final void Function(int number, String value) onTitleChanged;
+  final void Function(int number, String value) onContentChanged;
   final Chapter chapter;
 
   const ChapterForm({
     super.key,
     required this.alt,
-    required this.validateChapterTitle,
-    required this.validateChapterContent,
+    required this.validateTitle,
+    required this.validateContent,
     required this.chapter,
+    required this.onTitleChanged,
+    required this.onContentChanged,
   });
 
   @override
@@ -30,14 +34,15 @@ class ChapterForm extends StatelessWidget {
             title: alt.current.dream_form_chapter_textfield,
             chapterNumber: chapter.number,
             initialValue: chapter.title,
-            validator: (value) => validateChapterTitle(chapter.number, value),
+            validator: (value) => validateTitle(value),
+            onChanged: (value) => onTitleChanged(chapter.number, value),
           ),
           const SizedBox(height: 6),
           ErevohTextField(
             labelText: alt.current.dream_form_content_textfield,
             initialValue: chapter.content,
             maxLines: null,
-            validator: (value) => validateChapterContent(chapter.number, value),
+            validator: (value) => validateContent(value),
           ),
         ],
       ),
