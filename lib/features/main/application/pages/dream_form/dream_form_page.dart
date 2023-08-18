@@ -44,79 +44,62 @@ class _State extends ConsumerState<DreamFormPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: erevohDark,
-        body: Stack(
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(height: 20),
-                MainDreamFormHeader(alt: alt, currentPage: currentPageIndex),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: Form(
-                    key: controller.formKey,
-                    child: PageView.builder(
-                      controller: controller.pageController,
-                      itemCount: 1 + dream.chapters.length + 1,
-                      onPageChanged: (index) {
-                        controller.onPageChange(index);
-                      },
-                      itemBuilder: (context, index) {
-                        // First page's always the page with Dream title and tags editions.
-                        if (index == 0) {
-                          return MainDreamForm(
-                            alt: alt,
-                            validator: (value) => controller.validateDreamTitle(value),
-                            dreamTitle: dream.title,
-                            onContentDreamFormAccess: () => controller.goToContentFormPage(),
-                            onPushBack: () => controller.returnToUserHomePage(context),
-                            onSave: () => controller.saveCurrentDream(),
-                            onDreamTitleChange: (value) => controller.onDreamTitleChanged(value),
-                          );
-                        }
+            const SizedBox(height: 20),
+            MainDreamFormHeader(alt: alt, currentPage: currentPageIndex),
+            const SizedBox(height: 20),
+            Expanded(
+              child: Form(
+                key: controller.formKey,
+                child: PageView.builder(
+                  controller: controller.pageController,
+                  itemCount: 1 + dream.chapters.length + 1,
+                  onPageChanged: (index) {
+                    controller.onPageChange(index);
+                  },
+                  itemBuilder: (context, index) {
+                    // First page's always the page with Dream title and tags editions.
+                    if (index == 0) {
+                      return MainDreamForm(
+                        alt: alt,
+                        dreamTitle: dream.title,
+                        validator: (value) => controller.validateDreamTitle(value),
+                        onDreamTitleChange: (value) => controller.onDreamTitleChanged(value),
+                        onSave: () => controller.saveCurrentDream(),
+                        onCancel: () => controller.returnToUserHomePage(context),
+                      );
+                    }
 
-                        // Last page's always the page that allow a user to add a new chapter.
-                        if (index == (1 + dream.chapters.length)) {
-                          return ChapterFormAdd(
-                            alt: alt,
-                            onChapterAdd: () => controller.addNewChapter(),
-                          );
-                        }
-                        // And between this, there's chapters.
-                        return ChapterForm(
-                          alt: alt,
-                          chapter: dream.chapters[index - 1],
-                          validateTitle: (value) => controller.validateDreamChapterTitle(value),
-                          validateContent: (value) => controller.validateDreamChapterContent(value),
-                          onTitleChanged: (number, value) => controller.onDreamChapterTitleChanged(number - 1, value),
-                          onContentChanged: (number, value) => controller.onDreamChapterContentChanged(number - 1, value),
-                        );
-                      },
-                    ),
-                  ),
+                    // Last page's always the page that allow a user to add a new chapter.
+                    if (index == (1 + dream.chapters.length)) {
+                      return ChapterFormAdd(
+                        alt: alt,
+                        onChapterAdd: () => controller.addNewChapter(),
+                      );
+                    }
+                    // And between this, there's chapters.
+                    return ChapterForm(
+                      alt: alt,
+                      chapter: dream.chapters[index - 1],
+                      validateTitle: (value) => controller.validateDreamChapterTitle(value),
+                      validateContent: (value) => controller.validateDreamChapterContent(value),
+                      onTitleChanged: (number, value) => controller.onDreamChapterTitleChanged(number - 1, value),
+                      onContentChanged: (number, value) => controller.onDreamChapterContentChanged(number - 1, value),
+                    );
+                  },
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: PagerDots(
-                    currentPage: currentPageIndex,
-                    totalPages: dream.chapters.length + 2,
-                  ),
-                ),
-                const SizedBox(height: 30),
-              ],
-            ),
-            ElevatedButton(
-              onPressed: () => controller.goToMainFormPage(),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(10),
-                backgroundColor: erevohOrange,
-                fixedSize: const Size(40, 40),
-              ),
-              child: const Icon(
-                Icons.arrow_back,
               ),
             ),
+            Align(
+              alignment: Alignment.center,
+              child: PagerDots(
+                currentPage: currentPageIndex,
+                totalPages: dream.chapters.length + 2,
+              ),
+            ),
+            const SizedBox(height: 30),
           ],
         ),
       ),

@@ -7,22 +7,21 @@ import 'package:flutter/material.dart';
 class MainDreamForm extends StatelessWidget {
   final AppLocalisationTools alt;
   final String? dreamTitle;
+
   final String? Function(String? value) validator;
   final void Function(String value) onDreamTitleChange;
 
-  final void Function() onContentDreamFormAccess;
   final void Function() onSave;
-  final void Function() onPushBack;
+  final void Function() onCancel;
 
   const MainDreamForm({
     super.key,
-    required this.validator,
     required this.dreamTitle,
-    required this.onContentDreamFormAccess,
     required this.alt,
-    required this.onSave,
-    required this.onPushBack,
+    required this.validator,
     required this.onDreamTitleChange,
+    required this.onSave,
+    required this.onCancel,
   });
 
   @override
@@ -40,20 +39,42 @@ class MainDreamForm extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 20),
-        OutlinedButton(
-          onPressed: () => onContentDreamFormAccess(),
-          style: OutlinedButton.styleFrom(
-            backgroundColor: erevohBlue,
-          ),
-          child: const AutoSizeText(
-            'Modifier le contenu du rêve',
-            style: TextStyle(
-              color: erevohWhite,
-              fontSize: 24,
-            ),
+        const Expanded(child: SizedBox()),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: erevohRed,
+                ),
+                onPressed: () => onCancel(),
+                child: const AutoSizeText(
+                  'Annuler',
+                  style: TextStyle(
+                    color: erevohWhite,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: erevohGreen,
+                ),
+                onPressed: () => onSave(),
+                child: const AutoSizeText(
+                  'Sauvegarder',
+                  style: TextStyle(
+                    color: erevohWhite,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        const Expanded(child: SizedBox()),
+        const SizedBox(height: 20),
       ],
     );
   }

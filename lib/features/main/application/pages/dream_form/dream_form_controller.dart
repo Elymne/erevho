@@ -50,22 +50,6 @@ class DreamFormController extends Controller {
     if (context.mounted) Navigator.pop(context);
   }
 
-  void goToMainFormPage() {
-    pageController.animateToPage(
-      0,
-      duration: const Duration(milliseconds: 1000),
-      curve: Curves.fastLinearToSlowEaseIn,
-    );
-  }
-
-  void goToContentFormPage() {
-    pageController.animateToPage(
-      1,
-      duration: const Duration(milliseconds: 1000),
-      curve: Curves.fastLinearToSlowEaseIn,
-    );
-  }
-
   void returnToUserHomePage(BuildContext context) {
     Navigator.pop(context);
   }
