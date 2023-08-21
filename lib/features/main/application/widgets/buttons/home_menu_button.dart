@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class HomeMenuButton extends StatefulWidget {
   final Color scafoldBackgroundColor;
   final String text;
+  final IconData icon;
   final int animationDuration;
 
   final void Function() onClick;
@@ -14,6 +15,7 @@ class HomeMenuButton extends StatefulWidget {
     required this.onClick,
     required this.scafoldBackgroundColor,
     required this.text,
+    required this.icon,
     required this.animationDuration,
   });
 
@@ -59,7 +61,7 @@ class _State extends State<HomeMenuButton> with SingleTickerProviderStateMixin {
             onLongPressStart: (_) {
               isPressing = true;
             },
-            onLongPressEnd: (_) {
+            onLongPressEnd: (longPressEndDetails) {
               isPressing = false;
             },
             onLongPressCancel: () {
@@ -118,11 +120,11 @@ class _State extends State<HomeMenuButton> with SingleTickerProviderStateMixin {
                       alignment: Alignment.centerLeft,
                       child: Row(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
                             child: Icon(
-                              Icons.create_outlined,
-                              size: 40,
+                              widget.icon,
+                              size: isPressing ? 26 : 20,
                             ),
                           ),
                           AutoSizeText(

@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/home/home_controller.dart';
 import 'package:erevho/features/main/application/widgets/buttons/home_menu_button.dart';
+import 'package:erevho/features/main/application/widgets/styles/bubble_speak.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,6 +16,7 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _State extends ConsumerState<HomePage> {
   late final HomeController controller = ref.read(homeControllerProvider);
+  late final AppLocalisationTools alt = ref.read(appLocalisationToolsProvider);
 
   late final double screenWidth = MediaQuery.of(context).size.width;
   late final double screenHeight = MediaQuery.of(context).size.height;
@@ -34,41 +37,16 @@ class _State extends ConsumerState<HomePage> {
         backgroundColor: scafoldBackgroundColor,
         body: Column(
           children: [
-            // Start text.
-            const SizedBox(height: 30.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: AutoSizeText.rich(
-                TextSpan(
-                  text: homeMessage?.greeting,
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w300,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: homeMessage?.userName,
-                      style: const TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w300,
-                        color: erevohOrange,
-                      ),
-                    ),
-                  ],
-                ),
+            // App title.
+            const SizedBox(height: 10),
+            AutoSizeText(
+              alt.current.appName,
+              style: const TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w200,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: AutoSizeText(
-                homeMessage?.specialMessage ?? '',
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w200,
-                ),
-              ),
-            ),
-            const SizedBox(height: 30.0),
+            const SizedBox(height: 30),
 
             // Dreams user's access.
             Padding(
@@ -76,33 +54,77 @@ class _State extends ConsumerState<HomePage> {
               child: HomeMenuButton(
                 scafoldBackgroundColor: scafoldBackgroundColor,
                 animationDuration: 1200,
-                text: "Acces aux rêves",
+                text: alt.current.home_dream_access,
+                icon: Icons.menu_book_sharp,
                 onClick: () => controller.goToUserHomePage(context),
               ),
             ),
             const SizedBox(height: 10.0),
+
             // Dreams user's access.
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6),
               child: HomeMenuButton(
                 scafoldBackgroundColor: scafoldBackgroundColor,
                 animationDuration: 2000,
-                text: "Autour de moi",
+                text: alt.current.home_nearby_dream,
+                icon: Icons.bluetooth,
                 onClick: () {},
               ),
             ),
             const SizedBox(height: 10.0),
+
             // Dreams user's access.
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6),
               child: HomeMenuButton(
                 scafoldBackgroundColor: scafoldBackgroundColor,
                 animationDuration: 1600,
-                text: "Paramètres",
+                text: alt.current.home_settings,
+                icon: Icons.settings,
                 onClick: () {},
               ),
             ),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 30.0),
+
+            // LA BUBULE
+            BubbleSpeak(
+              content: Column(
+                children: [
+                  AutoSizeText.rich(
+                    TextSpan(
+                      text: homeMessage?.greeting,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w300,
+                        color: erevohBlack,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: homeMessage?.userName,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w300,
+                            color: erevohOrange,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  AutoSizeText(
+                    homeMessage?.specialMessage ?? '',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w300,
+                      color: erevohBlack,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                ],
+              ),
+            ),
+
+            // LOUL
           ],
         ),
       ),
