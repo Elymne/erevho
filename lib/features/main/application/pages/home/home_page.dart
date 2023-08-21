@@ -70,67 +70,39 @@ class _State extends ConsumerState<HomePage> {
             ),
             const SizedBox(height: 30.0),
 
+            // Dreams user's access.
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 6),
               child: HomeMenuButton(
-                onClick: () {},
                 scafoldBackgroundColor: scafoldBackgroundColor,
-              ),
-            ),
-            const SizedBox(height: 30.0),
-
-            // Containers clickable.
-            GestureDetector(
-              onTap: () => controller.goToUserHomePage(context),
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                height: screenHeight / 6,
-                decoration: BoxDecoration(
-                  color: erevohGrey,
-                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                  border: Border.all(
-                    color: erevohBlack.withOpacity(0.6),
-                    width: 2,
-                  ),
-                ),
+                animationDuration: 1200,
+                text: "Acces aux rêves",
+                onClick: () => controller.goToUserHomePage(context),
               ),
             ),
             const SizedBox(height: 10.0),
-            GestureDetector(
-              onTap: () {
-                print('ITEM 2');
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                height: screenHeight / 6,
-                decoration: BoxDecoration(
-                  color: erevohGrey,
-                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                  border: Border.all(
-                    color: erevohBlack.withOpacity(0.6),
-                    width: 2,
-                  ),
-                ),
+            // Dreams user's access.
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              child: HomeMenuButton(
+                scafoldBackgroundColor: scafoldBackgroundColor,
+                animationDuration: 2000,
+                text: "Autour de moi",
+                onClick: () {},
               ),
             ),
             const SizedBox(height: 10.0),
-            GestureDetector(
-              onTap: () {
-                print('ITEM 3');
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                height: screenHeight / 6,
-                decoration: BoxDecoration(
-                  color: erevohGrey,
-                  borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                  border: Border.all(
-                    color: erevohBlack.withOpacity(0.6),
-                    width: 2,
-                  ),
-                ),
+            // Dreams user's access.
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 6),
+              child: HomeMenuButton(
+                scafoldBackgroundColor: scafoldBackgroundColor,
+                animationDuration: 1600,
+                text: "Paramètres",
+                onClick: () {},
               ),
             ),
+            const SizedBox(height: 10.0),
           ],
         ),
       ),

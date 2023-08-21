@@ -11,7 +11,7 @@ class ObjectBox {
   late final Store store;
 
   ObjectBox._create(this.store) {
-    clearData();
+    //clearData();
   }
 
   /// Create an instance of ObjectBox to use throughout the app.

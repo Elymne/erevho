@@ -82,16 +82,19 @@ class _State extends ConsumerState<UserInitialisationPage> {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            TextFormField(
-                              validator: (value) => controller.validateNameTextfield(value),
-                              decoration: InputDecoration(
-                                hintText: alt.current.name_textfield_hint,
-                                filled: true,
-                                fillColor: erevohBlack.withOpacity(0.6),
-                                errorStyle: const TextStyle(
-                                  fontSize: 18,
-                                  color: erevohRed,
-                                  fontWeight: FontWeight.w300,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              child: TextFormField(
+                                validator: (value) => controller.validateNameTextfield(value),
+                                decoration: InputDecoration(
+                                  hintText: alt.current.name_textfield_hint,
+                                  filled: true,
+                                  fillColor: erevohBlack.withOpacity(0.6),
+                                  errorStyle: const TextStyle(
+                                    fontSize: 18,
+                                    color: erevohRed,
+                                    fontWeight: FontWeight.w300,
+                                  ),
                                 ),
                               ),
                             ),

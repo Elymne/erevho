@@ -1,8 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 class HomeMenuButton extends StatefulWidget {
   final Color scafoldBackgroundColor;
+  final String text;
+  final int animationDuration;
 
   final void Function() onClick;
 
@@ -10,6 +13,8 @@ class HomeMenuButton extends StatefulWidget {
     super.key,
     required this.onClick,
     required this.scafoldBackgroundColor,
+    required this.text,
+    required this.animationDuration,
   });
 
   @override
@@ -18,9 +23,9 @@ class HomeMenuButton extends StatefulWidget {
 
 class _State extends State<HomeMenuButton> with SingleTickerProviderStateMixin {
   late final AnimationController animationController;
-
   late final Animation<Color?> borderColorAnimation;
-  late final Animation<Color?> backgroundColorAnimation;
+
+  bool isPressing = false;
 
   @override
   void initState() {
@@ -28,18 +33,12 @@ class _State extends State<HomeMenuButton> with SingleTickerProviderStateMixin {
 
     animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
-      reverseDuration: const Duration(seconds: 4),
+      duration: Duration(milliseconds: widget.animationDuration),
     );
 
     borderColorAnimation = ColorTween(
       begin: Colors.white.withOpacity(0.7),
       end: Colors.white.withOpacity(0.2),
-    ).animate(animationController);
-
-    backgroundColorAnimation = ColorTween(
-      begin: Colors.white.withOpacity(0.1),
-      end: Colors.white.withOpacity(0.01),
     ).animate(animationController);
 
     animationController.forward();
@@ -57,6 +56,15 @@ class _State extends State<HomeMenuButton> with SingleTickerProviderStateMixin {
         builder: (context, child) {
           return GestureDetector(
             onTap: () => widget.onClick(),
+            onLongPressStart: (_) {
+              isPressing = true;
+            },
+            onLongPressEnd: (_) {
+              isPressing = false;
+            },
+            onLongPressCancel: () {
+              isPressing = false;
+            },
             child: Stack(
               children: [
                 // Bordure.
@@ -78,7 +86,8 @@ class _State extends State<HomeMenuButton> with SingleTickerProviderStateMixin {
                 // Fraud background.
                 Padding(
                   padding: const EdgeInsets.all(1.0),
-                  child: Container(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 400),
                     height: 58,
                     decoration: BoxDecoration(
                       color: widget.scafoldBackgroundColor,
@@ -86,32 +95,44 @@ class _State extends State<HomeMenuButton> with SingleTickerProviderStateMixin {
                   ),
                 ),
 
-                // Gradient background.
+                // Background stylish.
                 Padding(
                   padding: const EdgeInsets.all(1.0),
-                  child: Container(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 400),
                     height: 58,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                         colors: [
-                          backgroundColorAnimation.value!,
+                          isPressing ? erevohWhite.withOpacity(0.2) : Colors.transparent,
+                          isPressing ? erevohWhite.withOpacity(0.1) : Colors.transparent,
+                          isPressing ? erevohWhite.withOpacity(0.1) : Colors.transparent,
+                          isPressing ? erevohWhite.withOpacity(0.1) : Colors.transparent,
                           Colors.transparent,
                         ],
                       ),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: AutoSizeText(
-                          "Accéder à mes rêves",
-                          minFontSize: 24,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w300,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.create_outlined,
+                              size: 40,
+                            ),
                           ),
-                        ),
+                          AutoSizeText(
+                            widget.text,
+                            minFontSize: 24,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
