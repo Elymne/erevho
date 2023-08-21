@@ -32,7 +32,6 @@ class _State extends ConsumerState<UserInitialisationPage> {
     final viewVisibility = ref.watch(controller.viewVisibilityProvider);
     return SafeArea(
       child: Scaffold(
-        //resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             RiveAnimation.asset(
@@ -49,81 +48,74 @@ class _State extends ConsumerState<UserInitialisationPage> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Container(
-                        padding: const EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          color: erevohDark.withOpacity(0.9),
-                          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                          border: Border.all(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 1.0,
-                          ),
-                        ),
-                        child: Form(
-                          key: controller.formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: AutoSizeText(
-                                  maxLines: 1,
-                                  alt.current.name_textfield_label,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 30,
-                                  ),
+                    Container(
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        color: erevohBlack.withOpacity(0.4),
+                      ),
+                      child: Form(
+                        key: controller.formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: AutoSizeText(
+                                maxLines: 1,
+                                alt.current.name_textfield_label,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 30,
                                 ),
                               ),
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: AutoSizeText(
-                                  maxLines: 2,
-                                  alt.current.name_textfield_label_more,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.w200,
-                                    fontSize: 18,
-                                    fontStyle: FontStyle.italic,
-                                  ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: AutoSizeText(
+                                maxLines: 2,
+                                alt.current.name_textfield_label_more,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w200,
+                                  fontSize: 18,
+                                  fontStyle: FontStyle.italic,
                                 ),
                               ),
-                              const SizedBox(height: 20),
-                              TextFormField(
-                                validator: (value) => controller.validateNameTextfield(value),
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  hintText: alt.current.name_textfield_hint,
-                                  filled: true,
-                                  fillColor: erevohGrey,
-                                  errorStyle: const TextStyle(
-                                    fontSize: 18,
-                                    color: erevohRed,
-                                    fontWeight: FontWeight.w300,
-                                  ),
+                            ),
+                            const SizedBox(height: 20),
+                            TextFormField(
+                              validator: (value) => controller.validateNameTextfield(value),
+                              decoration: InputDecoration(
+                                hintText: alt.current.name_textfield_hint,
+                                filled: true,
+                                fillColor: erevohBlack.withOpacity(0.6),
+                                errorStyle: const TextStyle(
+                                  fontSize: 18,
+                                  color: erevohRed,
+                                  fontWeight: FontWeight.w300,
                                 ),
                               ),
-                              const SizedBox(height: 40),
-                              OutlinedButton(
-                                onPressed: () => controller.onValidation(context),
-                                style: OutlinedButton.styleFrom(
-                                  backgroundColor: erevohGreen,
-                                ),
-                                child: const AutoSizeText(
-                                  'Valider',
-                                  style: TextStyle(
-                                    color: erevohWhite,
-                                    fontSize: 24,
-                                  ),
+                            ),
+                            const SizedBox(height: 40),
+                            OutlinedButton(
+                              onPressed: () => controller.onValidation(context),
+                              style: OutlinedButton.styleFrom(
+                                backgroundColor: erevohBlack.withOpacity(0.6),
+                                side: const BorderSide(
+                                  color: erevohBlueNeon,
+                                  width: 0.5,
+                                  style: BorderStyle.solid,
                                 ),
                               ),
-                              const SizedBox(height: 10),
-                            ],
-                          ),
+                              child: const AutoSizeText(
+                                'Valider',
+                                style: TextStyle(
+                                  color: erevohWhite,
+                                  fontSize: 24,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                          ],
                         ),
                       ),
                     ),
