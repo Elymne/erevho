@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:erevho/features/main/application/pages/home/home_controller.dart';
+import 'package:erevho/features/main/application/widgets/buttons/home_menu_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,10 +27,11 @@ class _State extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     final homeMessage = ref.watch(controller.homeMessageProvider);
+    const scafoldBackgroundColor = erevohDark;
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: erevohDark,
+        backgroundColor: scafoldBackgroundColor,
         body: Column(
           children: [
             // Start text.
@@ -64,6 +66,15 @@ class _State extends ConsumerState<HomePage> {
                   fontSize: 24,
                   fontWeight: FontWeight.w200,
                 ),
+              ),
+            ),
+            const SizedBox(height: 30.0),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: HomeMenuButton(
+                onClick: () {},
+                scafoldBackgroundColor: scafoldBackgroundColor,
               ),
             ),
             const SizedBox(height: 30.0),
