@@ -6,6 +6,7 @@ import 'package:erevho/features/main/application/widgets/buttons/home_menu_butto
 import 'package:erevho/features/main/application/widgets/styles/bubble_speak.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rive/rive.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -127,11 +128,19 @@ class _State extends ConsumerState<HomePage> {
             ),
             const SizedBox(height: 10),
 
-            Container(
+            // Char animation.
+            SizedBox(
               height: 140,
-              width: 300,
-              color: erevohWhite,
-              child: const Text("CHARACTER ANIMATION BUT FUCK I DON'T DO THAT SHIT"),
+              // width: 300,
+              child: RiveAnimation.asset(
+                "assets/rives/char.riv",
+                antialiasing: false,
+                fit: BoxFit.fitHeight,
+                controllers: [
+                  controller.initAnimationController,
+                  controller.idlesAnimationController,
+                ],
+              ),
             ),
           ],
         ),
