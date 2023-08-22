@@ -43,7 +43,7 @@ class _State extends ConsumerState<HomePage> {
               alt.current.appName,
               style: const TextStyle(
                 fontSize: 30,
-                fontWeight: FontWeight.w200,
+                fontWeight: FontWeight.w400,
               ),
             ),
             const SizedBox(height: 30),
@@ -85,10 +85,12 @@ class _State extends ConsumerState<HomePage> {
                 onClick: () {},
               ),
             ),
-            const SizedBox(height: 30.0),
+
+            const Expanded(child: SizedBox()),
 
             // LA BUBULE
             BubbleSpeak(
+              scafoldBackgroundColor: scafoldBackgroundColor,
               content: Column(
                 children: [
                   AutoSizeText.rich(
@@ -97,7 +99,7 @@ class _State extends ConsumerState<HomePage> {
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w300,
-                        color: erevohBlack,
+                        color: erevohWhite,
                       ),
                       children: [
                         TextSpan(
@@ -116,15 +118,21 @@ class _State extends ConsumerState<HomePage> {
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w300,
-                      color: erevohBlack,
+                      color: erevohWhite,
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
+            const SizedBox(height: 10),
 
-            // LOUL
+            Container(
+              height: 140,
+              width: 300,
+              color: erevohWhite,
+              child: const Text("CHARACTER ANIMATION BUT FUCK I DON'T DO THAT SHIT"),
+            ),
           ],
         ),
       ),

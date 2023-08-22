@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 /// Todo Virer ce truc, j'vais faire ma bulle avec Rive, bien plus simple.
 class BubbleSpeak extends StatefulWidget {
   final Widget content;
-  const BubbleSpeak({super.key, required this.content});
+  final Color scafoldBackgroundColor;
+
+  const BubbleSpeak({
+    super.key,
+    required this.content,
+    required this.scafoldBackgroundColor,
+  });
 
   @override
   State<StatefulWidget> createState() => _State();
@@ -16,19 +22,22 @@ class _State extends State<BubbleSpeak> with SingleTickerProviderStateMixin {
     return Column(
       children: [
         Container(
-          decoration: BoxDecoration(color: erevohWhite, borderRadius: BorderRadius.circular(20)),
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: erevohWhite,
+              width: 1,
+            ),
+          ),
           child: Center(
             child: widget.content,
           ),
         ),
+        const SizedBox(height: 3),
         CustomPaint(
-          painter: TrianglePainter(
-            paintingStyle: PaintingStyle.fill,
-          ),
-          child: const SizedBox(
-            height: 20,
-            width: 40,
-          ),
+          painter: TrianglePainter(widget.scafoldBackgroundColor),
+          child: const SizedBox(height: 10, width: 20),
         ),
       ],
     );
@@ -36,15 +45,19 @@ class _State extends State<BubbleSpeak> with SingleTickerProviderStateMixin {
 }
 
 class TrianglePainter extends CustomPainter {
-  final PaintingStyle paintingStyle;
+  final Color scafoldBackgroundColor;
 
-  TrianglePainter({this.paintingStyle = PaintingStyle.stroke});
+  TrianglePainter(this.scafoldBackgroundColor);
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = erevohWhite;
-
-    canvas.drawPath(getTrianglePath(size.width, size.height), paint);
+    // White border.
+    canvas.drawPath(
+        getTrianglePath(size.width, size.height),
+        Paint()
+          ..color = erevohWhite
+          ..style = PaintingStyle.fill
+          ..strokeWidth = 1);
   }
 
   Path getTrianglePath(double x, double y) {
