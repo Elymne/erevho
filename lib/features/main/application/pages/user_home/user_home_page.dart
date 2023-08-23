@@ -22,7 +22,9 @@ class _State extends ConsumerState<UserHomePage> {
   @override
   void initState() {
     super.initState();
-    controller.init();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.init();
+    });
   }
 
   @override
@@ -89,6 +91,9 @@ class _State extends ConsumerState<UserHomePage> {
                         },
                         onSecondContainerTap: () {
                           controller.goToCreatePage();
+                        },
+                        onPushBack: () {
+                          controller.onPushBack(context);
                         },
                       ),
                       const UserDreamsListPage(),

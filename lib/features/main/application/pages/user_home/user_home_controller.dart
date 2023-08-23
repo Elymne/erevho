@@ -12,11 +12,13 @@ class UserHomeController extends Controller {
     initialPage: ref.read(currentPageProvider),
   );
 
-  final currentTitleTextProvider = StateProvider<String>((ref) => 'Bouffon mdr');
+  final currentTitleTextProvider = StateProvider<String>((ref) => "");
   final isTopContentVisibleProvider = StateProvider<bool>((ref) => true);
   final currentPageProvider = StateProvider<int>((ref) => 1);
 
-  Future init() async {}
+  Future init() async {
+    ref.read(currentTitleTextProvider.notifier).state = alt.current.home_user_title_1;
+  }
 
   UserHomeController(super.ref);
 
@@ -63,5 +65,9 @@ class UserHomeController extends Controller {
     ref.read(currentPageProvider.notifier).state = newCurrentPage;
     ref.read(currentTitleTextProvider.notifier).state = newCurrentTitleProvider;
     ref.read(isTopContentVisibleProvider.notifier).state = true;
+  }
+
+  void onPushBack(BuildContext context) {
+    Navigator.pop(context);
   }
 }

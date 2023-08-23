@@ -4,6 +4,7 @@
     "@_CORE_STRING": {},
     "ok": "Ok",
     "confirm": "Confirm",
+    "back": "Back",
     "@_SPLASH_SCREEN": {},
     "touch_screen": "Touch the screen",
     "@_USER_INIT": {},
