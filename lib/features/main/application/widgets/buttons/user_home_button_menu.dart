@@ -32,7 +32,7 @@ class _State extends State<UserHomeButtonMenu> {
             width: 1,
           ),
           image: DecorationImage(
-            image: AssetImage(widget.imageBackground!),
+            image: AssetImage(widget.imageBackground),
             fit: BoxFit.cover,
           ),
         ),
@@ -48,7 +48,7 @@ class _State extends State<UserHomeButtonMenu> {
                     color: erevohBlack.withOpacity(0.6),
                     spreadRadius: 5,
                     blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
+                    offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
               ),

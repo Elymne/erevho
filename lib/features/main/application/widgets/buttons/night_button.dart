@@ -18,7 +18,7 @@ class NightButton extends StatelessWidget {
         padding: const EdgeInsets.all(14.0),
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             color: erevohWhite,
           ),
