@@ -6,13 +6,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final userAddDreamControllerProvider = Provider((ref) => UserAddDreamController(ref));
 
 class UserAddDreamController extends Controller {
+  late final PageController pageController;
   final formKey = GlobalKey<FormState>();
   final textFieldController = TextEditingController();
   String? username;
 
   UserAddDreamController(super.ref);
 
-  Future init() async {}
+  Future init(PageController pageController) async {
+    this.pageController = pageController;
+  }
 
   String? validateDreamTitle(String? value) {
     if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ton rêve !';
@@ -21,17 +24,19 @@ class UserAddDreamController extends Controller {
     return null;
   }
 
-  void onValidation(BuildContext context) {
+  Future onValidation(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       if (context.mounted) {
         final username = this.username;
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => DreamFormPage(newTitle: username),
           ),
         );
+
         _resetPage();
+        pageController.jumpToPage(2);
       }
     }
   }

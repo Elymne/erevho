@@ -5,7 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserAddDreamPage extends ConsumerStatefulWidget {
-  const UserAddDreamPage({super.key});
+  final PageController pageController;
+
+  const UserAddDreamPage({
+    super.key,
+    required this.pageController,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _State();
@@ -17,7 +22,7 @@ class _State extends ConsumerState<UserAddDreamPage> {
   @override
   void initState() {
     super.initState();
-    controller.init();
+    controller.init(widget.pageController);
   }
 
   @override

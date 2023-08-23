@@ -22,9 +22,7 @@ class _State extends ConsumerState<UserHomePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.init();
-    });
+    controller.init();
   }
 
   @override
@@ -84,7 +82,9 @@ class _State extends ConsumerState<UserHomePage> {
                     controller: controller.pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      const UserAddDreamPage(),
+                      UserAddDreamPage(
+                        pageController: controller.pageController,
+                      ),
                       UserMainHomePage(
                         onFirstContainerTap: () {
                           controller.goToListPage();

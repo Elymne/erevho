@@ -8,16 +8,18 @@ final userHomeControllerProvider = Provider((ref) => UserHomeController(ref));
 class UserHomeController extends Controller {
   late final AppLocalisationTools alt = ref.read(appLocalisationToolsProvider);
 
-  late final PageController pageController = PageController(
-    initialPage: ref.read(currentPageProvider),
-  );
-
-  final currentTitleTextProvider = StateProvider<String>((ref) => "");
-  final isTopContentVisibleProvider = StateProvider<bool>((ref) => true);
-  final currentPageProvider = StateProvider<int>((ref) => 1);
+  late final StateProvider<String> currentTitleTextProvider;
+  late final StateProvider<bool> isTopContentVisibleProvider;
+  late final StateProvider<int> currentPageProvider;
+  late final PageController pageController;
 
   Future init() async {
-    ref.read(currentTitleTextProvider.notifier).state = alt.current.home_user_title_1;
+    currentPageProvider = StateProvider<int>((ref) => 1);
+    currentTitleTextProvider = StateProvider<String>((ref) => alt.current.home_user_title_1);
+    isTopContentVisibleProvider = StateProvider<bool>((ref) => true);
+    pageController = PageController(
+      initialPage: ref.read(currentPageProvider),
+    );
   }
 
   UserHomeController(super.ref);
@@ -35,6 +37,10 @@ class UserHomeController extends Controller {
   void goToListPage() {
     _updatePageController(2);
     _updateTopContent(2);
+  }
+
+  void onPushBack(BuildContext context) {
+    Navigator.pop(context);
   }
 
   void _updatePageController(int newCurrentPage) {
@@ -65,9 +71,5 @@ class UserHomeController extends Controller {
     ref.read(currentPageProvider.notifier).state = newCurrentPage;
     ref.read(currentTitleTextProvider.notifier).state = newCurrentTitleProvider;
     ref.read(isTopContentVisibleProvider.notifier).state = true;
-  }
-
-  void onPushBack(BuildContext context) {
-    Navigator.pop(context);
   }
 }
