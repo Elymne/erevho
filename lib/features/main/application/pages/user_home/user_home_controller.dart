@@ -1,5 +1,6 @@
 import 'package:erevho/core/controller.dart';
 import 'package:erevho/core/l10n/tools/app_localisation_tools.dart';
+import 'package:erevho/features/main/application/pages/dream_form/dream_form_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -41,6 +42,16 @@ class UserHomeController extends Controller {
 
   void onPushBack(BuildContext context) {
     Navigator.pop(context);
+  }
+
+  Future onNewDreamAdding(BuildContext context, String dreamTitle) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DreamFormPage(newTitle: dreamTitle),
+      ),
+    );
+    goToListPage();
   }
 
   void _updatePageController(int newCurrentPage) {

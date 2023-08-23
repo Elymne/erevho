@@ -1,48 +1,40 @@
 import 'package:erevho/core/controller.dart';
-import 'package:erevho/features/main/application/pages/dream_form/dream_form_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userAddDreamControllerProvider = Provider((ref) => UserAddDreamController(ref));
 
 class UserAddDreamController extends Controller {
-  late final PageController pageController;
+  late void Function(String dreamTitle) onDreamAdded;
   final formKey = GlobalKey<FormState>();
   final textFieldController = TextEditingController();
-  String? username;
+  String? dreamTitle;
 
   UserAddDreamController(super.ref);
 
-  Future init(PageController pageController) async {
-    this.pageController = pageController;
+  Future init({required void Function(String dreamTitle) onDreamAdded}) async {
+    this.onDreamAdded = onDreamAdded;
   }
 
-  String? validateDreamTitle(String? value) {
+  String? validateTitleTextfield(String? value) {
     if (value == null || value.isEmpty) return 'Tu dois au moins donner un titre à ton rêve !';
     if (value.length > 40) return 'Ton titre doit-être moins long (4O caractères maximum) !';
-    username = value;
+    dreamTitle = value;
     return null;
   }
 
-  Future onValidation(BuildContext context) async {
+  void onFormValidation(BuildContext context) {
     if (formKey.currentState!.validate()) {
       if (context.mounted) {
-        final username = this.username;
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DreamFormPage(newTitle: username),
-          ),
-        );
-
+        final dreamTitle = this.dreamTitle;
         _resetPage();
-        pageController.jumpToPage(2);
+        onDreamAdded(dreamTitle!);
       }
     }
   }
 
   void _resetPage() {
     textFieldController.clear();
-    username = null;
+    dreamTitle = null;
   }
 }

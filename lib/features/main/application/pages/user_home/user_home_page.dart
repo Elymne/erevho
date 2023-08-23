@@ -83,7 +83,7 @@ class _State extends ConsumerState<UserHomePage> {
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       UserAddDreamPage(
-                        pageController: controller.pageController,
+                        onDreamAdded: (dreamTitle) => controller.onNewDreamAdding(context, dreamTitle),
                       ),
                       UserMainHomePage(
                         onFirstContainerTap: () {

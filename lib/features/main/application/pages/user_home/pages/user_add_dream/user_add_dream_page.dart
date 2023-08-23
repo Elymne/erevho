@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserAddDreamPage extends ConsumerStatefulWidget {
-  final PageController pageController;
+  final void Function(String dreamTitle) onDreamAdded;
 
   const UserAddDreamPage({
     super.key,
-    required this.pageController,
+    required this.onDreamAdded,
   });
 
   @override
@@ -22,7 +22,7 @@ class _State extends ConsumerState<UserAddDreamPage> {
   @override
   void initState() {
     super.initState();
-    controller.init(widget.pageController);
+    controller.init(onDreamAdded: widget.onDreamAdded);
   }
 
   @override
@@ -45,7 +45,7 @@ class _State extends ConsumerState<UserAddDreamPage> {
             const SizedBox(height: 10),
             TextFormField(
               controller: controller.textFieldController,
-              validator: (value) => controller.validateDreamTitle(value),
+              validator: (value) => controller.validateTitleTextfield(value),
               decoration: InputDecoration(
                 hintText: 'Rentrez le titre de votre rêve',
                 hintStyle: const TextStyle(
@@ -89,7 +89,7 @@ class _State extends ConsumerState<UserAddDreamPage> {
             ),
             const SizedBox(height: 20),
             OutlinedButton(
-              onPressed: () => controller.onValidation(context),
+              onPressed: () => controller.onFormValidation(context),
               style: OutlinedButton.styleFrom(
                 backgroundColor: erevohGreen,
               ),
