@@ -134,6 +134,14 @@ class DreamFormController extends Controller {
     }
   }
 
+  void changePage(int index) {
+    pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.decelerate,
+    );
+  }
+
   void onPageChange(int index) {
     ref.read(currentPageIndexProvider.notifier).state = index;
   }

@@ -56,6 +56,7 @@ class _State extends ConsumerState<DreamFormPage> {
                 child: PageView.builder(
                   controller: controller.pageController,
                   itemCount: 1 + dream.chapters.length + 1,
+                  physics: const NeverScrollableScrollPhysics(),
                   onPageChanged: (index) {
                     controller.onPageChange(index);
                   },
@@ -94,9 +95,30 @@ class _State extends ConsumerState<DreamFormPage> {
             ),
             Align(
               alignment: Alignment.center,
-              child: PagerDots(
-                currentPage: currentPageIndex,
-                totalPages: dream.chapters.length + 2,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      OutlinedButton.icon(
+                        onPressed: () => controller.changePage(currentPageIndex - 1),
+                        icon: const Icon(Icons.arrow_left),
+                        label: const SizedBox(),
+                      ),
+                      const SizedBox(width: 10),
+                      PagerDots(
+                        currentPage: currentPageIndex,
+                        totalPages: dream.chapters.length + 2,
+                      ),
+                      const SizedBox(width: 10),
+                      OutlinedButton.icon(
+                        onPressed: () => controller.changePage(currentPageIndex + 1),
+                        icon: const Icon(Icons.arrow_right),
+                        label: const SizedBox(),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 30),

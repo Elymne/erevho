@@ -1,18 +1,17 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:erevho/core/themes/colors.dart';
 import 'package:flutter/material.dart';
 
-class ErevohDreamTitleTextField extends StatelessWidget {
+class ErevohChapterContentTextField extends StatelessWidget {
   final String title;
   final String? hintText;
   final String? initialValue;
   final String? Function(String?) validator;
-  final void Function(String) onChange;
+  final void Function(String) onChanged;
 
-  const ErevohDreamTitleTextField({
+  const ErevohChapterContentTextField({
     required this.validator,
     required this.title,
-    required this.onChange,
+    required this.onChanged,
     this.hintText,
     this.initialValue,
     super.key,
@@ -23,27 +22,21 @@ class ErevohDreamTitleTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AutoSizeText(
-          title,
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w300,
-          ),
-        ),
+        const SizedBox(height: 6),
         TextFormField(
           validator: (value) => validator(value),
-          onChanged: (value) => onChange(value),
+          onChanged: (value) => onChanged(value),
           initialValue: initialValue,
-          maxLines: 1,
+          maxLines: null,
           style: const TextStyle(
-            fontWeight: FontWeight.w300,
-            fontSize: 24,
+            fontWeight: FontWeight.w200,
+            fontSize: 18,
           ),
           decoration: InputDecoration(
             hintText: title,
             hintStyle: const TextStyle(
               fontWeight: FontWeight.w300,
-              fontSize: 30,
+              fontSize: 18,
             ),
             errorStyle: const TextStyle(
               fontSize: 18,
